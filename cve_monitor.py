@@ -50,12 +50,12 @@ GITHUB_SEARCH_URL = "https://api.github.com/search/repositories"
 CVE_ID_RE = re.compile(r"CVE-\d{4}-\d{4,7}", re.IGNORECASE)
 
 SEVERITY_COLORS = {
-    "CRITICAL": 0x992D22,
-    "HIGH": 0xE74C3C,
-    "MEDIUM": 0xE67E22,
-    "LOW": 0xF1C40F,
-    "NONE": 0x95A5A6,
-    "UNKNOWN": 0x7289DA,
+    "CRITICAL": 0x992D22,  # dark red
+    "HIGH": 0xE74C3C,      # red
+    "MEDIUM": 0xE67E22,    # orange
+    "LOW": 0xF1C40F,       # yellow
+    "NONE": 0x95A5A6,      # gray
+    "UNKNOWN": 0x7289DA,   # discord blurple
 }
 
 PATCH_LABELS = {
@@ -493,13 +493,25 @@ def send_to_discord(webhook_url, embeds, batch_note=None):
 # Main
 # --------------------------------------------------------------------------
 
-def main():
-    webhook_url = get_env("DISCORD_WEBHOOK_URL", required=True)
-    nvd_api_key = get_env("NVD_API_KEY", default=None)
-    github_token = get_env("GITHUB_TOKEN", default=None)
-    lookback_minutes = int(get_env("LOOKBACK_MINUTES", default="70"))
-    min_cvss = float(get_env("MIN_CVSS", default="0"))
-    state_file = get_env("STATE_FILE", default="state.json")
+def load_config():
+    return {
+        "webhook_url": get_env("DISCORD_WEBHOOK_URL", required=True),
+        "nvd_api_key": get_env("NVD_API_KEY", default=None),
+        "github_token": get_env("GITHUB_TOKEN", default=None),
+        "lookback_minutes": int(get_env("LOOKBACK_MINUTES", default="70")),
+        "min_cvss": float(get_env("MIN_CVSS", default="0")),
+        "state_file": get_env("STATE_FILE", default="state.json"),
+    }
+
+
+def run_once(config):
+    """Runs a single scan-merge-post cycle. Returns the number of embeds posted."""
+    webhook_url = config["webhook_url"]
+    nvd_api_key = config["nvd_api_key"]
+    github_token = config["github_token"]
+    lookback_minutes = config["lookback_minutes"]
+    min_cvss = config["min_cvss"]
+    state_file = config["state_file"]
 
     print(f"Looking back {lookback_minutes} minutes across NVD, GHSA, and GitHub repo search...")
 
@@ -551,8 +563,16 @@ def main():
         print("Nothing new to post this run.")
 
     save_state(state_file, state)
-    print("Done.")
+    print("Scan cycle done.")
+    return len(all_embeds)
+
+
+def main():
+    """Single-shot entry point (used by simple cron-only setups)."""
+    config = load_config()
+    run_once(config)
 
 
 if __name__ == "__main__":
     main()
+
