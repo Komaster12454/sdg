@@ -475,6 +475,7 @@ def send_to_discord(webhook_url, embeds, batch_note=None):
         payload = {"embeds": batch}
         if batch_note and i == 0:
             payload["content"] = batch_note
+        print(f"Sending {len(batch)} embed(s) to Discord webhook...")
         resp = requests.post(webhook_url, json=payload, timeout=15)
         if resp.status_code == 429:
             try:
@@ -483,9 +484,13 @@ def send_to_discord(webhook_url, embeds, batch_note=None):
                 retry_after = 2
             print(f"Rate limited by Discord, retrying after {retry_after}s", file=sys.stderr)
             time.sleep(float(retry_after) + 0.5)
-            resp = requests.post(webhook_url, json=payload, timeout=15)
+            print(f"Sending {len(batch)} embed(s) to Discord webhook...")
+        resp = requests.post(webhook_url, json=payload, timeout=15)
+        print(f"Discord response: {resp.status_code}")
         if not resp.ok:
             print(f"ERROR posting to Discord: {resp.status_code} {resp.text}", file=sys.stderr)
+        else:
+            print("Discord webhook accepted the message.")
         time.sleep(1)
 
 
