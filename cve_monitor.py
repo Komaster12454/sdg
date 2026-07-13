@@ -42,11 +42,14 @@ Env vars:
   STATE_FILE            (optional)  Path to dedupe state file, default state.json
 """
 
+import collections
 import json
 import os
 import re
 import sys
+import threading
 import time
+from concurrent.futures import ThreadPoolExecutor, as_completed
 from datetime import datetime, timedelta, timezone
 
 import requests
@@ -75,6 +78,25 @@ PATCH_LABELS = {
 DISCORD_EMBED_LIMIT = 10          # max embeds per Discord message
 DISCORD_DESCRIPTION_LIMIT = 350   # truncate long descriptions
 MAX_POC_REPOS_SHOWN = 3
+
+# Discord rejects a message if the SUM of title + description + all field
+# names/values + footer.text + author.name across every embed in that one
+# message exceeds 6000 chars — this is separate from (and easier to hit
+# than) the 10-embeds-per-message limit above. We batch to a safety margin
+# below the real cap to leave room for rounding/encoding differences.
+DISCORD_TOTAL_CHAR_LIMIT = 5500
+
+DISCORD_SEND_DELAY = 1.0    # baseline spacing between queued Discord sends
+DISCORD_MAX_RETRIES = 3     # per-batch retry budget for network errors / 5xx
+
+# Patched/Unpatched/Unknown are each sent to Discord on their own thread (see
+# run_once), so this lock keeps their log lines from interleaving mid-line.
+_PRINT_LOCK = threading.Lock()
+
+
+def _log(msg, file=sys.stdout):
+    with _PRINT_LOCK:
+        print(msg, file=file)
 
 
 print("Working!")
@@ -475,29 +497,153 @@ def build_embed(rec, status_change=False):
     return embed
 
 
-def send_to_discord(webhook_url, embeds, batch_note=None):
-    for i in range(0, len(embeds), DISCORD_EMBED_LIMIT):
-        batch = embeds[i:i + DISCORD_EMBED_LIMIT]
+def embed_char_count(embed):
+    """Approximates Discord's own accounting for the 6000-char total-embed-size
+    cap: title + description + every field's name/value + footer.text +
+    author.name, summed across the whole embed."""
+    total = len(embed.get("title") or "") + len(embed.get("description") or "")
+    total += len((embed.get("footer") or {}).get("text") or "")
+    total += len((embed.get("author") or {}).get("name") or "")
+    for field in embed.get("fields") or []:
+        total += len(field.get("name") or "") + len(field.get("value") or "")
+    return total
+
+
+def _truncate(text, limit):
+    if len(text) <= limit:
+        return text
+    return text[:limit].rsplit(" ", 1)[0] + "…"
+
+
+def shrink_embed(embed, target_total):
+    """Best-effort trim of a single embed that alone is already over the
+    total-char budget (rare — only the biggest PoC/reference lists hit this).
+    Shrinks the roomiest, least-critical fields first, then the description,
+    until it fits under target_total or there's nothing left to cut."""
+    embed = dict(embed)
+    embed["fields"] = [dict(f) for f in embed.get("fields") or []]
+
+    for field_name in ("References", "GitHub PoC/Repo Activity", "CWE"):
+        if embed_char_count(embed) <= target_total:
+            break
+        for f in embed["fields"]:
+            if f.get("name") == field_name and embed_char_count(embed) > target_total:
+                over = embed_char_count(embed) - target_total
+                new_len = max(20, len(f.get("value", "")) - over - 10)
+                f["value"] = _truncate(f.get("value", ""), new_len)
+
+    if embed_char_count(embed) > target_total:
+        over = embed_char_count(embed) - target_total
+        new_len = max(50, len(embed.get("description", "")) - over - 10)
+        embed["description"] = _truncate(embed.get("description", ""), new_len)
+
+    return embed
+
+
+def chunk_embeds_for_discord(embeds):
+    """Groups embeds into Discord-safe messages: at most DISCORD_EMBED_LIMIT
+    embeds AND at most DISCORD_TOTAL_CHAR_LIMIT chars (summed via
+    embed_char_count) per message. This is what the plain len(embeds) //
+    DISCORD_EMBED_LIMIT batching upstream was missing — 10 modest-looking
+    embeds can still add up to well over Discord's 6000-char total cap."""
+    batch, batch_chars = [], 0
+    for embed in embeds:
+        size = embed_char_count(embed)
+        if size > DISCORD_TOTAL_CHAR_LIMIT:
+            embed = shrink_embed(embed, DISCORD_TOTAL_CHAR_LIMIT)
+            size = embed_char_count(embed)
+
+        if batch and (len(batch) >= DISCORD_EMBED_LIMIT or batch_chars + size > DISCORD_TOTAL_CHAR_LIMIT):
+            yield batch
+            batch, batch_chars = [], 0
+
+        batch.append(embed)
+        batch_chars += size
+
+    if batch:
+        yield batch
+
+
+def send_to_discord(webhook_url, embeds, batch_note=None, label=None):
+    """Splits embeds into Discord-safe batches and sends them through a
+    retry queue: batches that hit a transient failure (network error, 5xx,
+    or a 429) go back on the queue and are retried with backoff rather than
+    aborting the whole run, and a batch that keeps failing is dropped after
+    DISCORD_MAX_RETRIES so one bad message can't jam the rest.
+
+    `label` is just a log-line prefix (e.g. the patch-status category) —
+    run_once fires one of these per category on its own thread, so the
+    prefix is what keeps interleaved output readable."""
+    if not embeds:
+        return 0
+
+    prefix = f"[{label}] " if label else ""
+
+    queue = collections.deque()
+    for i, batch in enumerate(chunk_embeds_for_discord(embeds)):
+        queue.append({
+            "batch": batch,
+            "note": batch_note if (batch_note and i == 0) else None,
+            "attempt": 0,
+        })
+
+    _log(f"{prefix}Queued {len(queue)} Discord message(s) for {len(embeds)} embed(s).")
+
+    sent = 0
+    while queue:
+        item = queue.popleft()
+        batch = item["batch"]
         payload = {"embeds": batch}
-        if batch_note and i == 0:
-            payload["content"] = batch_note
-        print(f"Sending {len(batch)} embed(s) to Discord webhook...")
-        resp = requests.post(webhook_url, json=payload, timeout=15)
+        if item["note"]:
+            payload["content"] = item["note"]
+
+        _log(f"{prefix}Sending {len(batch)} embed(s) to Discord webhook "
+             f"({sum(embed_char_count(e) for e in batch)} chars, queue depth {len(queue)})...")
+
+        try:
+            resp = requests.post(webhook_url, json=payload, timeout=15)
+        except requests.RequestException as e:
+            item["attempt"] += 1
+            if item["attempt"] <= DISCORD_MAX_RETRIES:
+                backoff = 2 ** item["attempt"]
+                _log(f"{prefix}WARNING: Discord request failed ({e}); retrying in {backoff}s "
+                     f"(attempt {item['attempt']}/{DISCORD_MAX_RETRIES})", file=sys.stderr)
+                time.sleep(backoff)
+                queue.appendleft(item)
+            else:
+                _log(f"{prefix}ERROR: giving up on a Discord batch after {DISCORD_MAX_RETRIES} retries: {e}",
+                     file=sys.stderr)
+            continue
+
         if resp.status_code == 429:
             try:
-                retry_after = resp.json().get("retry_after", 2)
-            except ValueError:
-                retry_after = 2
-            print(f"Rate limited by Discord, retrying after {retry_after}s", file=sys.stderr)
-            time.sleep(float(retry_after) + 0.5)
-            print(f"Sending {len(batch)} embed(s) to Discord webhook...")
-        resp = requests.post(webhook_url, json=payload, timeout=15)
-        print(f"Discord response: {resp.status_code}")
+                retry_after = float(resp.json().get("retry_after", 2))
+            except (ValueError, TypeError):
+                retry_after = 2.0
+            _log(f"{prefix}Rate limited by Discord, waiting {retry_after}s before retrying "
+                 f"(doesn't count against the retry budget)...", file=sys.stderr)
+            time.sleep(retry_after + 0.5)
+            queue.appendleft(item)
+            continue
+
         if not resp.ok:
-            print(f"ERROR posting to Discord: {resp.status_code} {resp.text}", file=sys.stderr)
-        else:
-            print("Discord webhook accepted the message.")
-        time.sleep(1)
+            _log(f"{prefix}ERROR posting to Discord: {resp.status_code} {resp.text}", file=sys.stderr)
+            item["attempt"] += 1
+            if item["attempt"] <= DISCORD_MAX_RETRIES and resp.status_code >= 500:
+                backoff = 2 ** item["attempt"]
+                _log(f"{prefix}Retrying in {backoff}s (attempt {item['attempt']}/{DISCORD_MAX_RETRIES})",
+                     file=sys.stderr)
+                time.sleep(backoff)
+                queue.appendleft(item)
+            # 4xx errors (bad payload, etc.) aren't retryable — drop the batch.
+            continue
+
+        _log(f"{prefix}Discord webhook accepted the message.")
+        sent += 1
+        if queue:
+            time.sleep(DISCORD_SEND_DELAY)
+
+    return sent
 
 
 # --------------------------------------------------------------------------
@@ -625,8 +771,7 @@ def run_once(config):
     for cid in remove:
         del state[cid]
 
-    total_sent = 0
-
+    jobs = []
     for status in ("PATCHED", "UNPATCHED", "UNKNOWN"):
         status_embeds = new_embeds[status] + update_embeds[status]
         if not status_embeds:
@@ -647,15 +792,37 @@ def run_once(config):
         if update_embeds[status]:
             note.append(f"{len(update_embeds[status])} patch update(s)")
 
-        print(f"Posting {len(status_embeds)} {status} notification(s)...")
+        jobs.append({
+            "status": status,
+            "embeds": status_embeds,
+            "webhook_url": webhook_url,
+            "batch_note": f"🔔 **{PATCH_LABELS[status]}** — " + " / ".join(note),
+        })
 
-        send_to_discord(
-            webhook_url,
-            status_embeds,
-            batch_note=f"🔔 **{PATCH_LABELS[status]}** — " + " / ".join(note),
-        )
+    total_sent = 0
 
-        total_sent += len(status_embeds)
+    if jobs:
+        # One thread per category (max 3) — Patched/Unpatched/Unknown post to
+        # their webhooks in parallel instead of a slow/rate-limited category
+        # holding up the other two. Each thread runs its own independent
+        # send_to_discord retry queue.
+        with ThreadPoolExecutor(max_workers=len(jobs)) as executor:
+            future_to_status = {
+                executor.submit(
+                    send_to_discord,
+                    job["webhook_url"],
+                    job["embeds"],
+                    batch_note=job["batch_note"],
+                    label=job["status"],
+                ): job["status"]
+                for job in jobs
+            }
+            for future in as_completed(future_to_status):
+                status = future_to_status[future]
+                try:
+                    total_sent += future.result() or 0
+                except Exception as e:  # noqa: BLE001 - one category's thread shouldn't kill the run
+                    print(f"[{status}] ERROR: webhook thread failed: {e}", file=sys.stderr)
 
     if total_sent == 0:
         print("No new notifications this cycle.")
