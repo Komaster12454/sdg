@@ -510,7 +510,7 @@ def load_config():
 
 
 def run_once(config):
-    """Runs a scan and keeps monitoring unpatched CVEs until patched."""
+    print("running!!!")
 
     webhook_url = config["webhook_url"]
     nvd_api_key = config["nvd_api_key"]
