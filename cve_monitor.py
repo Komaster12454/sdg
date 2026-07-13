@@ -510,66 +510,120 @@ def load_config():
 
 
 def run_once(config):
-    """Runs a single scan-merge-post cycle. Returns the number of embeds posted."""
+    """Runs a scan and keeps monitoring unpatched CVEs until patched."""
+
     webhook_url = config["webhook_url"]
     nvd_api_key = config["nvd_api_key"]
     github_token = config["github_token"]
-    lookback_minutes = config["lookback_minutes"]
     min_cvss = config["min_cvss"]
     state_file = config["state_file"]
 
-    print(f"Looking back {lookback_minutes} minutes across NVD, GHSA, and GitHub repo search...")
+    lookback_days = int(os.environ.get("LOOKBACK_DAYS", "14"))
+    lookback_minutes = lookback_days * 24 * 60
+
+    print(f"Scanning the last {lookback_days} day(s)...")
 
     nvd_items = fetch_nvd_cves(lookback_minutes, api_key=nvd_api_key)
-    print(f"NVD: {len(nvd_items)} record(s).")
-
     ghsa_items = fetch_ghsa_advisories(lookback_minutes, token=github_token)
-    print(f"GHSA: {len(ghsa_items)} record(s).")
-
     github_repo_map = fetch_github_cve_repos(lookback_minutes, token=github_token)
-    print(f"GitHub repo search: {len(github_repo_map)} CVE ID(s) mentioned in new repos.")
 
     merged = merge_records(nvd_items, ghsa_items, github_repo_map)
-    print(f"Merged total: {len(merged)} unique CVE(s) this run.")
+
+    print(f"Found {len(merged)} total CVEs.")
 
     state = load_state(state_file)
+
+    now = datetime.now(timezone.utc).isoformat()
+
     new_embeds = []
     update_embeds = []
 
     for cve_id, rec in merged.items():
+
         score = rec.get("score")
         if score is not None and score < min_cvss:
             continue
 
-        prior = state.get(cve_id)
+        patch_status = rec.get("patch_status", "UNKNOWN")
 
-        if prior is None:
-            # Brand new CVE we haven't posted before
+        entry = state.get(cve_id)
+
+        if entry is None:
+            state[cve_id] = {
+                "posted": True,
+                "patch_status": patch_status,
+                "first_seen": now,
+                "last_checked": now,
+                "active": patch_status != "PATCHED",
+            }
+
             new_embeds.append(build_embed(rec))
-            state[cve_id] = {"posted": True, "patch_status": rec["patch_status"]}
-        else:
-            prior_status = prior.get("patch_status", "UNKNOWN")
-            new_status = rec["patch_status"]
-            if prior_status == "UNPATCHED" and new_status == "PATCHED":
-                update_embeds.append(build_embed(rec, status_change=True))
-            state[cve_id]["patch_status"] = new_status
+            continue
 
-    all_embeds = new_embeds + update_embeds
-    if all_embeds:
-        note_parts = []
+        entry["last_checked"] = now
+
+        old_status = entry.get("patch_status", "UNKNOWN")
+
+        if old_status == "UNPATCHED" and patch_status == "PATCHED":
+            print(f"{cve_id} is now patched.")
+            update_embeds.append(build_embed(rec, status_change=True))
+            entry["active"] = False
+
+        elif patch_status == "UNPATCHED":
+            entry["active"] = True
+
+        entry["patch_status"] = patch_status
+
+    # Clean up patched CVEs older than 14 days
+    cutoff = datetime.now(timezone.utc) - timedelta(days=14)
+
+    remove = []
+
+    for cid, entry in state.items():
+        if entry.get("active", True):
+            continue
+
+        try:
+            seen = datetime.fromisoformat(entry["first_seen"])
+        except Exception:
+            continue
+
+        if seen < cutoff:
+            remove.append(cid)
+
+    for cid in remove:
+        del state[cid]
+
+    embeds = new_embeds + update_embeds
+
+    if embeds:
+
+        note = []
+
         if new_embeds:
-            note_parts.append(f"{len(new_embeds)} new CVE(s)")
+            note.append(f"{len(new_embeds)} new CVE(s)")
+
         if update_embeds:
-            note_parts.append(f"{len(update_embeds)} patch update(s)")
-        note = "🔔 **" + " / ".join(note_parts) + "**"
-        print(f"Posting {len(all_embeds)} embed(s) to Discord...")
-        send_to_discord(webhook_url, all_embeds, batch_note=note)
+            note.append(f"{len(update_embeds)} patch update(s)")
+
+        print(f"Posting {len(embeds)} notification(s)...")
+
+        send_to_discord(
+            webhook_url,
+            embeds,
+            batch_note="🔔 **" + " / ".join(note) + "**",
+        )
+
     else:
-        print("Nothing new to post this run.")
+        print("No new notifications this cycle.")
 
     save_state(state_file, state)
-    print("Scan cycle done.")
-    return len(all_embeds)
+
+    print(
+        f"Tracking {sum(1 for x in state.values() if x.get('active'))} active unpatched CVEs."
+    )
+
+    return len(embeds)
 
 
 def main():
