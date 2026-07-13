@@ -25,7 +25,15 @@ can send a follow-up "patch released" notice when status flips from
 Unpatched -> Patched. The GitHub Actions workflow commits this file back.
 
 Env vars:
-  DISCORD_WEBHOOK_URL   (required)  Discord webhook to post to
+  DISCORD_WEBHOOK_PATCHED_URL     (required*) Discord webhook for Patched CVEs
+  DISCORD_WEBHOOK_UNPATCHED_URL   (required*) Discord webhook for Unpatched CVEs
+  DISCORD_WEBHOOK_UNKNOWN_URL     (required*) Discord webhook for Unknown-status CVEs
+  DISCORD_WEBHOOK_URL             (optional)  Fallback webhook used for any of the
+                                                above three that isn't set. *At least
+                                                one of the four webhook vars must be set
+                                                (any category left unconfigured falls
+                                                back to this one; if none are set at
+                                                all, the script exits with an error).
   NVD_API_KEY           (optional)  NVD API key, raises NVD rate limit
   GITHUB_TOKEN          (optional)  GitHub token, raises GH API rate limit
                                      (in Actions, pass ${{ secrets.GITHUB_TOKEN }})
@@ -69,9 +77,7 @@ DISCORD_DESCRIPTION_LIMIT = 350   # truncate long descriptions
 MAX_POC_REPOS_SHOWN = 3
 
 
-# --------------------------------------------------------------------------
-# Helpers
-# --------------------------------------------------------------------------
+print("Working!")
 
 def get_env(name, default=None, required=False):
     val = os.environ.get(name, default)
@@ -499,8 +505,31 @@ def send_to_discord(webhook_url, embeds, batch_note=None):
 # --------------------------------------------------------------------------
 
 def load_config():
+    fallback = get_env("DISCORD_WEBHOOK_URL", default=None)
+    webhooks = {
+        "PATCHED": get_env("DISCORD_WEBHOOK_PATCHED_URL", default=None) or fallback,
+        "UNPATCHED": get_env("DISCORD_WEBHOOK_UNPATCHED_URL", default=None) or fallback,
+        "UNKNOWN": get_env("DISCORD_WEBHOOK_UNKNOWN_URL", default=None) or fallback,
+    }
+    if not any(webhooks.values()):
+        print(
+            "ERROR: no Discord webhook configured. Set DISCORD_WEBHOOK_PATCHED_URL / "
+            "DISCORD_WEBHOOK_UNPATCHED_URL / DISCORD_WEBHOOK_UNKNOWN_URL (per-category) "
+            "and/or DISCORD_WEBHOOK_URL (fallback for any unset category).",
+            file=sys.stderr,
+        )
+        sys.exit(1)
+
+    missing = [status for status, url in webhooks.items() if not url]
+    if missing:
+        print(
+            f"WARNING: no webhook configured for {', '.join(missing)} CVEs and no "
+            f"DISCORD_WEBHOOK_URL fallback set — those notifications will be skipped.",
+            file=sys.stderr,
+        )
+
     return {
-        "webhook_url": get_env("DISCORD_WEBHOOK_URL", required=True),
+        "webhooks": webhooks,
         "nvd_api_key": get_env("NVD_API_KEY", default=None),
         "github_token": get_env("GITHUB_TOKEN", default=None),
         "lookback_minutes": int(get_env("LOOKBACK_MINUTES", default="70")),
@@ -512,7 +541,7 @@ def load_config():
 def run_once(config):
     print("running!!!")
 
-    webhook_url = config["webhook_url"]
+    webhooks = config["webhooks"]
     nvd_api_key = config["nvd_api_key"]
     github_token = config["github_token"]
     min_cvss = config["min_cvss"]
@@ -535,8 +564,10 @@ def run_once(config):
 
     now = datetime.now(timezone.utc).isoformat()
 
-    new_embeds = []
-    update_embeds = []
+    # Embeds bucketed by the CVE's *current* patch status, so each bucket can
+    # be routed to its own Discord webhook (Patched / Unpatched / Unknown).
+    new_embeds = {"PATCHED": [], "UNPATCHED": [], "UNKNOWN": []}
+    update_embeds = {"PATCHED": [], "UNPATCHED": [], "UNKNOWN": []}
 
     for cve_id, rec in merged.items():
 
@@ -557,7 +588,7 @@ def run_once(config):
                 "active": patch_status != "PATCHED",
             }
 
-            new_embeds.append(build_embed(rec))
+            new_embeds[patch_status].append(build_embed(rec))
             continue
 
         entry["last_checked"] = now
@@ -566,7 +597,7 @@ def run_once(config):
 
         if old_status == "UNPATCHED" and patch_status == "PATCHED":
             print(f"{cve_id} is now patched.")
-            update_embeds.append(build_embed(rec, status_change=True))
+            update_embeds[patch_status].append(build_embed(rec, status_change=True))
             entry["active"] = False
 
         elif patch_status == "UNPATCHED":
@@ -594,27 +625,39 @@ def run_once(config):
     for cid in remove:
         del state[cid]
 
-    embeds = new_embeds + update_embeds
+    total_sent = 0
 
-    if embeds:
+    for status in ("PATCHED", "UNPATCHED", "UNKNOWN"):
+        status_embeds = new_embeds[status] + update_embeds[status]
+        if not status_embeds:
+            continue
+
+        webhook_url = webhooks.get(status)
+        if not webhook_url:
+            print(
+                f"Skipping {len(status_embeds)} {status} notification(s): "
+                f"no webhook configured for this category.",
+                file=sys.stderr,
+            )
+            continue
 
         note = []
+        if new_embeds[status]:
+            note.append(f"{len(new_embeds[status])} new CVE(s)")
+        if update_embeds[status]:
+            note.append(f"{len(update_embeds[status])} patch update(s)")
 
-        if new_embeds:
-            note.append(f"{len(new_embeds)} new CVE(s)")
-
-        if update_embeds:
-            note.append(f"{len(update_embeds)} patch update(s)")
-
-        print(f"Posting {len(embeds)} notification(s)...")
+        print(f"Posting {len(status_embeds)} {status} notification(s)...")
 
         send_to_discord(
             webhook_url,
-            embeds,
-            batch_note="🔔 **" + " / ".join(note) + "**",
+            status_embeds,
+            batch_note=f"🔔 **{PATCH_LABELS[status]}** — " + " / ".join(note),
         )
 
-    else:
+        total_sent += len(status_embeds)
+
+    if total_sent == 0:
         print("No new notifications this cycle.")
 
     save_state(state_file, state)
@@ -623,7 +666,7 @@ def run_once(config):
         f"Tracking {sum(1 for x in state.values() if x.get('active'))} active unpatched CVEs."
     )
 
-    return len(embeds)
+    return total_sent
 
 
 def main():
