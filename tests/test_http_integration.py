@@ -198,6 +198,7 @@ class HttpIntegrationTests(unittest.TestCase):
     def test_scan_url_defaults_to_post_but_requires_explicit_request_body(self):
         env = {
             "DRY_RUN": "true",
+            "VULN_TODAY_ENABLED": "true",
             "VULN_TODAY_API_URL": "https://vuln.today/api/v1/scan",
             "VULN_TODAY_REQUEST_JSON": '{"packages":[{"name":"example","version":"1.0"}]}',
         }
@@ -213,6 +214,7 @@ class HttpIntegrationTests(unittest.TestCase):
     def test_empty_method_environment_does_not_override_scan_post_default(self):
         env = {
             "DRY_RUN": "true",
+            "VULN_TODAY_ENABLED": "true",
             "VULN_TODAY_API_URL": "https://vuln.today/api/v1/scan",
             "VULN_TODAY_API_METHOD": "",
             "VULN_TODAY_REQUEST_JSON": '{"packages":[{"name":"example","version":"1.0"}]}',
@@ -220,6 +222,132 @@ class HttpIntegrationTests(unittest.TestCase):
         with patch.dict(os.environ, env, clear=True):
             config = monitor.load_config()
         self.assertEqual(config["vuln_today_api_method"], "POST")
+
+    def test_vuln_today_toggle_defaults_disabled_and_ignores_stale_configuration(self):
+        env = {
+            "DRY_RUN": "true",
+            "VULN_TODAY_API_URL": "https://vuln.today/api/v1/scan",
+            "VULN_TODAY_REQUEST_JSON": "not-valid-json",
+        }
+        with patch.dict(os.environ, env, clear=True):
+            config = monitor.load_config()
+
+        self.assertFalse(config["vuln_today_enabled"])
+        self.assertIsNone(config["vuln_today_api_method"])
+        self.assertIsNone(config["vuln_today_request_payload"])
+        self.assertIsNone(config["vuln_today_query_params"])
+
+    def test_vuln_today_toggle_accepts_common_true_and_false_values(self):
+        for value in ("1", "true", "yes", "on", "TRUE"):
+            with self.subTest(value=value), patch.dict(
+                os.environ,
+                {
+                    "DRY_RUN": "true",
+                    "VULN_TODAY_ENABLED": value,
+                    "VULN_TODAY_API_URL": "https://example.test/api/v1/feed",
+                },
+                clear=True,
+            ):
+                self.assertTrue(monitor.load_config()["vuln_today_enabled"])
+
+        for value in ("0", "false", "no", "off", "", "unexpected"):
+            with self.subTest(value=value), patch.dict(
+                os.environ,
+                {"DRY_RUN": "true", "VULN_TODAY_ENABLED": value},
+                clear=True,
+            ):
+                self.assertFalse(monitor.load_config()["vuln_today_enabled"])
+
+    def test_disabled_vuln_today_source_is_not_scheduled(self):
+        import tempfile
+        from pathlib import Path
+
+        config = {
+            "webhooks": {},
+            "dry_run": True,
+            "nvd_api_key": None,
+            "github_token": None,
+            "vuln_today_enabled": False,
+            "vuln_today_api_url": "https://vuln.today/api/v1/scan",
+            "vuln_today_api_method": "POST",
+            "vuln_today_request_payload": None,
+            "vuln_today_query_params": None,
+            "lookback_minutes": 10,
+            "min_cvss": 0.0,
+            "min_priority": 0,
+            "min_zero_day_score": 60,
+            "min_zero_day_confidence": 35,
+            "max_notifications": 10,
+            "include_unreviewed": False,
+            "notify_updates": True,
+            "jsonl_output": None,
+            "sarif_glob": "",
+            "sbom_glob": "",
+            "custom_findings_path": None,
+            "watch_repositories": [],
+            "watch_terms": [],
+            "suppressed_identifiers": set(),
+            "advisory_feeds": [],
+        }
+        with tempfile.TemporaryDirectory() as tmp:
+            config["state_file"] = str(Path(tmp) / "state.json")
+            with patch.object(monitor, "fetch_nvd", return_value=[]), \
+                patch.object(monitor, "fetch_ghsa", return_value=[]), \
+                patch.object(monitor, "fetch_cve_list_release_feed", return_value=[]), \
+                patch.object(monitor, "fetch_github_repository_signals", return_value=[]), \
+                patch.object(monitor, "fetch_cisa_kev", return_value={}), \
+                patch.object(monitor, "enrich_epss"), \
+                patch.object(monitor, "fetch_vuln_today") as vuln_today, \
+                patch.object(monitor, "_log"):
+                monitor.run_once(config)
+
+        vuln_today.assert_not_called()
+
+    def test_enabled_vuln_today_source_is_scheduled(self):
+        import tempfile
+        from pathlib import Path
+
+        config = {
+            "webhooks": {},
+            "dry_run": True,
+            "nvd_api_key": None,
+            "github_token": None,
+            "vuln_today_enabled": True,
+            "vuln_today_api_url": "https://vuln.today/api/v1/feed",
+            "vuln_today_api_key": None,
+            "vuln_today_api_method": "GET",
+            "vuln_today_request_payload": None,
+            "vuln_today_query_params": {},
+            "lookback_minutes": 10,
+            "min_cvss": 0.0,
+            "min_priority": 0,
+            "min_zero_day_score": 60,
+            "min_zero_day_confidence": 35,
+            "max_notifications": 10,
+            "include_unreviewed": False,
+            "notify_updates": True,
+            "jsonl_output": None,
+            "sarif_glob": "",
+            "sbom_glob": "",
+            "custom_findings_path": None,
+            "watch_repositories": [],
+            "watch_terms": [],
+            "suppressed_identifiers": set(),
+            "advisory_feeds": [],
+        }
+        with tempfile.TemporaryDirectory() as tmp:
+            config["state_file"] = str(Path(tmp) / "state.json")
+            with patch.object(monitor, "fetch_nvd", return_value=[]), \
+                patch.object(monitor, "fetch_ghsa", return_value=[]), \
+                patch.object(monitor, "fetch_cve_list_release_feed", return_value=[]), \
+                patch.object(monitor, "fetch_github_repository_signals", return_value=[]), \
+                patch.object(monitor, "fetch_cisa_kev", return_value={}), \
+                patch.object(monitor, "enrich_epss"), \
+                patch.object(monitor, "fetch_vuln_today", return_value=[]) as vuln_today, \
+                patch.object(monitor, "_log"):
+                monitor.run_once(config)
+
+        vuln_today.assert_called_once()
 
     def test_scan_endpoint_rejects_get_before_network_access(self):
         with self.assertRaisesRegex(ValueError, "/scan endpoint requires POST"):
