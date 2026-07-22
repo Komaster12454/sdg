@@ -300,6 +300,18 @@ def parse_json_env(name: str, default: Any) -> Any:
         return default
 
 
+def load_json_request_payload(inline_json: Any, file_path: str | None) -> Any:
+    """Load an API request body from an inline JSON value or a JSON file."""
+    if inline_json is not None:
+        return inline_json
+    if not file_path:
+        return None
+    try:
+        return json.loads(Path(file_path).read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError) as exc:
+        raise ValueError(f"Unable to load JSON request payload from {file_path}: {exc}") from exc
+
+
 def build_session() -> requests.Session:
     retry = Retry(
         total=4,
@@ -328,11 +340,31 @@ def request_json(
     session: requests.Session,
     url: str,
     *,
+    method: str = "GET",
     params: dict[str, Any] | None = None,
     headers: dict[str, str] | None = None,
+    json_body: Any = None,
     timeout: int = 30,
 ) -> Any:
-    response = session.get(url, params=params, headers=headers, timeout=timeout)
+    """Perform a JSON HTTP request while preserving the source contract.
+
+    Keeping the method explicit is important for endpoints such as manifest
+    scanners, which commonly require POST rather than acting as vulnerability
+    feeds. Unsupported methods fail closed instead of silently issuing GET.
+    """
+    normalized_method = method.strip().upper()
+    if normalized_method == "GET":
+        response = session.get(url, params=params, headers=headers, timeout=timeout)
+    elif normalized_method == "POST":
+        response = session.post(
+            url,
+            params=params,
+            headers=headers,
+            json=json_body,
+            timeout=timeout,
+        )
+    else:
+        raise ValueError(f"Unsupported JSON request method: {normalized_method}")
     response.raise_for_status()
     return response.json()
 
@@ -1143,9 +1175,28 @@ def fetch_vuln_today(
     api_url: str | None,
     api_key: str | None,
     since: datetime,
+    *,
+    method: str = "GET",
+    request_payload: Any = None,
 ) -> list[Finding]:
+    """Query a configured vuln.today endpoint without guessing its contract.
+
+    Search/feed endpoints can use GET with ``since`` and ``limit`` query
+    parameters. Scan endpoints usually require POST and an account-specific
+    manifest payload; POST therefore requires VULN_TODAY_REQUEST_JSON or
+    VULN_TODAY_REQUEST_FILE rather than sending a made-up body.
+    """
     if not api_url:
         return []
+    normalized_method = method.strip().upper()
+    if normalized_method not in {"GET", "POST"}:
+        raise ValueError("VULN_TODAY_API_METHOD must be GET or POST")
+    if normalized_method == "POST" and request_payload is None:
+        raise ValueError(
+            "vuln.today POST endpoint requires VULN_TODAY_REQUEST_JSON "
+            "or VULN_TODAY_REQUEST_FILE"
+        )
+
     headers = {"Accept": "application/json"}
     if api_key:
         headers["Authorization"] = f"Bearer {api_key}"
@@ -1153,8 +1204,12 @@ def fetch_vuln_today(
     data = request_json(
         session,
         api_url,
-        params={"since": since.isoformat(), "limit": 500},
+        method=normalized_method,
+        params={"since": since.isoformat(), "limit": 500}
+        if normalized_method == "GET"
+        else None,
         headers=headers,
+        json_body=request_payload if normalized_method == "POST" else None,
     )
     findings: list[Finding] = []
     for item in _extract_items(data):
@@ -1602,13 +1657,29 @@ def load_config() -> dict[str, Any]:
     if not isinstance(advisory_feeds, list):
         advisory_feeds = []
 
+    vuln_today_api_url = os.getenv("VULN_TODAY_API_URL")
+    default_vuln_today_method = (
+        "POST"
+        if vuln_today_api_url and vuln_today_api_url.rstrip("/").endswith("/scan")
+        else "GET"
+    )
+    vuln_today_api_method = os.getenv(
+        "VULN_TODAY_API_METHOD", default_vuln_today_method
+    ).strip().upper()
+    vuln_today_request_payload = load_json_request_payload(
+        parse_json_env("VULN_TODAY_REQUEST_JSON", None),
+        os.getenv("VULN_TODAY_REQUEST_FILE"),
+    )
+
     return {
         "webhooks": webhooks,
         "dry_run": dry_run,
         "nvd_api_key": os.getenv("NVD_API_KEY"),
         "github_token": os.getenv("GITHUB_TOKEN"),
-        "vuln_today_api_url": os.getenv("VULN_TODAY_API_URL"),
+        "vuln_today_api_url": vuln_today_api_url,
         "vuln_today_api_key": os.getenv("VULN_TODAY_API_KEY"),
+        "vuln_today_api_method": vuln_today_api_method,
+        "vuln_today_request_payload": vuln_today_request_payload,
         "lookback_minutes": safe_int(os.getenv("LOOKBACK_MINUTES"), 90),
         "min_cvss": safe_float(os.getenv("MIN_CVSS")) or 0.0,
         "min_priority": safe_int(os.getenv("MIN_PRIORITY"), 0),
@@ -1691,6 +1762,8 @@ def run_once(config: dict[str, Any]) -> int:
                     config.get("vuln_today_api_url"),
                     config.get("vuln_today_api_key"),
                     since,
+                    method=str(config.get("vuln_today_api_method") or "GET"),
+                    request_payload=config.get("vuln_today_request_payload"),
                 ),
             )
         )
