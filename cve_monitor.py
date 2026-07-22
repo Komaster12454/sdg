@@ -37,6 +37,7 @@ from datetime import datetime, timedelta, timezone
 from email.utils import parsedate_to_datetime
 from pathlib import Path
 from typing import Any, Callable, Iterable
+from urllib.parse import urlsplit
 
 import requests
 from requests.adapters import HTTPAdapter
@@ -1170,6 +1171,13 @@ def normalize_vuln_today_item(item: dict[str, Any]) -> list[Finding]:
     return normalized
 
 
+def is_scan_endpoint(api_url: str | None) -> bool:
+    """Return True when the configured URL clearly names a scan operation."""
+    if not api_url:
+        return False
+    return urlsplit(api_url).path.rstrip("/").lower().endswith("/scan")
+
+
 def fetch_vuln_today(
     session: requests.Session,
     api_url: str | None,
@@ -1178,19 +1186,30 @@ def fetch_vuln_today(
     *,
     method: str = "GET",
     request_payload: Any = None,
+    query_params: dict[str, Any] | None = None,
 ) -> list[Finding]:
-    """Query a configured vuln.today endpoint without guessing its contract.
+    """Query a configured vuln.today endpoint without inventing its contract.
 
-    Search/feed endpoints can use GET with ``since`` and ``limit`` query
-    parameters. Scan endpoints usually require POST and an account-specific
-    manifest payload; POST therefore requires VULN_TODAY_REQUEST_JSON or
-    VULN_TODAY_REQUEST_FILE rather than sending a made-up body.
+    A URL ending in ``/scan`` is treated as a scanner operation and must use
+    POST with an explicit account-specific request body. GET endpoints receive
+    only query parameters explicitly supplied through ``VULN_TODAY_QUERY_JSON``;
+    SDG no longer guesses that every endpoint accepts ``since`` and ``limit``.
+
+    ``since`` remains in the signature for source-interface compatibility and
+    may be referenced by a caller when constructing explicit query parameters.
     """
+    del since
     if not api_url:
         return []
-    normalized_method = method.strip().upper()
+
+    normalized_method = (method or "").strip().upper()
     if normalized_method not in {"GET", "POST"}:
         raise ValueError("VULN_TODAY_API_METHOD must be GET or POST")
+    if is_scan_endpoint(api_url) and normalized_method != "POST":
+        raise ValueError(
+            "vuln.today /scan endpoint requires POST; unset an empty/GET "
+            "VULN_TODAY_API_METHOD value or set it to POST"
+        )
     if normalized_method == "POST" and request_payload is None:
         raise ValueError(
             "vuln.today POST endpoint requires VULN_TODAY_REQUEST_JSON "
@@ -1205,9 +1224,7 @@ def fetch_vuln_today(
         session,
         api_url,
         method=normalized_method,
-        params={"since": since.isoformat(), "limit": 500}
-        if normalized_method == "GET"
-        else None,
+        params=query_params if normalized_method == "GET" else None,
         headers=headers,
         json_body=request_payload if normalized_method == "POST" else None,
     )
@@ -1530,20 +1547,40 @@ def build_embed(
         ]
     )
     if finding.watch_matches:
-        fields.append({"name": "Watchlist Matches", "value": ", ".join(finding.watch_matches), "inline": False})
+        fields.append(
+            {
+                "name": "Watchlist Matches",
+                "value": truncate(", ".join(finding.watch_matches), 1000),
+                "inline": False,
+            }
+        )
+
+    # Enforce Discord's individual component limits before applying the lower
+    # aggregate safety budget used by this monitor. This prevents unusually
+    # large source names, watchlists, or external metadata from producing a
+    # payload Discord rejects even when ordinary findings are small.
+    fields = [
+        {
+            **field_value,
+            "name": truncate(field_value.get("name", ""), 256),
+            "value": truncate(field_value.get("value", ""), 1024),
+        }
+        for field_value in fields[:25]
+    ]
+    footer_text = (
+        "Sources: "
+        + ", ".join(sorted(finding.sources))
+        + (" · candidate requires validation" if finding.zero_day_candidate else "")
+    )
 
     embed = {
-        "title": f"{prefix}{finding.identifier}",
-        "description": truncate(finding.description, DISCORD_DESCRIPTION_LIMIT),
+        "title": truncate(f"{prefix}{finding.identifier}", 256),
+        "description": truncate(finding.description, min(DISCORD_DESCRIPTION_LIMIT, 4096)),
         "color": ZERO_DAY_COLOR
         if finding.zero_day_candidate
         else SEVERITY_COLORS.get(finding.severity, SEVERITY_COLORS["UNKNOWN"]),
         "fields": fields,
-        "footer": {
-            "text": "Sources: "
-            + ", ".join(sorted(finding.sources))
-            + (" · candidate requires validation" if finding.zero_day_candidate else "")
-        },
+        "footer": {"text": truncate(footer_text, 2048)},
     }
     embed_url = finding.url or (
         f"https://nvd.nist.gov/vuln/detail/{finding.identifier}"
@@ -1554,8 +1591,30 @@ def build_embed(
         embed["url"] = embed_url
     while embed_char_count(embed) > DISCORD_TOTAL_CHAR_LIMIT and len(embed["fields"]) > 6:
         embed["fields"].pop(-2)
+
+    # If required fields plus footer still exceed the aggregate budget, reduce
+    # the largest field values progressively instead of returning an invalid
+    # embed. Core labels remain visible and no field is reduced below 20 chars.
+    while embed_char_count(embed) > DISCORD_TOTAL_CHAR_LIMIT:
+        candidates = [
+            field_value
+            for field_value in embed["fields"]
+            if len(field_value.get("value", "")) > 20
+        ]
+        if not candidates:
+            break
+        largest = max(candidates, key=lambda field_value: len(field_value.get("value", "")))
+        over = embed_char_count(embed) - DISCORD_TOTAL_CHAR_LIMIT
+        current = largest.get("value", "")
+        largest["value"] = truncate(current, max(20, len(current) - over - 8))
+
     if embed_char_count(embed) > DISCORD_TOTAL_CHAR_LIMIT:
         embed["description"] = truncate(embed.get("description", ""), 160)
+    if embed_char_count(embed) > DISCORD_TOTAL_CHAR_LIMIT:
+        embed["footer"]["text"] = truncate(
+            embed["footer"].get("text", ""),
+            max(20, len(embed["footer"].get("text", "")) - (embed_char_count(embed) - DISCORD_TOTAL_CHAR_LIMIT) - 8),
+        )
     return embed
 
 
@@ -1663,13 +1722,19 @@ def load_config() -> dict[str, Any]:
         if vuln_today_api_url and vuln_today_api_url.rstrip("/").endswith("/scan")
         else "GET"
     )
-    vuln_today_api_method = os.getenv(
-        "VULN_TODAY_API_METHOD", default_vuln_today_method
+    # GitHub Actions expands an unset repository variable to an empty string.
+    # Treat that the same as "not configured" so it cannot override the
+    # endpoint-derived POST default and silently fall back to GET later.
+    vuln_today_api_method = (
+        os.getenv("VULN_TODAY_API_METHOD") or default_vuln_today_method
     ).strip().upper()
     vuln_today_request_payload = load_json_request_payload(
         parse_json_env("VULN_TODAY_REQUEST_JSON", None),
         os.getenv("VULN_TODAY_REQUEST_FILE"),
     )
+    vuln_today_query_params = parse_json_env("VULN_TODAY_QUERY_JSON", None)
+    if vuln_today_query_params is not None and not isinstance(vuln_today_query_params, dict):
+        raise ValueError("VULN_TODAY_QUERY_JSON must contain a JSON object")
 
     return {
         "webhooks": webhooks,
@@ -1680,6 +1745,7 @@ def load_config() -> dict[str, Any]:
         "vuln_today_api_key": os.getenv("VULN_TODAY_API_KEY"),
         "vuln_today_api_method": vuln_today_api_method,
         "vuln_today_request_payload": vuln_today_request_payload,
+        "vuln_today_query_params": vuln_today_query_params,
         "lookback_minutes": safe_int(os.getenv("LOOKBACK_MINUTES"), 90),
         "min_cvss": safe_float(os.getenv("MIN_CVSS")) or 0.0,
         "min_priority": safe_int(os.getenv("MIN_PRIORITY"), 0),
@@ -1764,6 +1830,7 @@ def run_once(config: dict[str, Any]) -> int:
                     since,
                     method=str(config.get("vuln_today_api_method") or "GET"),
                     request_payload=config.get("vuln_today_request_payload"),
+                    query_params=config.get("vuln_today_query_params"),
                 ),
             )
         )
