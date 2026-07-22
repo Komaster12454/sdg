@@ -50,10 +50,8 @@ class LiveSourceContractTests(unittest.TestCase):
     @unittest.skipUnless(os.getenv("VULN_TODAY_API_URL"), "vuln.today endpoint not configured")
     def test_vuln_today_configured_contract(self):
         url = os.environ["VULN_TODAY_API_URL"]
-        method = os.getenv(
-            "VULN_TODAY_API_METHOD",
-            "POST" if url.rstrip("/").endswith("/scan") else "GET",
-        )
+        default_method = "POST" if monitor.is_scan_endpoint(url) else "GET"
+        method = os.getenv("VULN_TODAY_API_METHOD") or default_method
         payload = None
         if os.getenv("VULN_TODAY_REQUEST_JSON"):
             payload = json.loads(os.environ["VULN_TODAY_REQUEST_JSON"])
@@ -64,6 +62,9 @@ class LiveSourceContractTests(unittest.TestCase):
             datetime.now(timezone.utc) - timedelta(days=1),
             method=method,
             request_payload=payload,
+            query_params=json.loads(os.environ["VULN_TODAY_QUERY_JSON"])
+            if os.getenv("VULN_TODAY_QUERY_JSON")
+            else None,
         )
         self.assertIsInstance(findings, list)
 
