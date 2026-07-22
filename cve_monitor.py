@@ -1716,31 +1716,47 @@ def load_config() -> dict[str, Any]:
     if not isinstance(advisory_feeds, list):
         advisory_feeds = []
 
+    # vuln.today is explicitly opt-in. Keeping the toggle disabled prevents a
+    # stale URL, missing scan payload, or undocumented API change from creating
+    # warnings on every continuous scan cycle.
+    vuln_today_enabled = env_bool("VULN_TODAY_ENABLED", False)
     vuln_today_api_url = os.getenv("VULN_TODAY_API_URL")
-    default_vuln_today_method = (
-        "POST"
-        if vuln_today_api_url and vuln_today_api_url.rstrip("/").endswith("/scan")
-        else "GET"
-    )
-    # GitHub Actions expands an unset repository variable to an empty string.
-    # Treat that the same as "not configured" so it cannot override the
-    # endpoint-derived POST default and silently fall back to GET later.
-    vuln_today_api_method = (
-        os.getenv("VULN_TODAY_API_METHOD") or default_vuln_today_method
-    ).strip().upper()
-    vuln_today_request_payload = load_json_request_payload(
-        parse_json_env("VULN_TODAY_REQUEST_JSON", None),
-        os.getenv("VULN_TODAY_REQUEST_FILE"),
-    )
-    vuln_today_query_params = parse_json_env("VULN_TODAY_QUERY_JSON", None)
-    if vuln_today_query_params is not None and not isinstance(vuln_today_query_params, dict):
-        raise ValueError("VULN_TODAY_QUERY_JSON must contain a JSON object")
+    vuln_today_api_method: str | None = None
+    vuln_today_request_payload: Any = None
+    vuln_today_query_params: dict[str, Any] | None = None
+
+    if vuln_today_enabled:
+        if not vuln_today_api_url:
+            _log(
+                "WARNING: VULN_TODAY_ENABLED is true but VULN_TODAY_API_URL is unset; "
+                "the source will be skipped.",
+                file=sys.stderr,
+            )
+        default_vuln_today_method = (
+            "POST"
+            if vuln_today_api_url and vuln_today_api_url.rstrip("/").endswith("/scan")
+            else "GET"
+        )
+        # GitHub Actions expands an unset repository variable to an empty string.
+        # Treat that the same as "not configured" so it cannot override the
+        # endpoint-derived POST default and silently fall back to GET later.
+        vuln_today_api_method = (
+            os.getenv("VULN_TODAY_API_METHOD") or default_vuln_today_method
+        ).strip().upper()
+        vuln_today_request_payload = load_json_request_payload(
+            parse_json_env("VULN_TODAY_REQUEST_JSON", None),
+            os.getenv("VULN_TODAY_REQUEST_FILE"),
+        )
+        vuln_today_query_params = parse_json_env("VULN_TODAY_QUERY_JSON", None)
+        if vuln_today_query_params is not None and not isinstance(vuln_today_query_params, dict):
+            raise ValueError("VULN_TODAY_QUERY_JSON must contain a JSON object")
 
     return {
         "webhooks": webhooks,
         "dry_run": dry_run,
         "nvd_api_key": os.getenv("NVD_API_KEY"),
         "github_token": os.getenv("GITHUB_TOKEN"),
+        "vuln_today_enabled": vuln_today_enabled,
         "vuln_today_api_url": vuln_today_api_url,
         "vuln_today_api_key": os.getenv("VULN_TODAY_API_KEY"),
         "vuln_today_api_method": vuln_today_api_method,
@@ -1819,7 +1835,7 @@ def run_once(config: dict[str, Any]) -> int:
                 ),
             )
         )
-    if config.get("vuln_today_api_url"):
+    if config.get("vuln_today_enabled") and config.get("vuln_today_api_url"):
         source_jobs.append(
             (
                 "vuln.today",
