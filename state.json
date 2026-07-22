@@ -56032,16 +56032,6 @@
       "aliases": [],
       "candidate": false
     },
-    "CVE-2026-65014": {
-      "fingerprint": "a481798f1a429da536a4",
-      "first_seen": "2026-07-22T11:51:48.190562+00:00",
-      "last_seen": "2026-07-22T20:50:26.930471+00:00",
-      "patch_status": "UNKNOWN",
-      "priority": 0,
-      "zero_day_score": 0,
-      "aliases": [],
-      "candidate": false
-    },
     "CVE-2026-65602": {
       "fingerprint": "a481798f1a429da536a4",
       "first_seen": "2026-07-22T11:51:48.190562+00:00",
@@ -62848,10 +62838,22 @@
       ],
       "candidate": false
     },
+    "CVE-2026-65014": {
+      "fingerprint": "3dd23ca3ff424b6fd5a0",
+      "first_seen": "2026-07-22T11:51:48.190562+00:00",
+      "last_seen": "2026-07-22T22:37:00.380528+00:00",
+      "patch_status": "PATCHED",
+      "priority": 0,
+      "zero_day_score": 66,
+      "aliases": [
+        "GHSA-33Q9-F52J-GC75"
+      ],
+      "candidate": false
+    },
     "CVE-2026-65596": {
       "fingerprint": "f5ba4fe577e8ff549119",
       "first_seen": "2026-07-22T11:51:48.190562+00:00",
-      "last_seen": "2026-07-22T22:35:56.827297+00:00",
+      "last_seen": "2026-07-22T22:37:00.380528+00:00",
       "patch_status": "PATCHED",
       "priority": 0,
       "zero_day_score": 66,
@@ -62863,7 +62865,7 @@
     "CVE-2026-65594": {
       "fingerprint": "a9595ed90e4b3f1cf691",
       "first_seen": "2026-07-22T11:51:48.190562+00:00",
-      "last_seen": "2026-07-22T22:35:56.827297+00:00",
+      "last_seen": "2026-07-22T22:37:00.380528+00:00",
       "patch_status": "PATCHED",
       "priority": 0,
       "zero_day_score": 66,
@@ -62875,7 +62877,7 @@
     "CVE-2026-65590": {
       "fingerprint": "34efe373812ab4a4c397",
       "first_seen": "2026-07-22T11:51:48.190562+00:00",
-      "last_seen": "2026-07-22T22:35:56.827297+00:00",
+      "last_seen": "2026-07-22T22:37:00.380528+00:00",
       "patch_status": "PATCHED",
       "priority": 0,
       "zero_day_score": 66,
@@ -62885,5 +62887,5 @@
       "candidate": false
     }
   },
-  "updated": "2026-07-22T22:35:56.830264+00:00"
+  "updated": "2026-07-22T22:37:00.550410+00:00"
 }
