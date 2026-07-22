@@ -1,0 +1,35 @@
+name: Live Source Contract Tests
+
+on:
+  schedule:
+    - cron: "17 3 * * *"
+  workflow_dispatch: {}
+
+jobs:
+  public-source-contracts:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    permissions:
+      contents: read
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: python -m pip install -r requirements.txt
+
+      - name: Test live source contracts
+        env:
+          RUN_LIVE_SOURCE_TESTS: "1"
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          VULN_TODAY_API_URL: ${{ secrets.VULN_TODAY_API_URL }}
+          VULN_TODAY_API_KEY: ${{ secrets.VULN_TODAY_API_KEY }}
+          VULN_TODAY_API_METHOD: ${{ vars.VULN_TODAY_API_METHOD }}
+          VULN_TODAY_REQUEST_JSON: ${{ secrets.VULN_TODAY_REQUEST_JSON }}
+        run: python -m unittest tests.test_live_sources -v
