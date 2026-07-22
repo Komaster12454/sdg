@@ -47,7 +47,10 @@ class LiveSourceContractTests(unittest.TestCase):
         self.assertTrue(data)
         self.assertIn("ghsa_id", data[0])
 
-    @unittest.skipUnless(os.getenv("VULN_TODAY_API_URL"), "vuln.today endpoint not configured")
+    @unittest.skipUnless(
+        monitor.env_bool("VULN_TODAY_ENABLED", False) and os.getenv("VULN_TODAY_API_URL"),
+        "vuln.today integration not enabled/configured",
+    )
     def test_vuln_today_configured_contract(self):
         url = os.environ["VULN_TODAY_API_URL"]
         default_method = "POST" if monitor.is_scan_endpoint(url) else "GET"
