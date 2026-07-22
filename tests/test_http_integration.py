@@ -209,6 +209,47 @@ class HttpIntegrationTests(unittest.TestCase):
             {"packages": [{"name": "example", "version": "1.0"}]},
         )
 
+
+    def test_empty_method_environment_does_not_override_scan_post_default(self):
+        env = {
+            "DRY_RUN": "true",
+            "VULN_TODAY_API_URL": "https://vuln.today/api/v1/scan",
+            "VULN_TODAY_API_METHOD": "",
+            "VULN_TODAY_REQUEST_JSON": '{"packages":[{"name":"example","version":"1.0"}]}',
+        }
+        with patch.dict(os.environ, env, clear=True):
+            config = monitor.load_config()
+        self.assertEqual(config["vuln_today_api_method"], "POST")
+
+    def test_scan_endpoint_rejects_get_before_network_access(self):
+        with self.assertRaisesRegex(ValueError, "/scan endpoint requires POST"):
+            monitor.fetch_vuln_today(
+                requests.Session(),
+                "https://vuln.today/api/v1/scan",
+                None,
+                datetime(2026, 7, 21, tzinfo=timezone.utc),
+                method="GET",
+            )
+
+    def test_vuln_today_get_uses_only_explicit_query_parameters(self):
+        def dispatch(record):
+            return 200, {}, {"results": []}
+
+        with local_json_server(dispatch) as (base_url, seen):
+            monitor.fetch_vuln_today(
+                monitor.build_session(),
+                f"{base_url}/api/v1/feed",
+                None,
+                datetime(2026, 7, 21, tzinfo=timezone.utc),
+                method="GET",
+                query_params={"cursor": "abc", "page_size": 25},
+            )
+
+        self.assertEqual(seen[0]["method"], "GET")
+        self.assertEqual(seen[0]["query"], {"cursor": ["abc"], "page_size": ["25"]})
+        self.assertNotIn("since", seen[0]["query"])
+        self.assertNotIn("limit", seen[0]["query"])
+
     def test_http_errors_are_not_treated_as_empty_success(self):
         def dispatch(record):
             return 503, {}, {"error": "temporary failure"}
