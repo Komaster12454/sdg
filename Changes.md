@@ -30,6 +30,9 @@
 - Per-source failure isolation
 - HTTP retry and backoff handling
 - Discord rate-limit handling and character-aware batching
+- Confirmed Discord delivery using returned message IDs
+- Failed webhook buckets remain eligible for retry instead of being marked sent
+- Conflict-aware `state.json` persistence through the GitHub API, including files over 1 MiB
 - Flood-control cap
 - Unit tests in GitHub Actions
 - Fixed the previous `LOOKBACK_DAYS` override that ignored `LOOKBACK_MINUTES`
@@ -38,8 +41,8 @@
 ## Validation
 
 ```text
-Ran 10 tests
-OK
+Ran 41 tests
+OK (skipped=4 live-source tests)
 ```
 
 `cve_monitor.py`, `continuous_runner.py`, and the tests also pass Python bytecode compilation.

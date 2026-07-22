@@ -1,3 +1,4 @@
+import base64
 import json
 import os
 import threading
@@ -11,6 +12,7 @@ from urllib.parse import parse_qs, urlparse
 import requests
 
 import cve_monitor as monitor
+import continuous_runner as runner
 
 
 @contextmanager
@@ -47,6 +49,7 @@ def local_json_server(dispatch):
 
         do_GET = _handle
         do_POST = _handle
+        do_PUT = _handle
 
         def log_message(self, format, *args):
             return
@@ -94,6 +97,192 @@ def ghsa_row(identifier, cve_id=None):
 
 
 class HttpIntegrationTests(unittest.TestCase):
+    def test_discord_delivery_waits_for_and_validates_created_message(self):
+        def dispatch(record):
+            self.assertEqual(record["method"], "POST")
+            self.assertEqual(record["query"], {"thread_id": ["42"], "wait": ["true"]})
+            self.assertEqual(record["json"]["content"], "delivery test")
+            return 200, {}, {"id": "123456789", "channel_id": "987654321"}
+
+        with local_json_server(dispatch) as (base_url, seen), patch.object(
+            monitor, "build_session", return_value=requests.Session()
+        ):
+            sent = monitor.send_to_discord(
+                f"{base_url}/webhook?thread_id=42",
+                [{"title": "test"}],
+                label="UNKNOWN",
+                batch_note="delivery test",
+            )
+
+        self.assertEqual(sent, 1)
+        self.assertEqual(len(seen), 1)
+
+    def test_discord_success_without_message_id_is_not_counted_as_delivery(self):
+        def dispatch(record):
+            return 204, {}, b""
+
+        with local_json_server(dispatch) as (base_url, _), patch.object(
+            monitor, "build_session", return_value=requests.Session()
+        ):
+            with self.assertRaisesRegex(RuntimeError, "without a message confirmation"):
+                monitor.send_to_discord(
+                    f"{base_url}/webhook",
+                    [{"title": "test"}],
+                    label="UNKNOWN",
+                )
+
+    def test_discord_rate_limit_retries_are_bounded(self):
+        def dispatch(record):
+            return 429, {}, {"retry_after": 0.01}
+
+        with local_json_server(dispatch) as (base_url, seen), patch.object(
+            monitor, "build_session", return_value=requests.Session()
+        ), patch.object(monitor.time, "sleep", return_value=None):
+            with self.assertRaisesRegex(RuntimeError, "remained rate limited"):
+                monitor.send_to_discord(
+                    f"{base_url}/webhook",
+                    [{"title": "test"}],
+                    label="UNKNOWN",
+                )
+
+        self.assertEqual(len(seen), monitor.DISCORD_MAX_RETRIES + 1)
+
+    def test_github_state_persistence_merges_after_a_concurrent_update(self):
+        local_document = {
+            "records": {
+                "CVE-LOCAL": {
+                    "first_seen": "2026-07-22T01:00:00+00:00",
+                    "last_seen": "2026-07-22T03:00:00+00:00",
+                    "fingerprint": "local",
+                },
+                "CVE-SHARED": {
+                    "first_seen": "2026-07-22T01:00:00+00:00",
+                    "last_seen": "2026-07-22T03:00:00+00:00",
+                    "fingerprint": "local-shared",
+                },
+            },
+            "updated": "2026-07-22T03:00:00+00:00",
+        }
+        first_remote = {
+            "records": {
+                "CVE-REMOTE": {
+                    "first_seen": "2026-07-22T00:30:00+00:00",
+                    "last_seen": "2026-07-22T02:00:00+00:00",
+                    "fingerprint": "remote",
+                }
+            },
+            "updated": "2026-07-22T02:00:00+00:00",
+        }
+        concurrent_remote = {
+            "records": {
+                **first_remote["records"],
+                "CVE-SHARED": {
+                    "first_seen": "2026-07-21T23:00:00+00:00",
+                    "last_seen": "2026-07-22T04:00:00+00:00",
+                    "fingerprint": "concurrent-wins",
+                },
+                "CVE-CONCURRENT": {
+                    "first_seen": "2026-07-22T04:00:00+00:00",
+                    "last_seen": "2026-07-22T04:00:00+00:00",
+                    "fingerprint": "concurrent",
+                },
+            },
+            "updated": "2026-07-22T04:00:00+00:00",
+        }
+        get_count = 0
+        put_count = 0
+        final_body = {}
+
+        def github_content(document, sha):
+            content = base64.b64encode(json.dumps(document).encode()).decode()
+            return {"encoding": "base64", "content": content, "sha": sha}
+
+        def dispatch(record):
+            nonlocal get_count, put_count, final_body
+            self.assertEqual(record["path"], "/repos/owner/repo/contents/state.json")
+            self.assertEqual(record["headers"].get("Authorization"), "Bearer test-token")
+            if record["method"] == "GET":
+                get_count += 1
+                self.assertEqual(record["query"], {"ref": ["main"]})
+                document = first_remote if get_count == 1 else concurrent_remote
+                return 200, {}, github_content(document, f"sha-{get_count}")
+            put_count += 1
+            if put_count == 1:
+                return 409, {}, {"message": "sha changed"}
+            final_body = record["json"]
+            return 200, {}, {"commit": {"sha": "commit-sha"}}
+
+        import tempfile
+        from pathlib import Path
+
+        with tempfile.TemporaryDirectory() as tmp, local_json_server(dispatch) as (base_url, seen):
+            state_path = Path(tmp) / "state.json"
+            state_path.write_text(json.dumps(local_document), encoding="utf-8")
+            with patch.object(runner, "_github_state_path", return_value="state.json"):
+                persisted = runner.persist_state_to_github(
+                    str(state_path),
+                    repository="owner/repo",
+                    branch="main",
+                    token="test-token",
+                    api_url=base_url,
+                    session=requests.Session(),
+                )
+            saved = json.loads(state_path.read_text(encoding="utf-8"))
+
+        self.assertTrue(persisted)
+        self.assertEqual([request["method"] for request in seen], ["GET", "PUT", "GET", "PUT"])
+        self.assertEqual(final_body["sha"], "sha-2")
+        uploaded = json.loads(base64.b64decode(final_body["content"]))
+        self.assertEqual(set(uploaded["records"]), {
+            "CVE-LOCAL", "CVE-REMOTE", "CVE-SHARED", "CVE-CONCURRENT"
+        })
+        self.assertEqual(uploaded["records"]["CVE-SHARED"]["fingerprint"], "concurrent-wins")
+        self.assertEqual(uploaded["records"]["CVE-SHARED"]["first_seen"], "2026-07-21T23:00:00+00:00")
+        self.assertEqual(saved, uploaded)
+
+    def test_github_state_persistence_fetches_large_state_through_blob_api(self):
+        document = {
+            "records": {
+                "CVE-2026-10000": {
+                    "first_seen": "2026-07-22T01:00:00+00:00",
+                    "last_seen": "2026-07-22T02:00:00+00:00",
+                }
+            },
+            "updated": "2026-07-22T02:00:00+00:00",
+        }
+        encoded = base64.b64encode(json.dumps(document).encode()).decode()
+
+        def dispatch(record):
+            if record["method"] == "GET" and record["path"].endswith("/contents/state.json"):
+                return 200, {}, {"encoding": "none", "content": "", "sha": "large-blob-sha"}
+            if record["method"] == "GET" and record["path"].endswith("/git/blobs/large-blob-sha"):
+                return 200, {}, {"encoding": "base64", "content": encoded, "sha": "large-blob-sha"}
+            if record["method"] == "PUT":
+                self.assertEqual(record["json"]["sha"], "large-blob-sha")
+                return 200, {}, {"commit": {"sha": "commit-sha"}}
+            return 404, {}, {"message": "not found"}
+
+        import tempfile
+        from pathlib import Path
+
+        with tempfile.TemporaryDirectory() as tmp, local_json_server(dispatch) as (base_url, seen):
+            state_path = Path(tmp) / "state.json"
+            state_path.write_text(json.dumps(document), encoding="utf-8")
+            with patch.object(runner, "_github_state_path", return_value="state.json"):
+                runner.persist_state_to_github(
+                    str(state_path),
+                    repository="owner/repo",
+                    branch="main",
+                    token="test-token",
+                    api_url=base_url,
+                    session=requests.Session(),
+                )
+
+        self.assertEqual(
+            [request["method"] for request in seen],
+            ["GET", "GET", "PUT"],
+        )
+
     def test_nvd_pagination_uses_real_http_query_parameters(self):
         def dispatch(record):
             self.assertEqual(record["method"], "GET")
@@ -390,6 +579,63 @@ class HttpIntegrationTests(unittest.TestCase):
     def test_unsupported_http_method_fails_before_network_access(self):
         with self.assertRaisesRegex(ValueError, "Unsupported JSON request method"):
             monitor.request_json(requests.Session(), "https://example.invalid", method="DELETE")
+
+    def test_failed_discord_delivery_does_not_consume_notification_state(self):
+        finding = monitor.Finding(
+            identifier="CVE-2026-19999",
+            description="Authentication bypass in example service",
+            sources={"NVD"},
+            source_weights=[20],
+            patch_status="UNKNOWN",
+        )
+
+        import tempfile
+        from pathlib import Path
+
+        with tempfile.TemporaryDirectory() as tmp:
+            state_path = Path(tmp) / "state.json"
+            config = {
+                "webhooks": {"UNKNOWN": "https://discord.invalid/webhook"},
+                "dry_run": False,
+                "nvd_api_key": None,
+                "github_token": None,
+                "vuln_today_enabled": False,
+                "vuln_today_api_url": None,
+                "lookback_minutes": 10,
+                "min_cvss": 0.0,
+                "min_priority": 0,
+                "min_zero_day_score": 60,
+                "min_zero_day_confidence": 35,
+                "max_notifications": 10,
+                "include_unreviewed": False,
+                "notify_updates": True,
+                "state_file": str(state_path),
+                "jsonl_output": None,
+                "sarif_glob": "",
+                "sbom_glob": "",
+                "custom_findings_path": None,
+                "watch_repositories": [],
+                "watch_terms": [],
+                "suppressed_identifiers": set(),
+                "advisory_feeds": [],
+            }
+            with patch.object(monitor, "fetch_nvd", return_value=[finding]), \
+                patch.object(monitor, "fetch_ghsa", return_value=[]), \
+                patch.object(monitor, "fetch_cve_list_release_feed", return_value=[]), \
+                patch.object(monitor, "fetch_github_repository_signals", return_value=[]), \
+                patch.object(monitor, "fetch_cisa_kev", return_value={}), \
+                patch.object(monitor, "enrich_epss", return_value=None), \
+                patch.object(monitor, "send_to_discord", side_effect=[RuntimeError("down"), 1]) as send, \
+                patch.object(monitor, "_log"):
+                self.assertEqual(monitor.run_once(config), 0)
+                failed_state = json.loads(state_path.read_text(encoding="utf-8"))["records"]
+                self.assertNotIn(finding.identifier, failed_state)
+
+                self.assertEqual(monitor.run_once(config), 1)
+                delivered_state = json.loads(state_path.read_text(encoding="utf-8"))["records"]
+
+        self.assertEqual(send.call_count, 2)
+        self.assertIn(finding.identifier, delivered_state)
 
     def test_full_dry_run_pipeline_correlates_sources_and_writes_state(self):
         cve_id = "CVE-2026-10005"

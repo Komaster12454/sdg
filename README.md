@@ -89,6 +89,8 @@ DISCORD_WEBHOOK_ZERO_DAY_URL
 
 Unset category webhooks fall back to `DISCORD_WEBHOOK_URL`. Zero-day candidates also fall back to the Unknown webhook when one is configured.
 
+Webhook values must be stored as GitHub Actions **secrets**, not repository variables. The monitor adds Discord's `wait=true` option and counts a message only when Discord returns the created message ID. A failed bucket is left out of deduplication state so it is retried on the next cycle. Look for `discord_messages_confirmed=N` in the run log; any delivery problem is also logged with its category and HTTP status without printing the webhook URL.
+
 ### 2. Optional API secrets
 
 ```text
@@ -130,6 +132,8 @@ Only add repositories you are authorized to monitor and whose security-fix metad
 | `CUSTOM_FINDINGS_JSON` | empty | Path to custom authorized-research JSON |
 | `FINDINGS_JSONL` | empty | Optional output path for all normalized findings |
 | `STATE_FILE` | `state.json` | Dedupe, aliases, and candidate tracking state |
+| `STATE_PERSISTENCE_MODE` | `auto` | Use conflict-aware GitHub persistence in Actions or legacy local git elsewhere |
+| `STATE_PERSIST_RETRIES` | `4` | Attempts after concurrent GitHub state updates |
 | `DRY_RUN` | `false` | Print notification JSON instead of sending Discord messages |
 
 ## Vendor advisory feeds
@@ -256,7 +260,7 @@ python -m unittest discover -s tests -v
 
 ## Continuous GitHub Actions operation
 
-`.github/workflows/cve-monitor.yml` starts every five minutes and runs `continuous_runner.py`. The runner scans at the configured interval, commits only `state.json`, and is restarted by the next scheduled workflow execution.
+`.github/workflows/cve-monitor.yml` starts every five minutes and runs `continuous_runner.py`. The runner scans at the configured interval and persists only `state.json`. In Actions it uses GitHub's contents API with the current blob SHA. If another workflow or person updates the branch concurrently, the runner fetches the new state, merges records by their newest observation time, and retries. It never builds up rejected local commits or force-pushes `main`.
 
 GitHub scheduled workflows are best-effort and may be delayed. Keep `LOOKBACK_MINUTES` larger than the internal scan interval so delayed cycles do not create gaps.
 
