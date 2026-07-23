@@ -139,11 +139,45 @@ class MonitorBehaviorTests(unittest.TestCase):
         self.assertIn("GHSA-2345-6789-cfgh", result.aliases)
         self.assertEqual(result.affected, ["example-lib < 2.0"])
 
-    def test_patched_source_overrides_unpatched_or_unknown_status(self):
-        base = monitor.Finding(identifier="CVE-2026-12345", patch_status="UNPATCHED")
-        patch = monitor.Finding(identifier="CVE-2026-12345", patch_status="PATCHED")
-        base.merge(patch)
-        self.assertEqual(base.patch_status, "PATCHED")
+    def test_unpatched_evidence_wins_over_patched_evidence_in_either_order(self):
+        unpatched_first = monitor.Finding(identifier="CVE-2026-12345", patch_status="UNPATCHED")
+        patched_second = monitor.Finding(identifier="CVE-2026-12345", patch_status="PATCHED")
+        unpatched_first.merge(patched_second)
+
+        patched_first = monitor.Finding(identifier="CVE-2026-12345", patch_status="PATCHED")
+        unpatched_second = monitor.Finding(identifier="CVE-2026-12345", patch_status="UNPATCHED")
+        patched_first.merge(unpatched_second)
+
+        self.assertEqual(unpatched_first.patch_status, "UNPATCHED")
+        self.assertEqual(patched_first.patch_status, "UNPATCHED")
+
+    def test_unpatched_candidate_receives_more_urgency_than_patched_candidate(self):
+        patched = monitor.Finding(
+            identifier="GHSA-2345-6789-cfgh",
+            sources={"GHSA unreviewed"},
+            source_weights=[24],
+            severity="HIGH",
+            patch_status="PATCHED",
+            provisional=True,
+            zero_day_candidate=True,
+            zero_day_score=58,
+        )
+        unpatched = monitor.Finding(
+            identifier="GHSA-3456-789c-fghj",
+            sources={"GHSA unreviewed"},
+            source_weights=[24],
+            severity="HIGH",
+            patch_status="UNPATCHED",
+            provisional=True,
+            zero_day_candidate=True,
+            zero_day_score=58,
+        )
+
+        patched.calculate_scores()
+        unpatched.calculate_scores()
+
+        self.assertGreater(unpatched.zero_day_score, patched.zero_day_score)
+        self.assertGreater(unpatched.priority, patched.priority)
 
     def test_state_alias_lookup_supports_ghsa_to_cve_migration(self):
         state = {

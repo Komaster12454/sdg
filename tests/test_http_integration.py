@@ -335,6 +335,40 @@ class HttpIntegrationTests(unittest.TestCase):
         self.assertEqual(seen[0]["headers"].get("Authorization"), "Bearer test-token")
         self.assertEqual(seen[1]["headers"].get("Authorization"), "Bearer test-token")
 
+    def test_ghsa_with_any_unresolved_package_is_not_labeled_patched(self):
+        advisory = ghsa_row("GHSA-2345-6789-cfgh")
+        advisory["vulnerabilities"] = [
+            {
+                "package": {"ecosystem": "pip", "name": "first-package"},
+                "vulnerable_version_range": "< 2.0",
+                "first_patched_version": {"identifier": "2.0"},
+            },
+            {
+                "package": {"ecosystem": "npm", "name": "second-package"},
+                "vulnerable_version_range": "<= 4.1",
+                "first_patched_version": None,
+            },
+        ]
+
+        def dispatch(record):
+            return 200, {}, [advisory]
+
+        with local_json_server(dispatch) as (base_url, _):
+            with patch.object(monitor, "GHSA_API_URL", f"{base_url}/advisories"):
+                findings = monitor.fetch_ghsa(
+                    monitor.build_session(),
+                    datetime(2026, 7, 21, tzinfo=timezone.utc),
+                    "test-token",
+                    False,
+                )
+
+        self.assertEqual(len(findings), 1)
+        self.assertEqual(findings[0].patch_status, "UNPATCHED")
+        self.assertCountEqual(
+            findings[0].affected,
+            ["pip:first-package < 2.0", "npm:second-package <= 4.1"],
+        )
+
     def test_vuln_today_post_sends_exact_configured_payload(self):
         payload = {
             "manifest": {
@@ -636,6 +670,67 @@ class HttpIntegrationTests(unittest.TestCase):
 
         self.assertEqual(send.call_count, 2)
         self.assertIn(finding.identifier, delivered_state)
+
+    def test_unpatched_unreviewed_pre_cve_advisory_reaches_zero_day_webhook(self):
+        finding = monitor.Finding(
+            identifier="GHSA-2345-6789-cfgh",
+            description="Unauthenticated remote code execution before a CVE is assigned",
+            score=8.0,
+            severity="HIGH",
+            sources={"GHSA unreviewed"},
+            source_weights=[24],
+            patch_status="UNPATCHED",
+            provisional=True,
+            zero_day_candidate=True,
+            zero_day_score=58,
+            candidate_reasons=["GitHub advisory published before CVE assignment"],
+        )
+
+        import tempfile
+        from pathlib import Path
+
+        with tempfile.TemporaryDirectory() as tmp:
+            config = {
+                "webhooks": {"ZERO_DAY": "https://discord.invalid/zero-day"},
+                "dry_run": False,
+                "nvd_api_key": None,
+                "github_token": None,
+                "vuln_today_enabled": False,
+                "vuln_today_api_url": None,
+                "lookback_minutes": 10,
+                "min_cvss": 0.0,
+                "min_priority": 0,
+                "min_zero_day_score": 60,
+                "min_zero_day_confidence": 35,
+                "min_unresolved_zero_day_confidence": 20,
+                "max_notifications": 10,
+                "include_unreviewed": True,
+                "notify_updates": True,
+                "state_file": str(Path(tmp) / "state.json"),
+                "jsonl_output": None,
+                "sarif_glob": "",
+                "sbom_glob": "",
+                "custom_findings_path": None,
+                "watch_repositories": [],
+                "watch_terms": [],
+                "suppressed_identifiers": set(),
+                "advisory_feeds": [],
+            }
+            with patch.object(monitor, "fetch_nvd", return_value=[]), \
+                patch.object(monitor, "fetch_ghsa", return_value=[finding]), \
+                patch.object(monitor, "fetch_cve_list_release_feed", return_value=[]), \
+                patch.object(monitor, "fetch_github_repository_signals", return_value=[]), \
+                patch.object(monitor, "fetch_cisa_kev", return_value={}), \
+                patch.object(monitor, "enrich_epss", return_value=None), \
+                patch.object(monitor, "send_to_discord", return_value=1) as send, \
+                patch.object(monitor, "_log"):
+                delivered = monitor.run_once(config)
+
+        self.assertEqual(delivered, 1)
+        self.assertGreaterEqual(finding.zero_day_score, 60)
+        self.assertGreaterEqual(finding.confidence, 20)
+        self.assertEqual(send.call_args.kwargs["label"], "ZERO_DAY")
+        self.assertEqual(send.call_args.args[0], "https://discord.invalid/zero-day")
 
     def test_full_dry_run_pipeline_correlates_sources_and_writes_state(self):
         cve_id = "CVE-2026-10005"

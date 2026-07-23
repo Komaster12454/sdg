@@ -462,10 +462,17 @@ class Finding:
         self.zero_day_score = max(self.zero_day_score, other.zero_day_score)
         self.provisional = self.provisional and other.provisional
         self.url = self.url or other.url
-        if other.patch_status == "PATCHED":
-            self.patch_status = "PATCHED"
-        elif other.patch_status == "UNPATCHED" and self.patch_status == "UNKNOWN":
+        # Patch state is aggregated conservatively. A record is only considered
+        # patched when no correlated source still reports an unresolved affected
+        # component. This prevents one fix reference from hiding unpatched
+        # packages or platforms reported by another source.
+        patch_states = {self.patch_status, other.patch_status}
+        if "UNPATCHED" in patch_states:
             self.patch_status = "UNPATCHED"
+        elif "PATCHED" in patch_states:
+            self.patch_status = "PATCHED"
+        else:
+            self.patch_status = "UNKNOWN"
 
     def calculate_scores(self, watch_terms: Iterable[str] = ()) -> None:
         searchable = " ".join(
@@ -489,6 +496,7 @@ class Finding:
         zero_day += min(15, max(0, len(self.sources) - 1) * 5)
         zero_day += 10 if self.severity in {"HIGH", "CRITICAL"} else 0
         zero_day += 8 if self.public_exploit else 0
+        zero_day += 10 if self.patch_status == "UNPATCHED" else 0
         zero_day += 5 if self.patch_status == "UNKNOWN" else 0
         zero_day -= 12 if self.identifier.startswith("CVE-") and not self.provisional else 0
         self.zero_day_score = max(0, min(100, zero_day))
@@ -647,7 +655,13 @@ def fetch_ghsa(
                     continue
                 packages = advisory.get("vulnerabilities") or []
                 has_package = bool(packages)
-                has_patch = any(vulnerability.get("first_patched_version") for vulnerability in packages)
+                # GitHub returns one row per affected package/range. Treat the
+                # advisory as patched only if every affected row has a first
+                # patched version; one unresolved row keeps the aggregate alert
+                # in the unpatched category.
+                all_patched = has_package and all(
+                    vulnerability.get("first_patched_version") for vulnerability in packages
+                )
                 affected: list[str] = []
                 for vulnerability in packages:
                     package = vulnerability.get("package") or {}
@@ -683,7 +697,7 @@ def fetch_ghsa(
                         references=unique(references, 12),
                         sources={"GHSA" if advisory_type == "reviewed" else "GHSA unreviewed"},
                         source_weights=[40 if advisory_type == "reviewed" else 24],
-                        patch_status=("PATCHED" if has_patch else "UNPATCHED") if has_package else "UNKNOWN",
+                        patch_status=("PATCHED" if all_patched else "UNPATCHED") if has_package else "UNKNOWN",
                         affected=unique(affected, 16),
                         epss=safe_float(epss.get("percentage")),
                         epss_percentile=safe_float(epss.get("percentile")),
@@ -1806,6 +1820,9 @@ def load_config() -> dict[str, Any]:
         "min_priority": safe_int(os.getenv("MIN_PRIORITY"), 0),
         "min_zero_day_score": safe_int(os.getenv("MIN_ZERO_DAY_SCORE"), 60),
         "min_zero_day_confidence": safe_int(os.getenv("MIN_ZERO_DAY_CONFIDENCE"), 35),
+        "min_unresolved_zero_day_confidence": safe_int(
+            os.getenv("MIN_UNRESOLVED_ZERO_DAY_CONFIDENCE"), 20
+        ),
         "max_notifications": safe_int(os.getenv("MAX_NOTIFICATIONS_PER_RUN"), 60),
         "include_unreviewed": env_bool("GHSA_INCLUDE_UNREVIEWED", True),
         "notify_updates": env_bool("NOTIFY_UPDATES", True),
@@ -1977,10 +1994,16 @@ def run_once(config: dict[str, Any]) -> int:
             continue
         if finding.score is not None and finding.score < config.get("min_cvss", 0):
             continue
+        unresolved_candidate = finding.patch_status in {"UNPATCHED", "UNKNOWN"}
+        candidate_confidence = (
+            config.get("min_unresolved_zero_day_confidence", 20)
+            if unresolved_candidate
+            else config.get("min_zero_day_confidence", 35)
+        )
         candidate_alert = (
             finding.zero_day_candidate
             and finding.zero_day_score >= config.get("min_zero_day_score", 60)
-            and finding.confidence >= config.get("min_zero_day_confidence", 35)
+            and finding.confidence >= candidate_confidence
         )
         if not candidate_alert and finding.priority < config.get("min_priority", 0):
             continue
@@ -2082,9 +2105,14 @@ def run_once(config: dict[str, Any]) -> int:
             apply_state_update(identifier, previous_key, entry)
 
     save_state(state_file, state)
-    candidate_count = sum(1 for finding in merged.values() if finding.zero_day_candidate)
+    candidates = [finding for finding in merged.values() if finding.zero_day_candidate]
+    candidate_count = len(candidates)
+    unresolved_candidate_count = sum(
+        1 for finding in candidates if finding.patch_status in {"UNPATCHED", "UNKNOWN"}
+    )
     _log(
         f"findings={len(merged)} candidates={candidate_count} "
+        f"unresolved_candidates={unresolved_candidate_count} "
         f"notifications={notification_count} discord_messages_confirmed={total_sent}"
     )
     for error in errors:

@@ -66,7 +66,9 @@ zero_day_score >= 60
 confidence >= 35
 ```
 
-A new public repository signal alone is intentionally below the default alert threshold. A reviewed pre-CVE GHSA, trusted vendor advisory, or serious SARIF finding normally exceeds it.
+For candidates whose patch state is Unpatched or Unknown, the default confidence gate is `20`. Unresolved candidates also receive an urgency boost. This allows pre-CVE unreviewed advisories with unresolved packages through while keeping weak generic repository signals below the default score gate. A candidate being patched never controls whether it is discovered.
+
+Patch state is intentionally conservative: a multi-package GHSA is only marked Patched when every affected package range has a first patched version. When correlated sources disagree, unresolved evidence wins and the merged finding remains Unpatched.
 
 ## Setup
 
@@ -120,6 +122,7 @@ Only add repositories you are authorized to monitor and whose security-fix metad
 | `MIN_PRIORITY` | `0` | Skip ordinary findings below this priority |
 | `MIN_ZERO_DAY_SCORE` | `60` | Minimum candidate score for a zero-day alert |
 | `MIN_ZERO_DAY_CONFIDENCE` | `35` | Minimum candidate confidence for a zero-day alert |
+| `MIN_UNRESOLVED_ZERO_DAY_CONFIDENCE` | `20` | Lower confidence gate for Unpatched or Unknown candidates |
 | `MAX_NOTIFICATIONS_PER_RUN` | `60` | Flood-control cap per cycle |
 | `GHSA_INCLUDE_UNREVIEWED` | `true` | Include GitHub unreviewed advisories |
 | `NOTIFY_UPDATES` | `true` | Re-alert on material changes |
