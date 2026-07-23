@@ -66,7 +66,9 @@ zero_day_score >= 60
 confidence >= 35
 ```
 
-A new public repository signal alone is intentionally below the default alert threshold. A reviewed pre-CVE GHSA, trusted vendor advisory, or serious SARIF finding normally exceeds it.
+For candidates whose patch state is Unpatched or Unknown, the default confidence gate is `20`. Unresolved candidates also receive an urgency boost. This allows pre-CVE unreviewed advisories with unresolved packages through while keeping weak generic repository signals below the default score gate. A candidate being patched never controls whether it is discovered.
+
+Patch state is intentionally conservative: a multi-package GHSA is only marked Patched when every affected package range has a first patched version. When correlated sources disagree, unresolved evidence wins and the merged finding remains Unpatched.
 
 ## Setup
 
@@ -88,6 +90,8 @@ DISCORD_WEBHOOK_ZERO_DAY_URL
 ```
 
 Unset category webhooks fall back to `DISCORD_WEBHOOK_URL`. Zero-day candidates also fall back to the Unknown webhook when one is configured.
+
+Webhook values must be stored as GitHub Actions **secrets**, not repository variables. The monitor adds Discord's `wait=true` option and counts a message only when Discord returns the created message ID. A failed bucket is left out of deduplication state so it is retried on the next cycle. Look for `discord_messages_confirmed=N` in the run log; any delivery problem is also logged with its category and HTTP status without printing the webhook URL.
 
 ### 2. Optional API secrets
 
@@ -118,6 +122,7 @@ Only add repositories you are authorized to monitor and whose security-fix metad
 | `MIN_PRIORITY` | `0` | Skip ordinary findings below this priority |
 | `MIN_ZERO_DAY_SCORE` | `60` | Minimum candidate score for a zero-day alert |
 | `MIN_ZERO_DAY_CONFIDENCE` | `35` | Minimum candidate confidence for a zero-day alert |
+| `MIN_UNRESOLVED_ZERO_DAY_CONFIDENCE` | `20` | Lower confidence gate for Unpatched or Unknown candidates |
 | `MAX_NOTIFICATIONS_PER_RUN` | `60` | Flood-control cap per cycle |
 | `GHSA_INCLUDE_UNREVIEWED` | `true` | Include GitHub unreviewed advisories |
 | `NOTIFY_UPDATES` | `true` | Re-alert on material changes |
@@ -130,6 +135,8 @@ Only add repositories you are authorized to monitor and whose security-fix metad
 | `CUSTOM_FINDINGS_JSON` | empty | Path to custom authorized-research JSON |
 | `FINDINGS_JSONL` | empty | Optional output path for all normalized findings |
 | `STATE_FILE` | `state.json` | Dedupe, aliases, and candidate tracking state |
+| `STATE_PERSISTENCE_MODE` | `auto` | Use conflict-aware GitHub persistence in Actions or legacy local git elsewhere |
+| `STATE_PERSIST_RETRIES` | `4` | Attempts after concurrent GitHub state updates |
 | `DRY_RUN` | `false` | Print notification JSON instead of sending Discord messages |
 
 ## Vendor advisory feeds
@@ -256,7 +263,7 @@ python -m unittest discover -s tests -v
 
 ## Continuous GitHub Actions operation
 
-`.github/workflows/cve-monitor.yml` starts every five minutes and runs `continuous_runner.py`. The runner scans at the configured interval, commits only `state.json`, and is restarted by the next scheduled workflow execution.
+`.github/workflows/cve-monitor.yml` starts every five minutes and runs `continuous_runner.py`. The runner scans at the configured interval and persists only `state.json`. In Actions it uses GitHub's contents API with the current blob SHA. If another workflow or person updates the branch concurrently, the runner fetches the new state, merges records by their newest observation time, and retries. It never builds up rejected local commits or force-pushes `main`.
 
 GitHub scheduled workflows are best-effort and may be delayed. Keep `LOOKBACK_MINUTES` larger than the internal scan interval so delayed cycles do not create gaps.
 

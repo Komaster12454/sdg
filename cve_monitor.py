@@ -37,7 +37,7 @@ from datetime import datetime, timedelta, timezone
 from email.utils import parsedate_to_datetime
 from pathlib import Path
 from typing import Any, Callable, Iterable
-from urllib.parse import urlsplit
+from urllib.parse import parse_qsl, urlencode, urlsplit, urlunsplit
 
 import requests
 from requests.adapters import HTTPAdapter
@@ -462,10 +462,17 @@ class Finding:
         self.zero_day_score = max(self.zero_day_score, other.zero_day_score)
         self.provisional = self.provisional and other.provisional
         self.url = self.url or other.url
-        if other.patch_status == "PATCHED":
-            self.patch_status = "PATCHED"
-        elif other.patch_status == "UNPATCHED" and self.patch_status == "UNKNOWN":
+        # Patch state is aggregated conservatively. A record is only considered
+        # patched when no correlated source still reports an unresolved affected
+        # component. This prevents one fix reference from hiding unpatched
+        # packages or platforms reported by another source.
+        patch_states = {self.patch_status, other.patch_status}
+        if "UNPATCHED" in patch_states:
             self.patch_status = "UNPATCHED"
+        elif "PATCHED" in patch_states:
+            self.patch_status = "PATCHED"
+        else:
+            self.patch_status = "UNKNOWN"
 
     def calculate_scores(self, watch_terms: Iterable[str] = ()) -> None:
         searchable = " ".join(
@@ -489,6 +496,7 @@ class Finding:
         zero_day += min(15, max(0, len(self.sources) - 1) * 5)
         zero_day += 10 if self.severity in {"HIGH", "CRITICAL"} else 0
         zero_day += 8 if self.public_exploit else 0
+        zero_day += 10 if self.patch_status == "UNPATCHED" else 0
         zero_day += 5 if self.patch_status == "UNKNOWN" else 0
         zero_day -= 12 if self.identifier.startswith("CVE-") and not self.provisional else 0
         self.zero_day_score = max(0, min(100, zero_day))
@@ -647,7 +655,13 @@ def fetch_ghsa(
                     continue
                 packages = advisory.get("vulnerabilities") or []
                 has_package = bool(packages)
-                has_patch = any(vulnerability.get("first_patched_version") for vulnerability in packages)
+                # GitHub returns one row per affected package/range. Treat the
+                # advisory as patched only if every affected row has a first
+                # patched version; one unresolved row keeps the aggregate alert
+                # in the unpatched category.
+                all_patched = has_package and all(
+                    vulnerability.get("first_patched_version") for vulnerability in packages
+                )
                 affected: list[str] = []
                 for vulnerability in packages:
                     package = vulnerability.get("package") or {}
@@ -683,7 +697,7 @@ def fetch_ghsa(
                         references=unique(references, 12),
                         sources={"GHSA" if advisory_type == "reviewed" else "GHSA unreviewed"},
                         source_weights=[40 if advisory_type == "reviewed" else 24],
-                        patch_status=("PATCHED" if has_patch else "UNPATCHED") if has_package else "UNKNOWN",
+                        patch_status=("PATCHED" if all_patched else "UNPATCHED") if has_package else "UNKNOWN",
                         affected=unique(affected, 16),
                         epss=safe_float(epss.get("percentage")),
                         epss_percentile=safe_float(epss.get("percentile")),
@@ -1633,6 +1647,16 @@ def chunk_embeds(embeds: list[dict[str, Any]]) -> Iterable[list[dict[str, Any]]]
         yield batch
 
 
+def discord_delivery_url(webhook_url: str) -> str:
+    """Request Discord's synchronous response without dropping URL options."""
+    parts = urlsplit(webhook_url.strip())
+    if parts.scheme not in {"http", "https"} or not parts.netloc:
+        raise ValueError("Discord webhook URL must be an absolute HTTP(S) URL")
+    query = [(key, value) for key, value in parse_qsl(parts.query, keep_blank_values=True) if key != "wait"]
+    query.append(("wait", "true"))
+    return urlunsplit((parts.scheme, parts.netloc, parts.path, urlencode(query), parts.fragment))
+
+
 def send_to_discord(
     webhook_url: str,
     embeds: list[dict[str, Any]],
@@ -1643,6 +1667,7 @@ def send_to_discord(
     if not embeds:
         return 0
     session = build_session()
+    delivery_url = discord_delivery_url(webhook_url)
     queue = collections.deque(
         {"embeds": batch, "attempt": 0, "note": batch_note if index == 0 else None}
         for index, batch in enumerate(chunk_embeds(embeds))
@@ -1650,38 +1675,60 @@ def send_to_discord(
     sent = 0
     while queue:
         item = queue.popleft()
+        item["attempt"] += 1
         payload: dict[str, Any] = {"embeds": item["embeds"]}
         if item["note"]:
             payload["content"] = item["note"]
         try:
-            response = session.post(webhook_url, json=payload, timeout=20)
-        except requests.RequestException as exc:
-            item["attempt"] += 1
+            response = session.post(delivery_url, json=payload, timeout=20)
+        except requests.RequestException:
             if item["attempt"] <= DISCORD_MAX_RETRIES:
                 time.sleep(2 ** item["attempt"])
                 queue.appendleft(item)
             else:
-                _log(f"[{label}] ERROR: Discord request failed permanently: {exc}", file=sys.stderr)
+                raise RuntimeError(
+                    f"Discord {label} request failed after {item['attempt']} attempts"
+                ) from None
             continue
         if response.status_code == 429:
+            if item["attempt"] > DISCORD_MAX_RETRIES:
+                raise RuntimeError(
+                    f"Discord {label} remained rate limited after {item['attempt']} attempts"
+                )
             try:
                 retry_after = float(response.json().get("retry_after", 2))
-            except (ValueError, TypeError):
+            except (ValueError, TypeError, requests.JSONDecodeError):
                 retry_after = 2.0
-            time.sleep(retry_after + 0.25)
+            # Current Discord responses use seconds; tolerate legacy millisecond values.
+            if retry_after > 60:
+                retry_after /= 1000
+            time.sleep(min(60.0, max(0.1, retry_after)) + 0.25)
             queue.appendleft(item)
             continue
         if not response.ok:
-            item["attempt"] += 1
             if response.status_code >= 500 and item["attempt"] <= DISCORD_MAX_RETRIES:
                 time.sleep(2 ** item["attempt"])
                 queue.appendleft(item)
             else:
-                _log(
-                    f"[{label}] ERROR: Discord returned {response.status_code}: {response.text[:300]}",
-                    file=sys.stderr,
+                detail = truncate(response.text.strip(), 300) or "no response body"
+                raise RuntimeError(
+                    f"Discord {label} returned HTTP {response.status_code}: {detail}"
                 )
             continue
+
+        # `wait=true` makes Discord return the created message. Requiring its ID
+        # turns the log count into delivery confirmation instead of merely a
+        # count of fire-and-forget HTTP 204 responses.
+        try:
+            created_message = response.json()
+        except (ValueError, requests.JSONDecodeError) as exc:
+            raise RuntimeError(
+                f"Discord {label} returned success without a message confirmation"
+            ) from exc
+        if not isinstance(created_message, dict) or not created_message.get("id"):
+            raise RuntimeError(
+                f"Discord {label} returned success without a message ID"
+            )
         sent += 1
         if queue:
             time.sleep(DISCORD_SEND_DELAY)
@@ -1697,12 +1744,18 @@ def export_jsonl(path: str | None, findings: Iterable[Finding]) -> None:
 
 
 def load_config() -> dict[str, Any]:
-    fallback = os.getenv("DISCORD_WEBHOOK_URL")
+    def webhook_env(name: str) -> str | None:
+        value = os.getenv(name, "").strip()
+        return value or None
+
+    fallback = webhook_env("DISCORD_WEBHOOK_URL")
     webhooks = {
-        "PATCHED": os.getenv("DISCORD_WEBHOOK_PATCHED_URL") or fallback,
-        "UNPATCHED": os.getenv("DISCORD_WEBHOOK_UNPATCHED_URL") or fallback,
-        "UNKNOWN": os.getenv("DISCORD_WEBHOOK_UNKNOWN_URL") or fallback,
-        "ZERO_DAY": os.getenv("DISCORD_WEBHOOK_ZERO_DAY_URL") or os.getenv("DISCORD_WEBHOOK_UNKNOWN_URL") or fallback,
+        "PATCHED": webhook_env("DISCORD_WEBHOOK_PATCHED_URL") or fallback,
+        "UNPATCHED": webhook_env("DISCORD_WEBHOOK_UNPATCHED_URL") or fallback,
+        "UNKNOWN": webhook_env("DISCORD_WEBHOOK_UNKNOWN_URL") or fallback,
+        "ZERO_DAY": webhook_env("DISCORD_WEBHOOK_ZERO_DAY_URL")
+        or webhook_env("DISCORD_WEBHOOK_UNKNOWN_URL")
+        or fallback,
     }
     dry_run = env_bool("DRY_RUN", False)
     if not dry_run and not any(webhooks.values()):
@@ -1767,6 +1820,9 @@ def load_config() -> dict[str, Any]:
         "min_priority": safe_int(os.getenv("MIN_PRIORITY"), 0),
         "min_zero_day_score": safe_int(os.getenv("MIN_ZERO_DAY_SCORE"), 60),
         "min_zero_day_confidence": safe_int(os.getenv("MIN_ZERO_DAY_CONFIDENCE"), 35),
+        "min_unresolved_zero_day_confidence": safe_int(
+            os.getenv("MIN_UNRESOLVED_ZERO_DAY_CONFIDENCE"), 20
+        ),
         "max_notifications": safe_int(os.getenv("MAX_NOTIFICATIONS_PER_RUN"), 60),
         "include_unreviewed": env_bool("GHSA_INCLUDE_UNREVIEWED", True),
         "notify_updates": env_bool("NOTIFY_UPDATES", True),
@@ -1908,6 +1964,19 @@ def run_once(config: dict[str, Any]) -> int:
         "UNKNOWN": [],
         "ZERO_DAY": [],
     }
+    pending_state: dict[str, list[tuple[str, str | None, dict[str, Any]]]] = {
+        bucket: [] for bucket in buckets
+    }
+
+    def apply_state_update(
+        identifier: str,
+        previous_key: str | None,
+        entry: dict[str, Any],
+    ) -> None:
+        if previous_key and previous_key != identifier:
+            state.pop(previous_key, None)
+        state[identifier] = entry
+
     max_notifications = max(1, safe_int(config.get("max_notifications"), 60))
     notification_count = 0
 
@@ -1925,10 +1994,16 @@ def run_once(config: dict[str, Any]) -> int:
             continue
         if finding.score is not None and finding.score < config.get("min_cvss", 0):
             continue
+        unresolved_candidate = finding.patch_status in {"UNPATCHED", "UNKNOWN"}
+        candidate_confidence = (
+            config.get("min_unresolved_zero_day_confidence", 20)
+            if unresolved_candidate
+            else config.get("min_zero_day_confidence", 35)
+        )
         candidate_alert = (
             finding.zero_day_candidate
             and finding.zero_day_score >= config.get("min_zero_day_score", 60)
-            and finding.confidence >= config.get("min_zero_day_confidence", 35)
+            and finding.confidence >= candidate_confidence
         )
         if not candidate_alert and finding.priority < config.get("min_priority", 0):
             continue
@@ -1943,20 +2018,7 @@ def run_once(config: dict[str, Any]) -> int:
         changed = bool(previous and previous.get("fingerprint") != fingerprint)
         should_notify = previous is None or identifier_assigned or (changed and config.get("notify_updates", True))
 
-        if should_notify and notification_count < max_notifications:
-            bucket = "ZERO_DAY" if candidate_alert else finding.patch_status
-            buckets[bucket].append(
-                build_embed(
-                    finding,
-                    update=changed and not identifier_assigned,
-                    identifier_assigned=identifier_assigned,
-                )
-            )
-            notification_count += 1
-
-        if previous_key and previous_key != finding.identifier:
-            del state[previous_key]
-        state[finding.identifier] = {
+        state_entry = {
             "fingerprint": fingerprint,
             "first_seen": previous.get("first_seen", now) if previous else now,
             "last_seen": now,
@@ -1966,6 +2028,22 @@ def run_once(config: dict[str, Any]) -> int:
             "aliases": finding.aliases,
             "candidate": finding.zero_day_candidate,
         }
+
+        if should_notify and notification_count < max_notifications:
+            bucket = "ZERO_DAY" if candidate_alert else finding.patch_status
+            buckets[bucket].append(
+                build_embed(
+                    finding,
+                    update=changed and not identifier_assigned,
+                    identifier_assigned=identifier_assigned,
+                )
+            )
+            pending_state[bucket].append((finding.identifier, previous_key, state_entry))
+            notification_count += 1
+        elif not should_notify:
+            apply_state_update(finding.identifier, previous_key, state_entry)
+        # When the notification cap is full, deliberately leave this finding
+        # unseen so a later cycle can deliver it instead of dropping it.
 
     # Retain unresolved candidates for 30 days and ordinary records for state dedupe.
     candidate_cutoff = utcnow() - timedelta(days=30)
@@ -1977,10 +2055,13 @@ def run_once(config: dict[str, Any]) -> int:
             del state[identifier]
 
     total_sent = 0
+    delivered_buckets: set[str] = set()
     if config.get("dry_run"):
         for bucket, embeds in buckets.items():
             for embed in embeds:
                 _log(json.dumps({"bucket": bucket, "embed": embed}, default=str))
+            if embeds:
+                delivered_buckets.add(bucket)
     else:
         jobs = []
         for bucket, embeds in buckets.items():
@@ -2012,14 +2093,27 @@ def run_once(config: dict[str, Any]) -> int:
                     bucket = futures[future]
                     try:
                         total_sent += future.result()
+                        delivered_buckets.add(bucket)
                     except Exception as exc:  # noqa: BLE001
                         errors.append(f"Discord {bucket}: {exc}")
 
+    # A finding becomes deduplicated only after its Discord bucket is fully
+    # confirmed. Failed or unconfigured routes remain eligible for retry on the
+    # next cycle, preventing a transient webhook problem from losing alerts.
+    for bucket in delivered_buckets:
+        for identifier, previous_key, entry in pending_state[bucket]:
+            apply_state_update(identifier, previous_key, entry)
+
     save_state(state_file, state)
-    candidate_count = sum(1 for finding in merged.values() if finding.zero_day_candidate)
+    candidates = [finding for finding in merged.values() if finding.zero_day_candidate]
+    candidate_count = len(candidates)
+    unresolved_candidate_count = sum(
+        1 for finding in candidates if finding.patch_status in {"UNPATCHED", "UNKNOWN"}
+    )
     _log(
         f"findings={len(merged)} candidates={candidate_count} "
-        f"notifications={notification_count} messages={total_sent}"
+        f"unresolved_candidates={unresolved_candidate_count} "
+        f"notifications={notification_count} discord_messages_confirmed={total_sent}"
     )
     for error in errors:
         _log(f"WARNING: {error}", file=sys.stderr)
