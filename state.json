@@ -20664,13 +20664,6 @@
       "last_checked": "2026-07-22T01:33:12.312578+00:00",
       "active": true
     },
-    "CVE-2026-59221": {
-      "posted": true,
-      "patch_status": "PATCHED",
-      "first_seen": "2026-07-22T01:12:20.232107+00:00",
-      "last_checked": "2026-07-22T01:33:12.312578+00:00",
-      "active": false
-    },
     "CVE-2026-5923": {
       "posted": true,
       "patch_status": "UNKNOWN",
@@ -108590,7 +108583,19 @@
         "GHSA-M3QF-58WF-W979"
       ],
       "candidate": false
+    },
+    "CVE-2026-59221": {
+      "fingerprint": "b7b52a23d8dbdbdeda63",
+      "first_seen": "2026-07-22T01:12:20.232107+00:00",
+      "last_seen": "2026-07-24T21:06:26.830447+00:00",
+      "patch_status": "PATCHED",
+      "priority": 30,
+      "zero_day_score": 76,
+      "aliases": [
+        "GHSA-FRVJ-C5QP-XJ4W"
+      ],
+      "candidate": false
     }
   },
-  "updated": "2026-07-24T21:05:22.074445+00:00"
+  "updated": "2026-07-24T21:06:27.015827+00:00"
 }
