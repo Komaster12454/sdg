@@ -1,12 +1,5 @@
 {
   "records": {
-    "CVE-2026-16081": {
-      "posted": true,
-      "patch_status": "UNKNOWN",
-      "first_seen": "2026-07-22T01:33:12.312578+00:00",
-      "last_checked": "2026-07-22T01:33:12.312578+00:00",
-      "active": true
-    },
     "CVE-2026-16083": {
       "posted": true,
       "patch_status": "UNKNOWN",
@@ -110876,9 +110869,19 @@
     "GHSA-46Q4-43PH-C6FR": {
       "fingerprint": "920f8cf66eede21d8de6",
       "first_seen": "2026-07-24T22:27:45.194228+00:00",
-      "last_seen": "2026-07-24T22:27:45.194228+00:00",
+      "last_seen": "2026-07-24T22:28:51.375553+00:00",
       "patch_status": "PATCHED",
       "priority": 51,
+      "zero_day_score": 88,
+      "aliases": [],
+      "candidate": true
+    },
+    "GHSA-7PPR-R889-MCF2": {
+      "fingerprint": "27b3a34264553d69b258",
+      "first_seen": "2026-07-24T22:28:51.375553+00:00",
+      "last_seen": "2026-07-24T22:28:51.375553+00:00",
+      "patch_status": "PATCHED",
+      "priority": 52,
       "zero_day_score": 88,
       "aliases": [],
       "candidate": true
@@ -110886,7 +110889,7 @@
     "GHSA-MHVJ-JHPQ-885V": {
       "fingerprint": "920f8cf66eede21d8de6",
       "first_seen": "2026-07-24T22:26:39.157173+00:00",
-      "last_seen": "2026-07-24T22:27:45.194228+00:00",
+      "last_seen": "2026-07-24T22:28:51.375553+00:00",
       "patch_status": "PATCHED",
       "priority": 51,
       "zero_day_score": 88,
@@ -110894,5 +110897,5 @@
       "candidate": true
     }
   },
-  "updated": "2026-07-24T22:27:45.575752+00:00"
+  "updated": "2026-07-24T22:28:51.636511+00:00"
 }
