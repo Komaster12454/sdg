@@ -1,26 +1,5 @@
 {
   "records": {
-    "CVE-2026-16097": {
-      "posted": true,
-      "patch_status": "UNKNOWN",
-      "first_seen": "2026-07-22T01:33:12.312578+00:00",
-      "last_checked": "2026-07-22T01:33:12.312578+00:00",
-      "active": true
-    },
-    "CVE-2026-16103": {
-      "posted": true,
-      "patch_status": "UNKNOWN",
-      "first_seen": "2026-07-22T01:33:12.312578+00:00",
-      "last_checked": "2026-07-22T01:33:12.312578+00:00",
-      "active": true
-    },
-    "CVE-2026-16104": {
-      "posted": true,
-      "patch_status": "UNKNOWN",
-      "first_seen": "2026-07-22T01:33:12.312578+00:00",
-      "last_checked": "2026-07-22T01:33:12.312578+00:00",
-      "active": true
-    },
     "CVE-2026-16106": {
       "posted": true,
       "patch_status": "UNKNOWN",
@@ -110807,10 +110786,20 @@
       "aliases": [],
       "candidate": false
     },
+    "GHSA-MHVJ-JHPQ-885V": {
+      "fingerprint": "920f8cf66eede21d8de6",
+      "first_seen": "2026-07-24T22:26:39.157173+00:00",
+      "last_seen": "2026-07-24T22:35:29.281145+00:00",
+      "patch_status": "PATCHED",
+      "priority": 51,
+      "zero_day_score": 88,
+      "aliases": [],
+      "candidate": true
+    },
     "CVE-2026-16584": {
       "fingerprint": "e0e6b4cdfce9f6603a8f",
       "first_seen": "2026-07-23T16:18:39.444246+00:00",
-      "last_seen": "2026-07-24T22:35:29.281145+00:00",
+      "last_seen": "2026-07-24T22:36:35.527331+00:00",
       "patch_status": "PATCHED",
       "priority": 28,
       "zero_day_score": 76,
@@ -110822,7 +110811,7 @@
     "GHSA-46Q4-43PH-C6FR": {
       "fingerprint": "920f8cf66eede21d8de6",
       "first_seen": "2026-07-24T22:27:45.194228+00:00",
-      "last_seen": "2026-07-24T22:35:29.281145+00:00",
+      "last_seen": "2026-07-24T22:36:35.527331+00:00",
       "patch_status": "PATCHED",
       "priority": 51,
       "zero_day_score": 88,
@@ -110832,17 +110821,27 @@
     "GHSA-6V4M-FW66-8R4X": {
       "fingerprint": "7cdaa2734d775e2a28f5",
       "first_seen": "2026-07-24T22:34:23.336123+00:00",
-      "last_seen": "2026-07-24T22:35:29.281145+00:00",
+      "last_seen": "2026-07-24T22:36:35.527331+00:00",
       "patch_status": "PATCHED",
       "priority": 19,
       "zero_day_score": 78,
       "aliases": [],
       "candidate": true
     },
+    "GHSA-6XJ8-QV9J-XCJQ": {
+      "fingerprint": "35f20fe82108ff33e827",
+      "first_seen": "2026-07-24T22:36:35.527331+00:00",
+      "last_seen": "2026-07-24T22:36:35.527331+00:00",
+      "patch_status": "PATCHED",
+      "priority": 53,
+      "zero_day_score": 88,
+      "aliases": [],
+      "candidate": true
+    },
     "GHSA-7PPR-R889-MCF2": {
       "fingerprint": "27b3a34264553d69b258",
       "first_seen": "2026-07-24T22:28:51.375553+00:00",
-      "last_seen": "2026-07-24T22:35:29.281145+00:00",
+      "last_seen": "2026-07-24T22:36:35.527331+00:00",
       "patch_status": "PATCHED",
       "priority": 52,
       "zero_day_score": 88,
@@ -110852,7 +110851,7 @@
     "GHSA-86CX-WWF4-PHQ4": {
       "fingerprint": "19b357b2db1c7d5260a4",
       "first_seen": "2026-07-24T22:33:16.340923+00:00",
-      "last_seen": "2026-07-24T22:35:29.281145+00:00",
+      "last_seen": "2026-07-24T22:36:35.527331+00:00",
       "patch_status": "PATCHED",
       "priority": 45,
       "zero_day_score": 78,
@@ -110862,29 +110861,39 @@
     "GHSA-95CV-R8X4-VH75": {
       "fingerprint": "089bda94742676065eb5",
       "first_seen": "2026-07-24T22:29:58.037374+00:00",
-      "last_seen": "2026-07-24T22:35:29.281145+00:00",
+      "last_seen": "2026-07-24T22:36:35.527331+00:00",
       "patch_status": "PATCHED",
       "priority": 52,
       "zero_day_score": 88,
       "aliases": [],
       "candidate": true
     },
-    "GHSA-GM3R-Q2WP-HW87": {
-      "fingerprint": "62a75e27175f43df3d63",
-      "first_seen": "2026-07-24T22:35:29.281145+00:00",
-      "last_seen": "2026-07-24T22:35:29.281145+00:00",
+    "GHSA-FP43-VJ7G-PG92": {
+      "fingerprint": "27b3a34264553d69b258",
+      "first_seen": "2026-07-24T22:36:35.527331+00:00",
+      "last_seen": "2026-07-24T22:36:35.527331+00:00",
       "patch_status": "PATCHED",
-      "priority": 22,
+      "priority": 52,
       "zero_day_score": 88,
       "aliases": [],
       "candidate": true
     },
-    "GHSA-MHVJ-JHPQ-885V": {
-      "fingerprint": "920f8cf66eede21d8de6",
-      "first_seen": "2026-07-24T22:26:39.157173+00:00",
-      "last_seen": "2026-07-24T22:35:29.281145+00:00",
+    "GHSA-FWJX-9P69-H25H": {
+      "fingerprint": "f2c055dbdb0288d9a71e",
+      "first_seen": "2026-07-24T22:36:35.527331+00:00",
+      "last_seen": "2026-07-24T22:36:35.527331+00:00",
       "patch_status": "PATCHED",
-      "priority": 51,
+      "priority": 43,
+      "zero_day_score": 78,
+      "aliases": [],
+      "candidate": true
+    },
+    "GHSA-GM3R-Q2WP-HW87": {
+      "fingerprint": "62a75e27175f43df3d63",
+      "first_seen": "2026-07-24T22:35:29.281145+00:00",
+      "last_seen": "2026-07-24T22:36:35.527331+00:00",
+      "patch_status": "PATCHED",
+      "priority": 22,
       "zero_day_score": 88,
       "aliases": [],
       "candidate": true
@@ -110892,7 +110901,7 @@
     "GHSA-P6PH-3JX2-3337": {
       "fingerprint": "7c3cfe3e00bc8d216308",
       "first_seen": "2026-07-24T22:33:16.340923+00:00",
-      "last_seen": "2026-07-24T22:35:29.281145+00:00",
+      "last_seen": "2026-07-24T22:36:35.527331+00:00",
       "patch_status": "PATCHED",
       "priority": 36,
       "zero_day_score": 78,
@@ -110902,7 +110911,7 @@
     "GHSA-Q53C-4PRM-W95Q": {
       "fingerprint": "7cdaa2734d775e2a28f5",
       "first_seen": "2026-07-24T22:35:29.281145+00:00",
-      "last_seen": "2026-07-24T22:35:29.281145+00:00",
+      "last_seen": "2026-07-24T22:36:35.527331+00:00",
       "patch_status": "PATCHED",
       "priority": 19,
       "zero_day_score": 78,
@@ -110912,7 +110921,7 @@
     "GHSA-W4HW-QCX7-56PR": {
       "fingerprint": "6c953ad6761b9eb91239",
       "first_seen": "2026-07-24T22:35:29.281145+00:00",
-      "last_seen": "2026-07-24T22:35:29.281145+00:00",
+      "last_seen": "2026-07-24T22:36:35.527331+00:00",
       "patch_status": "PATCHED",
       "priority": 22,
       "zero_day_score": 88,
@@ -110920,5 +110929,5 @@
       "candidate": true
     }
   },
-  "updated": "2026-07-24T22:35:29.537675+00:00"
+  "updated": "2026-07-24T22:36:35.801987+00:00"
 }
