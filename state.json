@@ -11620,13 +11620,6 @@
       "last_checked": "2026-07-22T01:33:12.312578+00:00",
       "active": true
     },
-    "CVE-2026-48205": {
-      "posted": true,
-      "patch_status": "UNKNOWN",
-      "first_seen": "2026-07-22T01:33:12.312578+00:00",
-      "last_checked": "2026-07-22T01:33:12.312578+00:00",
-      "active": true
-    },
     "CVE-2026-48206": {
       "posted": true,
       "patch_status": "UNKNOWN",
@@ -108584,10 +108577,22 @@
       ],
       "candidate": false
     },
+    "CVE-2026-48205": {
+      "fingerprint": "2213912da8f1727ec313",
+      "first_seen": "2026-07-22T01:33:12.312578+00:00",
+      "last_seen": "2026-07-24T21:08:20.415431+00:00",
+      "patch_status": "PATCHED",
+      "priority": 36,
+      "zero_day_score": 76,
+      "aliases": [
+        "GHSA-HCM8-X79P-WX2W"
+      ],
+      "candidate": false
+    },
     "CVE-2026-59221": {
       "fingerprint": "b7b52a23d8dbdbdeda63",
       "first_seen": "2026-07-22T01:12:20.232107+00:00",
-      "last_seen": "2026-07-24T21:07:15.349834+00:00",
+      "last_seen": "2026-07-24T21:08:20.415431+00:00",
       "patch_status": "PATCHED",
       "priority": 30,
       "zero_day_score": 76,
@@ -108597,5 +108602,5 @@
       "candidate": false
     }
   },
-  "updated": "2026-07-24T21:07:15.354253+00:00"
+  "updated": "2026-07-24T21:08:20.587584+00:00"
 }
