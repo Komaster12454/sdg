@@ -16142,13 +16142,6 @@
       "last_checked": "2026-07-22T01:33:12.312578+00:00",
       "active": true
     },
-    "CVE-2026-55404": {
-      "posted": true,
-      "patch_status": "PATCHED",
-      "first_seen": "2026-07-22T01:33:12.312578+00:00",
-      "last_checked": "2026-07-22T01:33:12.312578+00:00",
-      "active": false
-    },
     "CVE-2026-55405": {
       "posted": true,
       "patch_status": "UNKNOWN",
@@ -72960,16 +72953,6 @@
       "aliases": [],
       "candidate": false
     },
-    "CVE-2026-60224": {
-      "fingerprint": "4c9d84ac486aabc61ad4",
-      "first_seen": "2026-07-23T17:47:40.511462+00:00",
-      "last_seen": "2026-07-24T00:55:42.783263+00:00",
-      "patch_status": "UNKNOWN",
-      "priority": 0,
-      "zero_day_score": 0,
-      "aliases": [],
-      "candidate": false
-    },
     "CVE-2026-60225": {
       "fingerprint": "4c9d84ac486aabc61ad4",
       "first_seen": "2026-07-23T17:47:40.511462+00:00",
@@ -108515,7 +108498,7 @@
     "CVE-2026-11529": {
       "fingerprint": "d6790a9f7e0166686b0b",
       "first_seen": "2026-07-23T07:11:33.183412+00:00",
-      "last_seen": "2026-07-24T20:35:21.503004+00:00",
+      "last_seen": "2026-07-24T20:36:28.834954+00:00",
       "patch_status": "PATCHED",
       "priority": 25,
       "zero_day_score": 66,
@@ -108527,7 +108510,7 @@
     "CVE-2026-40987": {
       "fingerprint": "f378ad94d3c644a3529f",
       "first_seen": "2026-07-23T09:10:50.310506+00:00",
-      "last_seen": "2026-07-24T20:35:21.503004+00:00",
+      "last_seen": "2026-07-24T20:36:28.834954+00:00",
       "patch_status": "UNPATCHED",
       "priority": 38,
       "zero_day_score": 86,
@@ -108535,7 +108518,29 @@
         "GHSA-792X-6VQ6-J8R9"
       ],
       "candidate": false
+    },
+    "CVE-2026-55404": {
+      "fingerprint": "4d0d43670629658ba2b7",
+      "first_seen": "2026-07-22T01:33:12.312578+00:00",
+      "last_seen": "2026-07-24T20:36:28.834954+00:00",
+      "patch_status": "PATCHED",
+      "priority": 30,
+      "zero_day_score": 76,
+      "aliases": [
+        "GHSA-6V4J-43GG-VJ32"
+      ],
+      "candidate": false
+    },
+    "CVE-2026-60224": {
+      "fingerprint": "59c750f6d8d984c207f6",
+      "first_seen": "2026-07-23T17:47:40.511462+00:00",
+      "last_seen": "2026-07-24T20:36:28.834954+00:00",
+      "patch_status": "UNKNOWN",
+      "priority": 39,
+      "zero_day_score": 3,
+      "aliases": [],
+      "candidate": false
     }
   },
-  "updated": "2026-07-24T20:35:21.778051+00:00"
+  "updated": "2026-07-24T20:36:29.050165+00:00"
 }
