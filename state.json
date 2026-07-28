@@ -1,12 +1,5 @@
 {
   "records": {
-    "CVE-2026-55651": {
-      "posted": true,
-      "patch_status": "UNKNOWN",
-      "first_seen": "2026-07-22T01:12:20.232107+00:00",
-      "last_checked": "2026-07-22T01:33:12.312578+00:00",
-      "active": true
-    },
     "CVE-2026-55652": {
       "posted": true,
       "patch_status": "UNKNOWN",
@@ -116388,10 +116381,20 @@
       "aliases": [],
       "candidate": false
     },
+    "GHSA-HP74-GM6M-2QM5": {
+      "fingerprint": "7cdaa2734d775e2a28f5",
+      "first_seen": "2026-07-28T14:26:10.016980+00:00",
+      "last_seen": "2026-07-28T14:35:04.575050+00:00",
+      "patch_status": "PATCHED",
+      "priority": 19,
+      "zero_day_score": 78,
+      "aliases": [],
+      "candidate": true
+    },
     "CVE-2026-43910": {
       "fingerprint": "71e1dd6f5c7ffdeebb5a",
       "first_seen": "2026-07-28T14:27:17.370067+00:00",
-      "last_seen": "2026-07-28T14:35:04.575050+00:00",
+      "last_seen": "2026-07-28T14:36:11.264497+00:00",
       "patch_status": "PATCHED",
       "priority": 32,
       "zero_day_score": 76,
@@ -116403,7 +116406,7 @@
     "CVE-2026-45293": {
       "fingerprint": "4ca476058f08368b9a91",
       "first_seen": "2026-07-28T14:28:24.227682+00:00",
-      "last_seen": "2026-07-28T14:35:04.575050+00:00",
+      "last_seen": "2026-07-28T14:36:11.264497+00:00",
       "patch_status": "PATCHED",
       "priority": 34,
       "zero_day_score": 76,
@@ -116415,7 +116418,7 @@
     "CVE-2026-46428": {
       "fingerprint": "c2aa3c57e01dbdb016a1",
       "first_seen": "2026-07-22T01:33:12.312578+00:00",
-      "last_seen": "2026-07-28T14:35:04.575050+00:00",
+      "last_seen": "2026-07-28T14:36:11.264497+00:00",
       "patch_status": "PATCHED",
       "priority": 0,
       "zero_day_score": 76,
@@ -116424,16 +116427,18 @@
       ],
       "candidate": false
     },
-    "GHSA-HP74-GM6M-2QM5": {
-      "fingerprint": "7cdaa2734d775e2a28f5",
-      "first_seen": "2026-07-28T14:26:10.016980+00:00",
-      "last_seen": "2026-07-28T14:35:04.575050+00:00",
+    "CVE-2026-47427": {
+      "fingerprint": "e3ed4a46a1227f5fb26d",
+      "first_seen": "2026-07-28T14:36:11.264497+00:00",
+      "last_seen": "2026-07-28T14:36:11.264497+00:00",
       "patch_status": "PATCHED",
-      "priority": 19,
-      "zero_day_score": 78,
-      "aliases": [],
-      "candidate": true
+      "priority": 30,
+      "zero_day_score": 76,
+      "aliases": [
+        "GHSA-W4Q6-QW23-4RG7"
+      ],
+      "candidate": false
     }
   },
-  "updated": "2026-07-28T14:35:04.580594+00:00"
+  "updated": "2026-07-28T14:36:11.528217+00:00"
 }
