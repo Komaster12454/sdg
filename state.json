@@ -26749,16 +26749,6 @@
       "aliases": [],
       "candidate": false
     },
-    "CVE-2026-11477": {
-      "fingerprint": "acb2f571b471fc4454f1",
-      "first_seen": "2026-07-23T07:11:33.183412+00:00",
-      "last_seen": "2026-07-23T07:19:15.905155+00:00",
-      "patch_status": "UNKNOWN",
-      "priority": 8,
-      "zero_day_score": 0,
-      "aliases": [],
-      "candidate": false
-    },
     "CVE-2026-11478": {
       "fingerprint": "99ca0b7e8e5199f391f7",
       "first_seen": "2026-07-23T07:11:33.183412+00:00",
@@ -116874,7 +116864,7 @@
     "CVE-2026-11466": {
       "fingerprint": "95483ca331f6f77cd5ce",
       "first_seen": "2026-07-23T07:11:33.183412+00:00",
-      "last_seen": "2026-07-28T20:54:49.037611+00:00",
+      "last_seen": "2026-07-28T20:55:53.992709+00:00",
       "patch_status": "UNPATCHED",
       "priority": 31,
       "zero_day_score": 76,
@@ -116883,10 +116873,22 @@
       ],
       "candidate": false
     },
+    "CVE-2026-11477": {
+      "fingerprint": "77e1453b5ddfd94ced4b",
+      "first_seen": "2026-07-23T07:11:33.183412+00:00",
+      "last_seen": "2026-07-28T20:55:53.992709+00:00",
+      "patch_status": "UNPATCHED",
+      "priority": 27,
+      "zero_day_score": 76,
+      "aliases": [
+        "GHSA-FXR3-GVM4-M8VC"
+      ],
+      "candidate": false
+    },
     "CVE-2026-11479": {
       "fingerprint": "096dd5e0ce764a950460",
       "first_seen": "2026-07-23T07:11:33.183412+00:00",
-      "last_seen": "2026-07-28T20:54:49.037611+00:00",
+      "last_seen": "2026-07-28T20:55:53.992709+00:00",
       "patch_status": "UNPATCHED",
       "priority": 26,
       "zero_day_score": 76,
@@ -116898,7 +116900,7 @@
     "CVE-2026-52888": {
       "fingerprint": "36cbaab6d8d2184dfe97",
       "first_seen": "2026-07-28T20:53:43.063311+00:00",
-      "last_seen": "2026-07-28T20:54:49.037611+00:00",
+      "last_seen": "2026-07-28T20:55:53.992709+00:00",
       "patch_status": "PATCHED",
       "priority": 27,
       "zero_day_score": 66,
@@ -116908,5 +116910,5 @@
       "candidate": false
     }
   },
-  "updated": "2026-07-28T20:54:49.263951+00:00"
+  "updated": "2026-07-28T20:55:54.201426+00:00"
 }
