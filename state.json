@@ -1,12 +1,5 @@
 {
   "records": {
-    "CVE-2026-56329": {
-      "posted": true,
-      "patch_status": "UNKNOWN",
-      "first_seen": "2026-07-22T01:12:20.232107+00:00",
-      "last_checked": "2026-07-22T01:33:12.312578+00:00",
-      "active": true
-    },
     "CVE-2026-56335": {
       "posted": true,
       "patch_status": "UNKNOWN",
@@ -116636,10 +116629,20 @@
       "aliases": [],
       "candidate": false
     },
+    "ZD-CAND-5248BB0E12BF": {
+      "fingerprint": "0d5ea8d28c187cc8a4a5",
+      "first_seen": "2026-07-28T16:27:51.920774+00:00",
+      "last_seen": "2026-07-28T16:35:49.628077+00:00",
+      "patch_status": "UNKNOWN",
+      "priority": 16,
+      "zero_day_score": 45,
+      "aliases": [],
+      "candidate": true
+    },
     "CVE-2026-54603": {
       "fingerprint": "89475d6b8dc0161be2be",
       "first_seen": "2026-07-28T16:33:35.279754+00:00",
-      "last_seen": "2026-07-28T16:35:49.628077+00:00",
+      "last_seen": "2026-07-28T16:36:55.728099+00:00",
       "patch_status": "PATCHED",
       "priority": 34,
       "zero_day_score": 76,
@@ -116651,7 +116654,7 @@
     "CVE-2026-54605": {
       "fingerprint": "80462ea65abaa2a95837",
       "first_seen": "2026-07-28T16:27:51.920774+00:00",
-      "last_seen": "2026-07-28T16:35:49.628077+00:00",
+      "last_seen": "2026-07-28T16:36:55.728099+00:00",
       "patch_status": "PATCHED",
       "priority": 28,
       "zero_day_score": 76,
@@ -116660,16 +116663,18 @@
       ],
       "candidate": false
     },
-    "ZD-CAND-5248BB0E12BF": {
-      "fingerprint": "0d5ea8d28c187cc8a4a5",
-      "first_seen": "2026-07-28T16:27:51.920774+00:00",
-      "last_seen": "2026-07-28T16:35:49.628077+00:00",
-      "patch_status": "UNKNOWN",
-      "priority": 16,
-      "zero_day_score": 45,
-      "aliases": [],
-      "candidate": true
+    "CVE-2026-54609": {
+      "fingerprint": "5a4960869ebd4d380058",
+      "first_seen": "2026-07-28T16:36:55.728099+00:00",
+      "last_seen": "2026-07-28T16:36:55.728099+00:00",
+      "patch_status": "UNPATCHED",
+      "priority": 44,
+      "zero_day_score": 86,
+      "aliases": [
+        "GHSA-85RG-P3FR-XC2F"
+      ],
+      "candidate": false
     }
   },
-  "updated": "2026-07-28T16:35:49.633797+00:00"
+  "updated": "2026-07-28T16:36:56.000771+00:00"
 }
