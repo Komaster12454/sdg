@@ -1,12 +1,5 @@
 {
   "records": {
-    "CVE-2026-57205": {
-      "posted": true,
-      "patch_status": "UNKNOWN",
-      "first_seen": "2026-07-22T01:33:12.312578+00:00",
-      "last_checked": "2026-07-22T01:33:12.312578+00:00",
-      "active": true
-    },
     "CVE-2026-57206": {
       "posted": true,
       "patch_status": "UNKNOWN",
@@ -116978,10 +116971,22 @@
       "aliases": [],
       "candidate": false
     },
+    "CVE-2026-54691": {
+      "fingerprint": "e2c6490e4c1ab07fe773",
+      "first_seen": "2026-07-28T21:30:54.990196+00:00",
+      "last_seen": "2026-07-28T21:30:54.990196+00:00",
+      "patch_status": "PATCHED",
+      "priority": 32,
+      "zero_day_score": 76,
+      "aliases": [
+        "GHSA-RFR2-MQ9M-X2QX"
+      ],
+      "candidate": false
+    },
     "CVE-2026-55390": {
       "fingerprint": "c1dcf2505fc970caba1e",
       "first_seen": "2026-07-28T21:27:39.945649+00:00",
-      "last_seen": "2026-07-28T21:29:49.967105+00:00",
+      "last_seen": "2026-07-28T21:30:54.990196+00:00",
       "patch_status": "PATCHED",
       "priority": 30,
       "zero_day_score": 76,
@@ -116991,5 +116996,5 @@
       "candidate": false
     }
   },
-  "updated": "2026-07-28T21:29:49.972764+00:00"
+  "updated": "2026-07-28T21:30:55.204504+00:00"
 }
