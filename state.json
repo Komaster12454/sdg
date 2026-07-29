@@ -1,12 +1,5 @@
 {
   "records": {
-    "CVE-2026-58253": {
-      "posted": true,
-      "patch_status": "PATCHED",
-      "first_seen": "2026-07-22T01:33:12.312578+00:00",
-      "last_checked": "2026-07-22T01:33:12.312578+00:00",
-      "active": false
-    },
     "CVE-2026-58254": {
       "posted": true,
       "patch_status": "PATCHED",
@@ -26877,16 +26870,6 @@
       "patch_status": "UNKNOWN",
       "priority": 25,
       "zero_day_score": 0,
-      "aliases": [],
-      "candidate": false
-    },
-    "CVE-2026-11393": {
-      "fingerprint": "a1a4e4d17cd343c05123",
-      "first_seen": "2026-07-23T08:11:12.374827+00:00",
-      "last_seen": "2026-07-23T08:20:20.163579+00:00",
-      "patch_status": "UNKNOWN",
-      "priority": 35,
-      "zero_day_score": 3,
       "aliases": [],
       "candidate": false
     },
@@ -117790,16 +117773,38 @@
       ],
       "candidate": false
     },
+    "CVE-2026-11393": {
+      "fingerprint": "58b76a7bd3c43eca987f",
+      "first_seen": "2026-07-23T08:11:12.374827+00:00",
+      "last_seen": "2026-07-29T16:11:24.055368+00:00",
+      "patch_status": "UNPATCHED",
+      "priority": 46,
+      "zero_day_score": 86,
+      "aliases": [
+        "GHSA-M4X6-GWGP-4PM7"
+      ],
+      "candidate": false
+    },
     "CVE-2026-60951": {
       "fingerprint": "67c15c8d11411b5820ec",
       "first_seen": "2026-07-23T18:30:28.560953+00:00",
-      "last_seen": "2026-07-29T16:10:18.904234+00:00",
+      "last_seen": "2026-07-29T16:11:24.055368+00:00",
       "patch_status": "UNKNOWN",
       "priority": 32,
       "zero_day_score": 3,
       "aliases": [],
       "candidate": false
+    },
+    "CVE-2026-66066": {
+      "fingerprint": "bb1af289c9709489cd3e",
+      "first_seen": "2026-07-29T16:11:24.055368+00:00",
+      "last_seen": "2026-07-29T16:11:24.055368+00:00",
+      "patch_status": "UNKNOWN",
+      "priority": 5,
+      "zero_day_score": 30,
+      "aliases": [],
+      "candidate": false
     }
   },
-  "updated": "2026-07-29T16:10:18.909644+00:00"
+  "updated": "2026-07-29T16:11:24.360601+00:00"
 }
