@@ -1,12 +1,5 @@
 {
   "records": {
-    "CVE-2026-58029": {
-      "posted": true,
-      "patch_status": "UNKNOWN",
-      "first_seen": "2026-07-22T01:33:12.312578+00:00",
-      "last_checked": "2026-07-22T01:33:12.312578+00:00",
-      "active": true
-    },
     "CVE-2026-58030": {
       "posted": true,
       "patch_status": "UNKNOWN",
@@ -117236,16 +117229,6 @@
       "aliases": [],
       "candidate": false
     },
-    "CVE-2026-50517": {
-      "fingerprint": "6f22b072cc437060e561",
-      "first_seen": "2026-07-24T01:17:40.919453+00:00",
-      "last_seen": "2026-07-29T14:26:23.843916+00:00",
-      "patch_status": "UNKNOWN",
-      "priority": 39,
-      "zero_day_score": 3,
-      "aliases": [],
-      "candidate": false
-    },
     "CVE-2026-54603": {
       "fingerprint": "a6aef4b9095d97854389",
       "first_seen": "2026-07-28T16:33:35.279754+00:00",
@@ -117264,18 +117247,6 @@
       "priority": 35,
       "zero_day_score": 3,
       "aliases": [],
-      "candidate": false
-    },
-    "CVE-2026-54660": {
-      "fingerprint": "08c5a276ee65982772cb",
-      "first_seen": "2026-07-29T14:23:02.327712+00:00",
-      "last_seen": "2026-07-29T14:26:23.843916+00:00",
-      "patch_status": "PATCHED",
-      "priority": 29,
-      "zero_day_score": 76,
-      "aliases": [
-        "GHSA-H754-FXP7-88WX"
-      ],
       "candidate": false
     },
     "CVE-2026-55391": {
@@ -117627,7 +117598,41 @@
       "zero_day_score": 3,
       "aliases": [],
       "candidate": false
+    },
+    "CVE-2026-50517": {
+      "fingerprint": "6f22b072cc437060e561",
+      "first_seen": "2026-07-24T01:17:40.919453+00:00",
+      "last_seen": "2026-07-29T14:27:30.441232+00:00",
+      "patch_status": "UNKNOWN",
+      "priority": 39,
+      "zero_day_score": 3,
+      "aliases": [],
+      "candidate": false
+    },
+    "CVE-2026-54660": {
+      "fingerprint": "08c5a276ee65982772cb",
+      "first_seen": "2026-07-29T14:23:02.327712+00:00",
+      "last_seen": "2026-07-29T14:27:30.441232+00:00",
+      "patch_status": "PATCHED",
+      "priority": 29,
+      "zero_day_score": 76,
+      "aliases": [
+        "GHSA-H754-FXP7-88WX"
+      ],
+      "candidate": false
+    },
+    "CVE-2026-54662": {
+      "fingerprint": "617b7e381bb896e7098b",
+      "first_seen": "2026-07-29T14:27:30.441232+00:00",
+      "last_seen": "2026-07-29T14:27:30.441232+00:00",
+      "patch_status": "PATCHED",
+      "priority": 33,
+      "zero_day_score": 76,
+      "aliases": [
+        "GHSA-HQJ5-CW9F-RX67"
+      ],
+      "candidate": false
     }
   },
-  "updated": "2026-07-29T14:26:23.850019+00:00"
+  "updated": "2026-07-29T14:27:30.750360+00:00"
 }
