@@ -1,15 +1,5 @@
 {
   "records": {
-    "CVE-2026-11071": {
-      "fingerprint": "1f75ac3378afdb805232",
-      "first_seen": "2026-07-23T06:10:44.774751+00:00",
-      "last_seen": "2026-07-23T06:19:00.114581+00:00",
-      "patch_status": "UNKNOWN",
-      "priority": 35,
-      "zero_day_score": 3,
-      "aliases": [],
-      "candidate": false
-    },
     "CVE-2026-11072": {
       "fingerprint": "a323f846b7e1bfca0bdf",
       "first_seen": "2026-07-23T06:10:44.774751+00:00",
@@ -120557,7 +120547,17 @@
         "GHSA-2QGP-6C6G-CMWV"
       ],
       "candidate": false
+    },
+    "GHSA-6V7P-G79W-8964": {
+      "fingerprint": "27b3a34264553d69b258",
+      "first_seen": "2026-07-31T06:53:30.081285+00:00",
+      "last_seen": "2026-07-31T06:53:30.081285+00:00",
+      "patch_status": "PATCHED",
+      "priority": 52,
+      "zero_day_score": 88,
+      "aliases": [],
+      "candidate": true
     }
   },
-  "updated": "2026-07-31T06:52:24.618384+00:00"
+  "updated": "2026-07-31T06:53:30.349016+00:00"
 }
