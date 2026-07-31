@@ -1,15 +1,5 @@
 {
   "records": {
-    "CVE-2026-11438": {
-      "fingerprint": "718b05a0a593413d2184",
-      "first_seen": "2026-07-23T07:11:33.183412+00:00",
-      "last_seen": "2026-07-23T07:19:15.905155+00:00",
-      "patch_status": "UNKNOWN",
-      "priority": 21,
-      "zero_day_score": 0,
-      "aliases": [],
-      "candidate": false
-    },
     "CVE-2026-11439": {
       "fingerprint": "718b05a0a593413d2184",
       "first_seen": "2026-07-23T07:11:33.183412+00:00",
@@ -120608,10 +120598,22 @@
       "aliases": [],
       "candidate": false
     },
+    "CVE-2016-1000305": {
+      "fingerprint": "52bc8f29f60ff57556e8",
+      "first_seen": "2026-07-31T22:33:47.844907+00:00",
+      "last_seen": "2026-07-31T22:33:47.844907+00:00",
+      "patch_status": "PATCHED",
+      "priority": 0,
+      "zero_day_score": 66,
+      "aliases": [
+        "GHSA-G65V-27R3-5P6M"
+      ],
+      "candidate": false
+    },
     "CVE-2026-54768": {
       "fingerprint": "9ede0a173cbefe9a49e8",
       "first_seen": "2026-07-31T22:24:52.739861+00:00",
-      "last_seen": "2026-07-31T22:32:31.268582+00:00",
+      "last_seen": "2026-07-31T22:33:47.844907+00:00",
       "patch_status": "UNPATCHED",
       "priority": 10,
       "zero_day_score": 76,
@@ -120623,7 +120625,7 @@
     "CVE-2026-54785": {
       "fingerprint": "530482999e92c75ae878",
       "first_seen": "2026-07-31T22:31:26.052834+00:00",
-      "last_seen": "2026-07-31T22:32:31.268582+00:00",
+      "last_seen": "2026-07-31T22:33:47.844907+00:00",
       "patch_status": "PATCHED",
       "priority": 24,
       "zero_day_score": 66,
@@ -120633,5 +120635,5 @@
       "candidate": false
     }
   },
-  "updated": "2026-07-31T22:32:31.274238+00:00"
+  "updated": "2026-07-31T22:33:48.134511+00:00"
 }
