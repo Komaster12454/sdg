@@ -41634,18 +41634,6 @@
       "aliases": [],
       "candidate": true
     },
-    "CVE-2026-14257": {
-      "fingerprint": "9b72e57383018ed3da47",
-      "first_seen": "2026-07-23T13:51:36.121469+00:00",
-      "last_seen": "2026-07-24T22:02:37.929235+00:00",
-      "patch_status": "PATCHED",
-      "priority": 30,
-      "zero_day_score": 76,
-      "aliases": [
-        "GHSA-MH99-V99M-4GVG"
-      ],
-      "candidate": false
-    },
     "GHSA-F25V-X6VR-962G": {
       "fingerprint": "64c6e20b3b8287b26eb6",
       "first_seen": "2026-07-24T21:54:54.605696+00:00",
@@ -120560,10 +120548,22 @@
       "aliases": [],
       "candidate": false
     },
+    "CVE-2026-14257": {
+      "fingerprint": "9b72e57383018ed3da47",
+      "first_seen": "2026-07-23T13:51:36.121469+00:00",
+      "last_seen": "2026-07-31T19:38:13.279558+00:00",
+      "patch_status": "PATCHED",
+      "priority": 30,
+      "zero_day_score": 76,
+      "aliases": [
+        "GHSA-MH99-V99M-4GVG"
+      ],
+      "candidate": false
+    },
     "CVE-2026-60974": {
       "fingerprint": "e527e02d895c1761115e",
       "first_seen": "2026-07-23T18:30:28.560953+00:00",
-      "last_seen": "2026-07-31T19:37:08.305860+00:00",
+      "last_seen": "2026-07-31T19:38:13.279558+00:00",
       "patch_status": "UNKNOWN",
       "priority": 32,
       "zero_day_score": 3,
@@ -120573,7 +120573,7 @@
     "CVE-2026-60978": {
       "fingerprint": "8d4eef0c204b49a30007",
       "first_seen": "2026-07-23T18:30:28.560953+00:00",
-      "last_seen": "2026-07-31T19:37:08.305860+00:00",
+      "last_seen": "2026-07-31T19:38:13.279558+00:00",
       "patch_status": "UNKNOWN",
       "priority": 26,
       "zero_day_score": 0,
@@ -120583,7 +120583,7 @@
     "CVE-2026-60979": {
       "fingerprint": "05a636ca4abc8bf03c8d",
       "first_seen": "2026-07-23T18:30:28.560953+00:00",
-      "last_seen": "2026-07-31T19:37:08.305860+00:00",
+      "last_seen": "2026-07-31T19:38:13.279558+00:00",
       "patch_status": "UNKNOWN",
       "priority": 32,
       "zero_day_score": 3,
@@ -120591,5 +120591,5 @@
       "candidate": false
     }
   },
-  "updated": "2026-07-31T19:37:08.498391+00:00"
+  "updated": "2026-07-31T19:38:13.284883+00:00"
 }
