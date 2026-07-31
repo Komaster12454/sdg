@@ -1,15 +1,5 @@
 {
   "records": {
-    "CVE-2026-11406": {
-      "fingerprint": "f3d98951d28a1db5e990",
-      "first_seen": "2026-07-23T07:11:33.183412+00:00",
-      "last_seen": "2026-07-23T07:19:15.905155+00:00",
-      "patch_status": "UNKNOWN",
-      "priority": 8,
-      "zero_day_score": 0,
-      "aliases": [],
-      "candidate": false
-    },
     "CVE-2026-11408": {
       "fingerprint": "31774f9b19395dc48f0c",
       "first_seen": "2026-07-23T07:11:33.183412+00:00",
@@ -120589,7 +120579,7 @@
     "CVE-2026-53607": {
       "fingerprint": "5696445d66ff6ec33ddf",
       "first_seen": "2026-07-31T21:52:11.627724+00:00",
-      "last_seen": "2026-07-31T21:53:16.262074+00:00",
+      "last_seen": "2026-07-31T21:54:21.765445+00:00",
       "patch_status": "PATCHED",
       "priority": 14,
       "zero_day_score": 66,
@@ -120598,10 +120588,22 @@
       ],
       "candidate": false
     },
+    "CVE-2026-53608": {
+      "fingerprint": "eb000e24f5b46dbb4644",
+      "first_seen": "2026-07-31T21:54:21.765445+00:00",
+      "last_seen": "2026-07-31T21:54:21.765445+00:00",
+      "patch_status": "PATCHED",
+      "priority": 34,
+      "zero_day_score": 76,
+      "aliases": [
+        "GHSA-WF43-FPP3-CF65"
+      ],
+      "candidate": false
+    },
     "CVE-2026-53609": {
       "fingerprint": "10cc7ab137a348bde0b8",
       "first_seen": "2026-07-31T21:50:01.183089+00:00",
-      "last_seen": "2026-07-31T21:53:16.262074+00:00",
+      "last_seen": "2026-07-31T21:54:21.765445+00:00",
       "patch_status": "PATCHED",
       "priority": 36,
       "zero_day_score": 76,
@@ -120611,5 +120613,5 @@
       "candidate": false
     }
   },
-  "updated": "2026-07-31T21:53:16.269440+00:00"
+  "updated": "2026-07-31T21:54:22.009561+00:00"
 }
