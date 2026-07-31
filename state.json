@@ -4920,16 +4920,6 @@
       "aliases": [],
       "candidate": false
     },
-    "CVE-2026-34031": {
-      "fingerprint": "6f31b77a3081f10a7a70",
-      "first_seen": "2026-07-23T08:11:12.374827+00:00",
-      "last_seen": "2026-07-23T08:20:20.163579+00:00",
-      "patch_status": "UNKNOWN",
-      "priority": 26,
-      "zero_day_score": 0,
-      "aliases": [],
-      "candidate": false
-    },
     "CVE-2026-34033": {
       "fingerprint": "0d9f2251830774fac26d",
       "first_seen": "2026-07-23T08:11:12.374827+00:00",
@@ -120709,7 +120699,19 @@
         "GHSA-4279-Q6MJ-392R"
       ],
       "candidate": false
+    },
+    "CVE-2026-34031": {
+      "fingerprint": "454a2242364c6826acce",
+      "first_seen": "2026-07-23T08:11:12.374827+00:00",
+      "last_seen": "2026-07-31T15:45:25.579899+00:00",
+      "patch_status": "PATCHED",
+      "priority": 26,
+      "zero_day_score": 66,
+      "aliases": [
+        "GHSA-X4F6-MQG6-28XX"
+      ],
+      "candidate": false
     }
   },
-  "updated": "2026-07-31T15:44:18.645933+00:00"
+  "updated": "2026-07-31T15:45:25.868158+00:00"
 }
