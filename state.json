@@ -120462,16 +120462,6 @@
       "aliases": [],
       "candidate": false
     },
-    "CVE-2026-16232": {
-      "fingerprint": "4ced09ceabfaeeb16f4a",
-      "first_seen": "2026-07-22T14:18:17.565884+00:00",
-      "last_seen": "2026-08-02T09:14:53.940185+00:00",
-      "patch_status": "UNKNOWN",
-      "priority": 55,
-      "zero_day_score": 0,
-      "aliases": [],
-      "candidate": false
-    },
     "CVE-2026-16256": {
       "fingerprint": "a481798f1a429da536a4",
       "first_seen": "2026-08-02T06:17:12.798891+00:00",
@@ -120615,7 +120605,7 @@
     "CVE-2026-12231": {
       "fingerprint": "f2913566f6db6ff9b30c",
       "first_seen": "2026-08-02T09:06:08.894574+00:00",
-      "last_seen": "2026-08-02T09:31:19.079693+00:00",
+      "last_seen": "2026-08-02T09:32:25.404395+00:00",
       "patch_status": "UNKNOWN",
       "priority": 25,
       "zero_day_score": 51,
@@ -120623,7 +120613,19 @@
         "GHSA-HH26-4VF3-JPR2"
       ],
       "candidate": false
+    },
+    "CVE-2026-16232": {
+      "fingerprint": "4d8b8751aa90886abeeb",
+      "first_seen": "2026-07-22T14:18:17.565884+00:00",
+      "last_seen": "2026-08-02T09:32:25.404395+00:00",
+      "patch_status": "UNKNOWN",
+      "priority": 91,
+      "zero_day_score": 66,
+      "aliases": [
+        "GHSA-M2XX-23GX-734V"
+      ],
+      "candidate": false
     }
   },
-  "updated": "2026-08-02T09:31:19.433224+00:00"
+  "updated": "2026-08-02T09:32:25.629722+00:00"
 }
