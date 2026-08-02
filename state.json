@@ -119044,16 +119044,6 @@
       "aliases": [],
       "candidate": false
     },
-    "CVE-2026-17002": {
-      "fingerprint": "a481798f1a429da536a4",
-      "first_seen": "2026-08-01T23:17:21.346094+00:00",
-      "last_seen": "2026-08-01T23:46:32.525696+00:00",
-      "patch_status": "UNKNOWN",
-      "priority": 0,
-      "zero_day_score": 0,
-      "aliases": [],
-      "candidate": false
-    },
     "CVE-2026-17346": {
       "fingerprint": "0b0b013b7853a05cbba9",
       "first_seen": "2026-07-31T16:17:24.215632+00:00",
@@ -120585,35 +120575,53 @@
       "candidate": false
     },
     "CVE-2026-13339": {
-      "fingerprint": "ce3b6bd570099672347f",
+      "fingerprint": "bc1bb331e4a3de25b7fc",
       "first_seen": "2026-08-02T00:16:59.860949+00:00",
-      "last_seen": "2026-08-02T00:25:35.491628+00:00",
+      "last_seen": "2026-08-02T00:32:01.138482+00:00",
       "patch_status": "UNKNOWN",
       "priority": 30,
-      "zero_day_score": 3,
-      "aliases": [],
+      "zero_day_score": 61,
+      "aliases": [
+        "GHSA-2CFF-WC4F-2M48"
+      ],
+      "candidate": false
+    },
+    "CVE-2026-17002": {
+      "fingerprint": "36fc2efa56e626a665a2",
+      "first_seen": "2026-08-01T23:17:21.346094+00:00",
+      "last_seen": "2026-08-02T00:32:01.138482+00:00",
+      "patch_status": "UNKNOWN",
+      "priority": 0,
+      "zero_day_score": 51,
+      "aliases": [
+        "GHSA-FW84-2M38-54M7"
+      ],
       "candidate": false
     },
     "CVE-2026-18352": {
-      "fingerprint": "ce3b6bd570099672347f",
+      "fingerprint": "0f46c5acff4622718219",
       "first_seen": "2026-08-02T00:16:59.860949+00:00",
-      "last_seen": "2026-08-02T00:25:35.491628+00:00",
+      "last_seen": "2026-08-02T00:32:01.138482+00:00",
       "patch_status": "UNKNOWN",
       "priority": 30,
-      "zero_day_score": 3,
-      "aliases": [],
+      "zero_day_score": 61,
+      "aliases": [
+        "GHSA-MXW9-RXRV-85F3"
+      ],
       "candidate": false
     },
     "CVE-2026-8457": {
-      "fingerprint": "4ef6f4b9bea715ec9fd3",
+      "fingerprint": "010822a566687fbb5c45",
       "first_seen": "2026-08-02T00:16:59.860949+00:00",
-      "last_seen": "2026-08-02T00:25:35.491628+00:00",
+      "last_seen": "2026-08-02T00:32:01.138482+00:00",
       "patch_status": "UNKNOWN",
       "priority": 39,
-      "zero_day_score": 3,
-      "aliases": [],
+      "zero_day_score": 61,
+      "aliases": [
+        "GHSA-QWC9-Q2F8-Q72Q"
+      ],
       "candidate": false
     }
   },
-  "updated": "2026-08-02T00:30:56.515660+00:00"
+  "updated": "2026-08-02T00:32:01.390988+00:00"
 }
