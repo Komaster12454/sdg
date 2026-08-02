@@ -26768,16 +26768,6 @@
       "aliases": [],
       "candidate": false
     },
-    "CVE-2026-27892": {
-      "fingerprint": "ba4fe39ed1ffbeec92eb",
-      "first_seen": "2026-07-24T13:10:13.517061+00:00",
-      "last_seen": "2026-07-24T13:19:13.391042+00:00",
-      "patch_status": "UNKNOWN",
-      "priority": 26,
-      "zero_day_score": 0,
-      "aliases": [],
-      "candidate": false
-    },
     "CVE-2026-27964": {
       "fingerprint": "b9215082a4a3f04b3a10",
       "first_seen": "2026-07-24T13:10:13.517061+00:00",
@@ -120625,7 +120615,19 @@
       "zero_day_score": 0,
       "aliases": [],
       "candidate": false
+    },
+    "CVE-2026-27892": {
+      "fingerprint": "72b41f3942fd26f2aeca",
+      "first_seen": "2026-07-24T13:10:13.517061+00:00",
+      "last_seen": "2026-08-02T21:53:14.938314+00:00",
+      "patch_status": "UNPATCHED",
+      "priority": 36,
+      "zero_day_score": 76,
+      "aliases": [
+        "GHSA-Q7F2-RV22-2XGR"
+      ],
+      "candidate": false
     }
   },
-  "updated": "2026-08-02T21:52:09.537261+00:00"
+  "updated": "2026-08-02T21:53:15.225743+00:00"
 }
