@@ -1,15 +1,5 @@
 {
   "records": {
-    "CVE-2026-5560": {
-      "fingerprint": "1c893cfca5401c91c76b",
-      "first_seen": "2026-07-24T20:15:27.759415+00:00",
-      "last_seen": "2026-07-24T20:18:58.634971+00:00",
-      "patch_status": "UNKNOWN",
-      "priority": 8,
-      "zero_day_score": 0,
-      "aliases": [],
-      "candidate": false
-    },
     "CVE-2026-5561": {
       "fingerprint": "6f278467d3104c7a6568",
       "first_seen": "2026-07-24T20:15:27.759415+00:00",
@@ -120443,7 +120433,7 @@
     "CVE-2026-70493": {
       "fingerprint": "b43c9aa20f1562eca2cb",
       "first_seen": "2026-08-04T20:56:35.422868+00:00",
-      "last_seen": "2026-08-04T21:03:24.149073+00:00",
+      "last_seen": "2026-08-04T21:04:30.788733+00:00",
       "patch_status": "PATCHED",
       "priority": 26,
       "zero_day_score": 66,
@@ -120455,7 +120445,7 @@
     "CVE-2026-70494": {
       "fingerprint": "a3d9a51bef537d13c3bc",
       "first_seen": "2026-08-04T20:58:50.936667+00:00",
-      "last_seen": "2026-08-04T21:03:24.149073+00:00",
+      "last_seen": "2026-08-04T21:04:30.788733+00:00",
       "patch_status": "PATCHED",
       "priority": 32,
       "zero_day_score": 76,
@@ -120463,7 +120453,19 @@
         "GHSA-3CG5-48J3-V4GV"
       ],
       "candidate": false
+    },
+    "CVE-2026-70588": {
+      "fingerprint": "18cca530c62f95e15250",
+      "first_seen": "2026-08-04T21:04:30.788733+00:00",
+      "last_seen": "2026-08-04T21:04:30.788733+00:00",
+      "patch_status": "PATCHED",
+      "priority": 20,
+      "zero_day_score": 66,
+      "aliases": [
+        "GHSA-2GX6-7GX2-WWCF"
+      ],
+      "candidate": false
     }
   },
-  "updated": "2026-08-04T21:03:24.154413+00:00"
+  "updated": "2026-08-04T21:04:31.212401+00:00"
 }
