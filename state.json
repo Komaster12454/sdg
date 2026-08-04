@@ -48198,16 +48198,6 @@
       "aliases": [],
       "candidate": false
     },
-    "CVE-2026-54658": {
-      "fingerprint": "aed237d92fc341ede56a",
-      "first_seen": "2026-07-28T22:20:26.648137+00:00",
-      "last_seen": "2026-07-30T20:11:34.116267+00:00",
-      "patch_status": "UNKNOWN",
-      "priority": 39,
-      "zero_day_score": 3,
-      "aliases": [],
-      "candidate": false
-    },
     "CVE-2026-55403": {
       "fingerprint": "1d1367de0b2c67358253",
       "first_seen": "2026-07-28T21:33:13.375554+00:00",
@@ -120414,10 +120404,22 @@
       "aliases": [],
       "candidate": false
     },
+    "CVE-2026-54658": {
+      "fingerprint": "35a2b0f0ffb18a1d7115",
+      "first_seen": "2026-07-28T22:20:26.648137+00:00",
+      "last_seen": "2026-08-04T20:34:45.903321+00:00",
+      "patch_status": "PATCHED",
+      "priority": 39,
+      "zero_day_score": 76,
+      "aliases": [
+        "GHSA-6WCC-39RP-HH9P"
+      ],
+      "candidate": false
+    },
     "CVE-2026-60580": {
       "fingerprint": "01e1d0747cc802553110",
       "first_seen": "2026-07-23T18:31:46.912867+00:00",
-      "last_seen": "2026-08-04T20:33:38.139773+00:00",
+      "last_seen": "2026-08-04T20:34:45.903321+00:00",
       "patch_status": "UNKNOWN",
       "priority": 35,
       "zero_day_score": 3,
@@ -120427,7 +120429,7 @@
     "CVE-2026-60581": {
       "fingerprint": "7d89f6e704e2b965906d",
       "first_seen": "2026-07-23T18:31:46.912867+00:00",
-      "last_seen": "2026-08-04T20:33:38.139773+00:00",
+      "last_seen": "2026-08-04T20:34:45.903321+00:00",
       "patch_status": "UNKNOWN",
       "priority": 30,
       "zero_day_score": 3,
@@ -120437,7 +120439,7 @@
     "CVE-2026-60582": {
       "fingerprint": "040839f48b1b56b3421a",
       "first_seen": "2026-07-23T18:31:46.912867+00:00",
-      "last_seen": "2026-08-04T20:33:38.139773+00:00",
+      "last_seen": "2026-08-04T20:34:45.903321+00:00",
       "patch_status": "UNKNOWN",
       "priority": 33,
       "zero_day_score": 3,
@@ -120445,5 +120447,5 @@
       "candidate": false
     }
   },
-  "updated": "2026-08-04T20:33:38.144612+00:00"
+  "updated": "2026-08-04T20:34:46.138598+00:00"
 }
