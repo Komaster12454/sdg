@@ -1,15 +1,5 @@
 {
   "records": {
-    "CVE-2026-17048": {
-      "fingerprint": "a481798f1a429da536a4",
-      "first_seen": "2026-07-24T14:17:21.962343+00:00",
-      "last_seen": "2026-07-24T23:50:22.108554+00:00",
-      "patch_status": "UNKNOWN",
-      "priority": 0,
-      "zero_day_score": 0,
-      "aliases": [],
-      "candidate": false
-    },
     "CVE-2026-17059": {
       "fingerprint": "a481798f1a429da536a4",
       "first_seen": "2026-07-24T14:52:43.280460+00:00",
@@ -120509,7 +120499,7 @@
     "CVE-2025-8110": {
       "fingerprint": "d569d270380be8c4798d",
       "first_seen": "2026-08-05T21:02:53.896824+00:00",
-      "last_seen": "2026-08-05T21:05:07.557867+00:00",
+      "last_seen": "2026-08-05T21:06:14.369474+00:00",
       "patch_status": "UNKNOWN",
       "priority": 81,
       "zero_day_score": 43,
@@ -120519,7 +120509,7 @@
     "CVE-2026-71314": {
       "fingerprint": "1368a4598a4bccd32ab6",
       "first_seen": "2026-08-05T21:00:23.107669+00:00",
-      "last_seen": "2026-08-05T21:05:07.557867+00:00",
+      "last_seen": "2026-08-05T21:06:14.369474+00:00",
       "patch_status": "PATCHED",
       "priority": 30,
       "zero_day_score": 76,
@@ -120527,7 +120517,19 @@
         "GHSA-HXCR-HM88-MPQ6"
       ],
       "candidate": false
+    },
+    "CVE-2026-71315": {
+      "fingerprint": "4ba44a6d4645edc3289f",
+      "first_seen": "2026-08-05T21:06:14.369474+00:00",
+      "last_seen": "2026-08-05T21:06:14.369474+00:00",
+      "patch_status": "PATCHED",
+      "priority": 32,
+      "zero_day_score": 76,
+      "aliases": [
+        "GHSA-HXVH-4H3W-PRP9"
+      ],
+      "candidate": false
     }
   },
-  "updated": "2026-08-05T21:05:07.564468+00:00"
+  "updated": "2026-08-05T21:06:14.623187+00:00"
 }
