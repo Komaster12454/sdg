@@ -1,15 +1,5 @@
 {
   "records": {
-    "CVE-2026-16767": {
-      "fingerprint": "212ee7ff621878fb5c35",
-      "first_seen": "2026-07-23T23:17:51.717061+00:00",
-      "last_seen": "2026-07-24T23:50:22.108554+00:00",
-      "patch_status": "UNKNOWN",
-      "priority": 0,
-      "zero_day_score": 0,
-      "aliases": [],
-      "candidate": false
-    },
     "CVE-2026-16796": {
       "fingerprint": "4634d8b2a61fa51d571e",
       "first_seen": "2026-07-23T20:41:40.598725+00:00",
@@ -120493,7 +120483,7 @@
     "CVE-2026-59732": {
       "fingerprint": "153f119edd902322e2f8",
       "first_seen": "2026-08-05T20:43:59.992143+00:00",
-      "last_seen": "2026-08-05T20:48:25.173564+00:00",
+      "last_seen": "2026-08-05T20:49:31.142946+00:00",
       "patch_status": "PATCHED",
       "priority": 20,
       "zero_day_score": 66,
@@ -120505,7 +120495,7 @@
     "CVE-2026-59733": {
       "fingerprint": "2d02af42f43ca297af6e",
       "first_seen": "2026-07-22T01:33:12.312578+00:00",
-      "last_seen": "2026-08-05T20:48:25.173564+00:00",
+      "last_seen": "2026-08-05T20:49:31.142946+00:00",
       "patch_status": "PATCHED",
       "priority": 35,
       "zero_day_score": 76,
@@ -120514,10 +120504,22 @@
       ],
       "candidate": false
     },
+    "CVE-2026-71313": {
+      "fingerprint": "a982ec83904edb5b382c",
+      "first_seen": "2026-08-05T20:49:31.142946+00:00",
+      "last_seen": "2026-08-05T20:49:31.142946+00:00",
+      "patch_status": "PATCHED",
+      "priority": 27,
+      "zero_day_score": 66,
+      "aliases": [
+        "GHSA-7P4M-QXVV-G567"
+      ],
+      "candidate": false
+    },
     "GHSA-GX4C-2HQX-CW2R": {
       "fingerprint": "a671f0963f3aef175ed7",
       "first_seen": "2026-08-05T20:43:59.992143+00:00",
-      "last_seen": "2026-08-05T20:48:25.173564+00:00",
+      "last_seen": "2026-08-05T20:49:31.142946+00:00",
       "patch_status": "PATCHED",
       "priority": 31,
       "zero_day_score": 78,
@@ -120525,5 +120527,5 @@
       "candidate": true
     }
   },
-  "updated": "2026-08-05T20:48:25.179488+00:00"
+  "updated": "2026-08-05T20:49:31.389862+00:00"
 }
