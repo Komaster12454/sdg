@@ -1,15 +1,5 @@
 {
   "records": {
-    "CVE-2026-60747": {
-      "fingerprint": "0ef54db6e315f80d2134",
-      "first_seen": "2026-07-23T18:30:28.560953+00:00",
-      "last_seen": "2026-07-27T18:08:32.923122+00:00",
-      "patch_status": "UNKNOWN",
-      "priority": 24,
-      "zero_day_score": 0,
-      "aliases": [],
-      "candidate": false
-    },
     "CVE-2024-22347": {
       "fingerprint": "3420eeb2078d0392c97f",
       "first_seen": "2026-07-27T18:15:11.580920+00:00",
@@ -120743,7 +120733,7 @@
     "CVE-2026-10773": {
       "fingerprint": "15d7340d6d351ef7f818",
       "first_seen": "2026-08-01T13:17:54.962805+00:00",
-      "last_seen": "2026-08-07T18:50:17.437673+00:00",
+      "last_seen": "2026-08-07T18:51:24.694898+00:00",
       "patch_status": "PATCHED",
       "priority": 39,
       "zero_day_score": 0,
@@ -120753,7 +120743,7 @@
     "CVE-2026-71850": {
       "fingerprint": "84451e9b56fe3d46a6b9",
       "first_seen": "2026-08-07T18:42:20.150371+00:00",
-      "last_seen": "2026-08-07T18:50:17.437673+00:00",
+      "last_seen": "2026-08-07T18:51:24.694898+00:00",
       "patch_status": "PATCHED",
       "priority": 19,
       "zero_day_score": 66,
@@ -120761,7 +120751,19 @@
         "GHSA-F23P-VX2J-J53R"
       ],
       "candidate": false
+    },
+    "CVE-2026-71851": {
+      "fingerprint": "1ed7eb3d7974d23dad3a",
+      "first_seen": "2026-08-07T18:51:24.694898+00:00",
+      "last_seen": "2026-08-07T18:51:24.694898+00:00",
+      "patch_status": "PATCHED",
+      "priority": 36,
+      "zero_day_score": 76,
+      "aliases": [
+        "GHSA-RG76-677X-56Q9"
+      ],
+      "candidate": false
     }
   },
-  "updated": "2026-08-07T18:50:17.442014+00:00"
+  "updated": "2026-08-07T18:51:24.974109+00:00"
 }
