@@ -1,15 +1,5 @@
 {
   "records": {
-    "CVE-2026-63913": {
-      "fingerprint": "95317fe54fbd66083999",
-      "first_seen": "2026-07-22T01:33:12.312578+00:00",
-      "last_seen": "2026-07-27T17:53:46.591800+00:00",
-      "patch_status": "UNKNOWN",
-      "priority": 32,
-      "zero_day_score": 3,
-      "aliases": [],
-      "candidate": false
-    },
     "CVE-2026-63914": {
       "fingerprint": "40fa7c7cfd57f133b67a",
       "first_seen": "2026-07-22T01:33:12.312578+00:00",
@@ -120746,10 +120736,22 @@
       ],
       "candidate": false
     },
+    "CVE-2026-66062": {
+      "fingerprint": "7efe1a123354f6037a0d",
+      "first_seen": "2026-08-07T16:50:48.805714+00:00",
+      "last_seen": "2026-08-07T16:50:48.805714+00:00",
+      "patch_status": "PATCHED",
+      "priority": 21,
+      "zero_day_score": 66,
+      "aliases": [
+        "GHSA-29G2-3RMR-QM68"
+      ],
+      "candidate": false
+    },
     "CVE-2026-71557": {
       "fingerprint": "9b91f70bbc105265b53d",
       "first_seen": "2026-08-07T16:42:57.631629+00:00",
-      "last_seen": "2026-08-07T16:49:40.322909+00:00",
+      "last_seen": "2026-08-07T16:50:48.805714+00:00",
       "patch_status": "PATCHED",
       "priority": 25,
       "zero_day_score": 66,
@@ -120761,7 +120763,7 @@
     "GHSA-7C4V-FWGW-9RF7": {
       "fingerprint": "7cdaa2734d775e2a28f5",
       "first_seen": "2026-08-07T16:46:18.945124+00:00",
-      "last_seen": "2026-08-07T16:49:40.322909+00:00",
+      "last_seen": "2026-08-07T16:50:48.805714+00:00",
       "patch_status": "PATCHED",
       "priority": 19,
       "zero_day_score": 78,
@@ -120769,5 +120771,5 @@
       "candidate": true
     }
   },
-  "updated": "2026-08-07T16:49:40.329006+00:00"
+  "updated": "2026-08-07T16:50:49.076994+00:00"
 }
