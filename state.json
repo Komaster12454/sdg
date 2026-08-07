@@ -1,15 +1,5 @@
 {
   "records": {
-    "CVE-2026-63884": {
-      "fingerprint": "4bdee79c522431f56988",
-      "first_seen": "2026-07-22T01:33:12.312578+00:00",
-      "last_seen": "2026-07-27T17:53:46.591800+00:00",
-      "patch_status": "UNKNOWN",
-      "priority": 31,
-      "zero_day_score": 3,
-      "aliases": [],
-      "candidate": false
-    },
     "CVE-2026-63885": {
       "fingerprint": "e8fd53c2bb838ac57349",
       "first_seen": "2026-07-22T01:33:12.312578+00:00",
@@ -120725,7 +120715,7 @@
     "CVE-2026-16105": {
       "fingerprint": "62ce43c8e604b2084410",
       "first_seen": "2026-07-31T08:17:23.073777+00:00",
-      "last_seen": "2026-08-07T15:02:24.490209+00:00",
+      "last_seen": "2026-08-07T15:03:30.417379+00:00",
       "patch_status": "UNKNOWN",
       "priority": 19,
       "zero_day_score": 0,
@@ -120735,7 +120725,7 @@
     "CVE-2026-18203": {
       "fingerprint": "5ca496bc49dd58f38b7d",
       "first_seen": "2026-07-31T08:17:23.073777+00:00",
-      "last_seen": "2026-08-07T15:02:24.490209+00:00",
+      "last_seen": "2026-08-07T15:03:30.417379+00:00",
       "patch_status": "UNKNOWN",
       "priority": 26,
       "zero_day_score": 0,
@@ -120745,17 +120735,29 @@
     "CVE-2026-18206": {
       "fingerprint": "3d65c9c87fe6a5070156",
       "first_seen": "2026-07-31T08:17:23.073777+00:00",
-      "last_seen": "2026-08-07T15:02:24.490209+00:00",
+      "last_seen": "2026-08-07T15:03:30.417379+00:00",
       "patch_status": "UNKNOWN",
       "priority": 14,
       "zero_day_score": 0,
       "aliases": [],
       "candidate": false
     },
+    "CVE-2026-62992": {
+      "fingerprint": "a0eb3feff3cab4e7efe3",
+      "first_seen": "2026-08-07T15:03:30.417379+00:00",
+      "last_seen": "2026-08-07T15:03:30.417379+00:00",
+      "patch_status": "PATCHED",
+      "priority": 0,
+      "zero_day_score": 66,
+      "aliases": [
+        "GHSA-F6WF-28G6-769X"
+      ],
+      "candidate": false
+    },
     "GHSA-WG23-69C2-GJC8": {
       "fingerprint": "6c953ad6761b9eb91239",
       "first_seen": "2026-08-07T14:58:00.529641+00:00",
-      "last_seen": "2026-08-07T15:02:24.490209+00:00",
+      "last_seen": "2026-08-07T15:03:30.417379+00:00",
       "patch_status": "PATCHED",
       "priority": 22,
       "zero_day_score": 88,
@@ -120763,5 +120765,5 @@
       "candidate": true
     }
   },
-  "updated": "2026-08-07T15:02:24.495408+00:00"
+  "updated": "2026-08-07T15:03:31.004143+00:00"
 }
