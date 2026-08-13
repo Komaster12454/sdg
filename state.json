@@ -108618,16 +108618,6 @@
       "aliases": [],
       "candidate": false
     },
-    "CVE-2026-62713": {
-      "fingerprint": "0a4dc2df3bc2d0ea4d68",
-      "first_seen": "2026-08-11T17:21:36.335408+00:00",
-      "last_seen": "2026-08-13T00:49:41.960509+00:00",
-      "patch_status": "UNKNOWN",
-      "priority": 0,
-      "zero_day_score": 0,
-      "aliases": [],
-      "candidate": false
-    },
     "CVE-2026-62714": {
       "fingerprint": "212ee7ff621878fb5c35",
       "first_seen": "2026-08-11T17:26:47.552312+00:00",
@@ -120746,36 +120736,6 @@
       "aliases": [],
       "candidate": false
     },
-    "CVE-2025-71393": {
-      "fingerprint": "c19f21145503a6a53bc9",
-      "first_seen": "2026-08-13T14:12:05.031810+00:00",
-      "last_seen": "2026-08-13T15:06:23.491302+00:00",
-      "patch_status": "UNKNOWN",
-      "priority": 24,
-      "zero_day_score": 0,
-      "aliases": [],
-      "candidate": false
-    },
-    "CVE-2025-71394": {
-      "fingerprint": "7725e4411a06acfba89f",
-      "first_seen": "2026-08-13T13:58:06.363947+00:00",
-      "last_seen": "2026-08-13T15:06:23.491302+00:00",
-      "patch_status": "UNKNOWN",
-      "priority": 9,
-      "zero_day_score": 0,
-      "aliases": [],
-      "candidate": false
-    },
-    "CVE-2026-40375": {
-      "fingerprint": "4c962deb301213bdbf51",
-      "first_seen": "2026-08-11T17:26:47.552312+00:00",
-      "last_seen": "2026-08-13T15:06:23.491302+00:00",
-      "patch_status": "UNKNOWN",
-      "priority": 26,
-      "zero_day_score": 0,
-      "aliases": [],
-      "candidate": false
-    },
     "CVE-2026-64285": {
       "fingerprint": "2459c4208509cb900978",
       "first_seen": "2026-08-13T14:57:54.974006+00:00",
@@ -120786,12 +120746,52 @@
       "aliases": [],
       "candidate": false
     },
-    "CVE-2026-64288": {
-      "fingerprint": "848fd041aec93505b613",
-      "first_seen": "2026-08-13T15:06:23.491302+00:00",
-      "last_seen": "2026-08-13T15:06:23.491302+00:00",
+    "CVE-2025-71393": {
+      "fingerprint": "c19f21145503a6a53bc9",
+      "first_seen": "2026-08-13T14:12:05.031810+00:00",
+      "last_seen": "2026-08-13T15:07:30.912560+00:00",
       "patch_status": "UNKNOWN",
-      "priority": 0,
+      "priority": 24,
+      "zero_day_score": 0,
+      "aliases": [],
+      "candidate": false
+    },
+    "CVE-2025-71394": {
+      "fingerprint": "7725e4411a06acfba89f",
+      "first_seen": "2026-08-13T13:58:06.363947+00:00",
+      "last_seen": "2026-08-13T15:07:30.912560+00:00",
+      "patch_status": "UNKNOWN",
+      "priority": 9,
+      "zero_day_score": 0,
+      "aliases": [],
+      "candidate": false
+    },
+    "CVE-2026-40375": {
+      "fingerprint": "4c962deb301213bdbf51",
+      "first_seen": "2026-08-11T17:26:47.552312+00:00",
+      "last_seen": "2026-08-13T15:07:30.912560+00:00",
+      "patch_status": "UNKNOWN",
+      "priority": 26,
+      "zero_day_score": 0,
+      "aliases": [],
+      "candidate": false
+    },
+    "CVE-2026-62713": {
+      "fingerprint": "8156d97894b4f19eae8a",
+      "first_seen": "2026-08-11T17:21:36.335408+00:00",
+      "last_seen": "2026-08-13T15:07:30.912560+00:00",
+      "patch_status": "PATCHED",
+      "priority": 31,
+      "zero_day_score": 0,
+      "aliases": [],
+      "candidate": false
+    },
+    "CVE-2026-64288": {
+      "fingerprint": "a199e5bf0770b1266518",
+      "first_seen": "2026-08-13T15:06:23.491302+00:00",
+      "last_seen": "2026-08-13T15:07:30.912560+00:00",
+      "patch_status": "PATCHED",
+      "priority": 22,
       "zero_day_score": 0,
       "aliases": [],
       "candidate": false
@@ -120799,7 +120799,7 @@
     "CVE-2026-64289": {
       "fingerprint": "a199e5bf0770b1266518",
       "first_seen": "2026-08-13T14:57:54.974006+00:00",
-      "last_seen": "2026-08-13T15:06:23.491302+00:00",
+      "last_seen": "2026-08-13T15:07:30.912560+00:00",
       "patch_status": "PATCHED",
       "priority": 22,
       "zero_day_score": 0,
@@ -120807,5 +120807,5 @@
       "candidate": false
     }
   },
-  "updated": "2026-08-13T15:06:23.882654+00:00"
+  "updated": "2026-08-13T15:07:31.283152+00:00"
 }
