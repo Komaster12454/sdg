@@ -1,15 +1,5 @@
 {
   "records": {
-    "CVE-2022-50252": {
-      "fingerprint": "773cb71c2ce575b9aa77",
-      "first_seen": "2026-08-04T12:16:37.430777+00:00",
-      "last_seen": "2026-08-06T00:55:35.443053+00:00",
-      "patch_status": "UNKNOWN",
-      "priority": 0,
-      "zero_day_score": 0,
-      "aliases": [],
-      "candidate": false
-    },
     "CVE-2022-50255": {
       "fingerprint": "773cb71c2ce575b9aa77",
       "first_seen": "2026-08-04T12:16:37.430777+00:00",
@@ -120837,7 +120827,7 @@
     "CVE-2026-42523": {
       "fingerprint": "e0c8be480d7d675d699e",
       "first_seen": "2026-08-14T19:48:45.497429+00:00",
-      "last_seen": "2026-08-14T19:48:45.497429+00:00",
+      "last_seen": "2026-08-14T19:49:52.177247+00:00",
       "patch_status": "PATCHED",
       "priority": 36,
       "zero_day_score": 76,
@@ -120846,10 +120836,22 @@
       ],
       "candidate": false
     },
+    "CVE-2026-53708": {
+      "fingerprint": "74c9dca93a424154600c",
+      "first_seen": "2026-08-14T19:49:52.177247+00:00",
+      "last_seen": "2026-08-14T19:49:52.177247+00:00",
+      "patch_status": "PATCHED",
+      "priority": 26,
+      "zero_day_score": 66,
+      "aliases": [
+        "GHSA-9HGC-G3W5-67CM"
+      ],
+      "candidate": false
+    },
     "GHSA-8RW6-P7M8-63JP": {
       "fingerprint": "19b357b2db1c7d5260a4",
       "first_seen": "2026-08-14T19:41:58.289033+00:00",
-      "last_seen": "2026-08-14T19:48:45.497429+00:00",
+      "last_seen": "2026-08-14T19:49:52.177247+00:00",
       "patch_status": "PATCHED",
       "priority": 45,
       "zero_day_score": 78,
@@ -120857,5 +120859,5 @@
       "candidate": true
     }
   },
-  "updated": "2026-08-14T19:48:45.828231+00:00"
+  "updated": "2026-08-14T19:49:52.475461+00:00"
 }
