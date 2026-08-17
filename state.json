@@ -1,15 +1,5 @@
 {
   "records": {
-    "CVE-2025-21762": {
-      "fingerprint": "d527fd52a3f957459b32",
-      "first_seen": "2026-07-30T06:22:01.664533+00:00",
-      "last_seen": "2026-08-06T00:55:35.443053+00:00",
-      "patch_status": "UNKNOWN",
-      "priority": 0,
-      "zero_day_score": 0,
-      "aliases": [],
-      "candidate": false
-    },
     "CVE-2025-21763": {
       "fingerprint": "fb99b8f1687988b907ff",
       "first_seen": "2026-07-30T07:12:47.245434+00:00",
@@ -120978,10 +120968,22 @@
       ],
       "candidate": false
     },
+    "CVE-2026-53659": {
+      "fingerprint": "c6919f9feedf3a062beb",
+      "first_seen": "2026-08-17T21:52:47.575264+00:00",
+      "last_seen": "2026-08-17T21:52:47.575264+00:00",
+      "patch_status": "UNPATCHED",
+      "priority": 40,
+      "zero_day_score": 86,
+      "aliases": [
+        "GHSA-G4W2-6H2R-3M3W"
+      ],
+      "candidate": false
+    },
     "GHSA-J659-8XH6-5PQ5": {
       "fingerprint": "62a75e27175f43df3d63",
       "first_seen": "2026-08-17T21:50:35.298317+00:00",
-      "last_seen": "2026-08-17T21:51:41.141457+00:00",
+      "last_seen": "2026-08-17T21:52:47.575264+00:00",
       "patch_status": "PATCHED",
       "priority": 22,
       "zero_day_score": 88,
@@ -120991,7 +120993,7 @@
     "GHSA-XHCR-CQFR-M3HV": {
       "fingerprint": "62a75e27175f43df3d63",
       "first_seen": "2026-08-17T21:50:35.298317+00:00",
-      "last_seen": "2026-08-17T21:51:41.141457+00:00",
+      "last_seen": "2026-08-17T21:52:47.575264+00:00",
       "patch_status": "PATCHED",
       "priority": 22,
       "zero_day_score": 88,
@@ -120999,5 +121001,5 @@
       "candidate": true
     }
   },
-  "updated": "2026-08-17T21:51:41.145840+00:00"
+  "updated": "2026-08-17T21:52:47.800161+00:00"
 }
