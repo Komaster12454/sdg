@@ -1,25 +1,5 @@
 {
   "records": {
-    "CVE-2025-21222": {
-      "fingerprint": "585594ca541d65df71d9",
-      "first_seen": "2026-08-10T17:38:55.585515+00:00",
-      "last_seen": "2026-08-11T00:44:00.177035+00:00",
-      "patch_status": "UNKNOWN",
-      "priority": 0,
-      "zero_day_score": 0,
-      "aliases": [],
-      "candidate": false
-    },
-    "CVE-2025-21416": {
-      "fingerprint": "7bb55289e5b74a6f3c9d",
-      "first_seen": "2026-08-10T17:38:55.585515+00:00",
-      "last_seen": "2026-08-11T00:44:00.177035+00:00",
-      "patch_status": "UNKNOWN",
-      "priority": 0,
-      "zero_day_score": 0,
-      "aliases": [],
-      "candidate": false
-    },
     "CVE-2025-24058": {
       "fingerprint": "056e7a0154786f2e57fb",
       "first_seen": "2026-08-10T17:38:55.585515+00:00",
@@ -121523,13 +121503,37 @@
     "CVE-2026-2329": {
       "fingerprint": "dd62b3b4b915dc8ee5d3",
       "first_seen": "2026-08-19T21:48:57.107447+00:00",
-      "last_seen": "2026-08-19T21:55:37.454926+00:00",
+      "last_seen": "2026-08-19T21:56:44.327509+00:00",
       "patch_status": "UNKNOWN",
       "priority": 15,
       "zero_day_score": 30,
       "aliases": [],
       "candidate": false
+    },
+    "CVE-2026-59992": {
+      "fingerprint": "36651e4d29ac2a8e87ce",
+      "first_seen": "2026-08-19T21:56:44.327509+00:00",
+      "last_seen": "2026-08-19T21:56:44.327509+00:00",
+      "patch_status": "PATCHED",
+      "priority": 21,
+      "zero_day_score": 66,
+      "aliases": [
+        "GHSA-8MQ9-5FW2-5RM4"
+      ],
+      "candidate": false
+    },
+    "CVE-2026-63123": {
+      "fingerprint": "bda897d452f6573e7a38",
+      "first_seen": "2026-08-19T21:56:44.327509+00:00",
+      "last_seen": "2026-08-19T21:56:44.327509+00:00",
+      "patch_status": "PATCHED",
+      "priority": 26,
+      "zero_day_score": 66,
+      "aliases": [
+        "GHSA-RGR9-R7MJ-MF6X"
+      ],
+      "candidate": false
     }
   },
-  "updated": "2026-08-19T21:55:37.459698+00:00"
+  "updated": "2026-08-19T21:56:44.624917+00:00"
 }
