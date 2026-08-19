@@ -306,18 +306,6 @@
       "aliases": [],
       "candidate": true
     },
-    "CVE-2026-16723": {
-      "fingerprint": "64abc8eb869943163886",
-      "first_seen": "2026-07-23T09:12:10.281033+00:00",
-      "last_seen": "2026-08-07T18:27:40.834684+00:00",
-      "patch_status": "UNPATCHED",
-      "priority": 46,
-      "zero_day_score": 86,
-      "aliases": [
-        "GHSA-CRF3-V9RR-V7HJ"
-      ],
-      "candidate": false
-    },
     "CVE-2026-18214": {
       "fingerprint": "82ba58df096b10926ccb",
       "first_seen": "2026-07-31T08:17:23.073777+00:00",
@@ -121073,7 +121061,17 @@
       "zero_day_score": 30,
       "aliases": [],
       "candidate": false
+    },
+    "CVE-2026-16723": {
+      "fingerprint": "07577be5966f631b4e00",
+      "first_seen": "2026-07-23T09:12:10.281033+00:00",
+      "last_seen": "2026-08-19T05:02:48.599284+00:00",
+      "patch_status": "UNKNOWN",
+      "priority": 5,
+      "zero_day_score": 30,
+      "aliases": [],
+      "candidate": false
     }
   },
-  "updated": "2026-08-19T05:01:42.871828+00:00"
+  "updated": "2026-08-19T05:02:48.822868+00:00"
 }
