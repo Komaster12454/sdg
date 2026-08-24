@@ -115458,16 +115458,6 @@
       "aliases": [],
       "candidate": false
     },
-    "CVE-2025-61258": {
-      "fingerprint": "ac9441f90bafe3762947",
-      "first_seen": "2026-08-24T14:17:42.040482+00:00",
-      "last_seen": "2026-08-24T14:39:22.448756+00:00",
-      "patch_status": "UNKNOWN",
-      "priority": 0,
-      "zero_day_score": 0,
-      "aliases": [],
-      "candidate": false
-    },
     "CVE-2025-61726": {
       "fingerprint": "df865668f3fed79855e3",
       "first_seen": "2026-07-22T12:18:19.537442+00:00",
@@ -120938,10 +120928,22 @@
       "aliases": [],
       "candidate": false
     },
+    "CVE-2025-61258": {
+      "fingerprint": "ed106d08702072331359",
+      "first_seen": "2026-08-24T14:17:42.040482+00:00",
+      "last_seen": "2026-08-24T15:31:23.801268+00:00",
+      "patch_status": "UNKNOWN",
+      "priority": 30,
+      "zero_day_score": 61,
+      "aliases": [
+        "GHSA-G823-F2HP-HRJR"
+      ],
+      "candidate": false
+    },
     "CVE-2026-66906": {
       "fingerprint": "bb1af289c9709489cd3e",
       "first_seen": "2026-08-24T15:30:15.414456+00:00",
-      "last_seen": "2026-08-24T15:30:15.414456+00:00",
+      "last_seen": "2026-08-24T15:31:23.801268+00:00",
       "patch_status": "UNKNOWN",
       "priority": 5,
       "zero_day_score": 30,
@@ -120951,7 +120953,7 @@
     "CVE-2026-66907": {
       "fingerprint": "bb1af289c9709489cd3e",
       "first_seen": "2026-08-24T15:24:21.421891+00:00",
-      "last_seen": "2026-08-24T15:30:15.414456+00:00",
+      "last_seen": "2026-08-24T15:31:23.801268+00:00",
       "patch_status": "UNKNOWN",
       "priority": 5,
       "zero_day_score": 30,
@@ -120959,5 +120961,5 @@
       "candidate": false
     }
   },
-  "updated": "2026-08-24T15:30:15.876355+00:00"
+  "updated": "2026-08-24T15:31:24.079445+00:00"
 }
