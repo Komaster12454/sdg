@@ -1,15 +1,5 @@
 {
   "records": {
-    "CVE-2026-19207": {
-      "fingerprint": "67c269804e12237a5e2c",
-      "first_seen": "2026-08-07T15:18:12.360405+00:00",
-      "last_seen": "2026-08-12T21:10:21.166997+00:00",
-      "patch_status": "UNKNOWN",
-      "priority": 7,
-      "zero_day_score": 0,
-      "aliases": [],
-      "candidate": false
-    },
     "CVE-2026-19208": {
       "fingerprint": "37d718210dbc2017fb11",
       "first_seen": "2026-08-07T16:18:04.057992+00:00",
@@ -121208,10 +121198,22 @@
       ],
       "candidate": false
     },
+    "CVE-2026-11624": {
+      "fingerprint": "9709d7c605d075fcacec",
+      "first_seen": "2026-08-24T22:06:51.158470+00:00",
+      "last_seen": "2026-08-24T22:06:51.158470+00:00",
+      "patch_status": "PATCHED",
+      "priority": 0,
+      "zero_day_score": 76,
+      "aliases": [
+        "GHSA-76G7-M3XW-X9GR"
+      ],
+      "candidate": false
+    },
     "GHSA-FX4F-MHW4-QM7J": {
       "fingerprint": "7cdaa2734d775e2a28f5",
       "first_seen": "2026-08-24T22:05:43.675908+00:00",
-      "last_seen": "2026-08-24T22:05:43.675908+00:00",
+      "last_seen": "2026-08-24T22:06:51.158470+00:00",
       "patch_status": "PATCHED",
       "priority": 19,
       "zero_day_score": 78,
@@ -121221,7 +121223,7 @@
     "GHSA-VX2M-JPXR-XV7W": {
       "fingerprint": "c354910af50cf45c7094",
       "first_seen": "2026-08-24T22:01:56.822721+00:00",
-      "last_seen": "2026-08-24T22:05:43.675908+00:00",
+      "last_seen": "2026-08-24T22:06:51.158470+00:00",
       "patch_status": "UNPATCHED",
       "priority": 53,
       "zero_day_score": 88,
@@ -121231,7 +121233,7 @@
     "GHSA-W8J7-39HP-8X59": {
       "fingerprint": "abb85de576695b3b2621",
       "first_seen": "2026-08-24T22:04:09.835438+00:00",
-      "last_seen": "2026-08-24T22:05:43.675908+00:00",
+      "last_seen": "2026-08-24T22:06:51.158470+00:00",
       "patch_status": "UNPATCHED",
       "priority": 32,
       "zero_day_score": 88,
@@ -121239,5 +121241,5 @@
       "candidate": true
     }
   },
-  "updated": "2026-08-24T22:05:44.497846+00:00"
+  "updated": "2026-08-24T22:06:51.519884+00:00"
 }
