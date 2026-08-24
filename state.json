@@ -1,15 +1,5 @@
 {
   "records": {
-    "GHSA-FCRW-F7GG-6G9F": {
-      "fingerprint": "2b22633aa6cd6b1394cf",
-      "first_seen": "2026-08-12T18:53:53.416973+00:00",
-      "last_seen": "2026-08-12T18:57:11.508867+00:00",
-      "patch_status": "PATCHED",
-      "priority": 38,
-      "zero_day_score": 78,
-      "aliases": [],
-      "candidate": true
-    },
     "CVE-2024-58358": {
       "fingerprint": "d0d2a42ee5028e70488e",
       "first_seen": "2026-08-12T18:49:18.000256+00:00",
@@ -99996,16 +99986,6 @@
       "aliases": [],
       "candidate": false
     },
-    "CVE-2026-14164": {
-      "fingerprint": "e0832f7578fc26cbe0ad",
-      "first_seen": "2026-08-10T09:50:31.012778+00:00",
-      "last_seen": "2026-08-22T00:33:36.654612+00:00",
-      "patch_status": "UNKNOWN",
-      "priority": 0,
-      "zero_day_score": 0,
-      "aliases": [],
-      "candidate": false
-    },
     "CVE-2026-14208": {
       "fingerprint": "a481798f1a429da536a4",
       "first_seen": "2026-08-21T11:17:36.792386+00:00",
@@ -120999,13 +120979,33 @@
     "CVE-2022-2590": {
       "fingerprint": "a408c6bb5db42fc1f9f9",
       "first_seen": "2026-08-24T05:13:51.789801+00:00",
-      "last_seen": "2026-08-24T05:16:03.147729+00:00",
+      "last_seen": "2026-08-24T05:17:08.462706+00:00",
       "patch_status": "UNKNOWN",
       "priority": 5,
       "zero_day_score": 30,
       "aliases": [],
       "candidate": false
+    },
+    "CVE-2026-14164": {
+      "fingerprint": "193342448b2d9fc872a4",
+      "first_seen": "2026-08-10T09:50:31.012778+00:00",
+      "last_seen": "2026-08-24T05:17:08.462706+00:00",
+      "patch_status": "UNKNOWN",
+      "priority": 30,
+      "zero_day_score": 3,
+      "aliases": [],
+      "candidate": false
+    },
+    "CVE-2026-59561": {
+      "fingerprint": "9290d684cb69ba142dff",
+      "first_seen": "2026-08-24T05:17:08.462706+00:00",
+      "last_seen": "2026-08-24T05:17:08.462706+00:00",
+      "patch_status": "UNKNOWN",
+      "priority": 33,
+      "zero_day_score": 3,
+      "aliases": [],
+      "candidate": false
     }
   },
-  "updated": "2026-08-24T05:16:03.152128+00:00"
+  "updated": "2026-08-24T05:17:08.756506+00:00"
 }
