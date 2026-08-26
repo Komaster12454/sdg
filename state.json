@@ -33568,16 +33568,6 @@
       "aliases": [],
       "candidate": false
     },
-    "CVE-2026-54356": {
-      "fingerprint": "fb32c750b895ff7d829c",
-      "first_seen": "2026-08-14T13:35:39.257376+00:00",
-      "last_seen": "2026-08-19T00:38:24.919116+00:00",
-      "patch_status": "UNKNOWN",
-      "priority": 0,
-      "zero_day_score": 0,
-      "aliases": [],
-      "candidate": false
-    },
     "CVE-2026-54552": {
       "fingerprint": "a481798f1a429da536a4",
       "first_seen": "2026-08-18T18:19:33.895096+00:00",
@@ -120933,7 +120923,19 @@
       "zero_day_score": 0,
       "aliases": [],
       "candidate": false
+    },
+    "CVE-2026-54356": {
+      "fingerprint": "21f7147a98077c623464",
+      "first_seen": "2026-08-14T13:35:39.257376+00:00",
+      "last_seen": "2026-08-26T14:07:40.871017+00:00",
+      "patch_status": "UNPATCHED",
+      "priority": 38,
+      "zero_day_score": 86,
+      "aliases": [
+        "GHSA-6X9P-4R67-5GJX"
+      ],
+      "candidate": false
     }
   },
-  "updated": "2026-08-26T14:06:34.768362+00:00"
+  "updated": "2026-08-26T14:07:41.260405+00:00"
 }
