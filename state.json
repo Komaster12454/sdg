@@ -1,15 +1,5 @@
 {
   "records": {
-    "CVE-2026-73122": {
-      "fingerprint": "41770b876924285b54b8",
-      "first_seen": "2026-08-12T02:16:53.407325+00:00",
-      "last_seen": "2026-08-14T19:17:29.605439+00:00",
-      "patch_status": "UNKNOWN",
-      "priority": 30,
-      "zero_day_score": 3,
-      "aliases": [],
-      "candidate": false
-    },
     "CVE-2026-19746": {
       "fingerprint": "bacc9d65b2261869f621",
       "first_seen": "2026-08-13T19:43:04.671737+00:00",
@@ -120909,17 +120899,29 @@
     "CVE-2026-19632": {
       "fingerprint": "e84bf26fc14f5a37122d",
       "first_seen": "2026-08-26T04:31:42.694789+00:00",
-      "last_seen": "2026-08-26T14:17:34.353733+00:00",
+      "last_seen": "2026-08-26T14:18:39.673166+00:00",
       "patch_status": "UNKNOWN",
       "priority": 23,
       "zero_day_score": 38,
       "aliases": [],
       "candidate": false
     },
+    "CVE-2026-54548": {
+      "fingerprint": "525c2b2e0be95cc94d2f",
+      "first_seen": "2026-08-26T14:18:39.673166+00:00",
+      "last_seen": "2026-08-26T14:18:39.673166+00:00",
+      "patch_status": "PATCHED",
+      "priority": 13,
+      "zero_day_score": 66,
+      "aliases": [
+        "GHSA-MV8M-V9V6-5F94"
+      ],
+      "candidate": false
+    },
     "CVE-2026-54553": {
       "fingerprint": "79c2c3d8451770a852ce",
       "first_seen": "2026-08-26T14:15:23.201284+00:00",
-      "last_seen": "2026-08-26T14:17:34.353733+00:00",
+      "last_seen": "2026-08-26T14:18:39.673166+00:00",
       "patch_status": "PATCHED",
       "priority": 21,
       "zero_day_score": 66,
@@ -120931,7 +120933,7 @@
     "CVE-2026-54556": {
       "fingerprint": "5e15918814d08eece6e5",
       "first_seen": "2026-08-26T14:12:04.949936+00:00",
-      "last_seen": "2026-08-26T14:17:34.353733+00:00",
+      "last_seen": "2026-08-26T14:18:39.673166+00:00",
       "patch_status": "PATCHED",
       "priority": 0,
       "zero_day_score": 76,
@@ -120941,5 +120943,5 @@
       "candidate": false
     }
   },
-  "updated": "2026-08-26T14:17:34.358129+00:00"
+  "updated": "2026-08-26T14:18:40.045547+00:00"
 }
