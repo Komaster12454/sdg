@@ -75892,16 +75892,6 @@
       "aliases": [],
       "candidate": false
     },
-    "CVE-2026-54770": {
-      "fingerprint": "54fd22b4a0dc7f549e34",
-      "first_seen": "2026-08-20T17:19:14.866460+00:00",
-      "last_seen": "2026-08-26T00:38:32.203918+00:00",
-      "patch_status": "UNKNOWN",
-      "priority": 0,
-      "zero_day_score": 0,
-      "aliases": [],
-      "candidate": false
-    },
     "CVE-2026-54874": {
       "fingerprint": "a481798f1a429da536a4",
       "first_seen": "2026-08-25T13:21:26.026093+00:00",
@@ -121221,7 +121211,19 @@
         "GHSA-JVM4-4J77-39P6"
       ],
       "candidate": false
+    },
+    "CVE-2026-54770": {
+      "fingerprint": "22db54cdcfd00a19cc23",
+      "first_seen": "2026-08-20T17:19:14.866460+00:00",
+      "last_seen": "2026-08-27T22:10:22.133446+00:00",
+      "patch_status": "PATCHED",
+      "priority": 24,
+      "zero_day_score": 66,
+      "aliases": [
+        "GHSA-6HX8-3WJJ-GR8G"
+      ],
+      "candidate": false
     }
   },
-  "updated": "2026-08-27T22:09:15.403131+00:00"
+  "updated": "2026-08-27T22:10:22.498504+00:00"
 }
