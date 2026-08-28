@@ -1,15 +1,5 @@
 {
   "records": {
-    "CVE-2026-74323": {
-      "fingerprint": "524677ad226f42d30045",
-      "first_seen": "2026-08-15T08:26:24.743592+00:00",
-      "last_seen": "2026-08-18T00:38:31.279820+00:00",
-      "patch_status": "UNKNOWN",
-      "priority": 0,
-      "zero_day_score": 0,
-      "aliases": [],
-      "candidate": false
-    },
     "CVE-2026-74324": {
       "fingerprint": "246945918bbb9986ed79",
       "first_seen": "2026-08-15T08:26:24.743592+00:00",
@@ -121323,7 +121313,7 @@
     "CVE-2026-55511": {
       "fingerprint": "6c0cc80705c841b4bf71",
       "first_seen": "2026-08-28T17:07:30.741842+00:00",
-      "last_seen": "2026-08-28T17:09:43.026272+00:00",
+      "last_seen": "2026-08-28T17:10:49.599963+00:00",
       "patch_status": "PATCHED",
       "priority": 36,
       "zero_day_score": 76,
@@ -121335,7 +121325,7 @@
     "CVE-2026-55521": {
       "fingerprint": "c97020f86c2729c0f987",
       "first_seen": "2026-08-28T17:09:43.026272+00:00",
-      "last_seen": "2026-08-28T17:09:43.026272+00:00",
+      "last_seen": "2026-08-28T17:10:49.599963+00:00",
       "patch_status": "PATCHED",
       "priority": 35,
       "zero_day_score": 76,
@@ -121343,7 +121333,19 @@
         "GHSA-962X-CCWF-8X6P"
       ],
       "candidate": false
+    },
+    "CVE-2026-55545": {
+      "fingerprint": "445c997d6b60b88f463f",
+      "first_seen": "2026-08-28T17:10:49.599963+00:00",
+      "last_seen": "2026-08-28T17:10:49.599963+00:00",
+      "patch_status": "PATCHED",
+      "priority": 26,
+      "zero_day_score": 66,
+      "aliases": [
+        "GHSA-FWWW-CP23-7F5G"
+      ],
+      "candidate": false
     }
   },
-  "updated": "2026-08-28T17:09:43.665868+00:00"
+  "updated": "2026-08-28T17:10:49.946711+00:00"
 }
