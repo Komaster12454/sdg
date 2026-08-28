@@ -1,15 +1,5 @@
 {
   "records": {
-    "CVE-2026-74786": {
-      "fingerprint": "0876afc0cd3d9958bd70",
-      "first_seen": "2026-08-16T14:17:32.033276+00:00",
-      "last_seen": "2026-08-18T00:38:31.279820+00:00",
-      "patch_status": "UNKNOWN",
-      "priority": 0,
-      "zero_day_score": 0,
-      "aliases": [],
-      "candidate": false
-    },
     "CVE-2026-74788": {
       "fingerprint": "4b29b9a4658541b4074d",
       "first_seen": "2026-08-16T14:17:32.033276+00:00",
@@ -121385,7 +121375,7 @@
     "CVE-2026-20097": {
       "fingerprint": "41b7facab7cf500143e3",
       "first_seen": "2026-08-28T19:10:16.296997+00:00",
-      "last_seen": "2026-08-28T19:16:53.194461+00:00",
+      "last_seen": "2026-08-28T19:17:59.616021+00:00",
       "patch_status": "UNKNOWN",
       "priority": 26,
       "zero_day_score": 0,
@@ -121395,7 +121385,7 @@
     "CVE-2026-55220": {
       "fingerprint": "c7b73d853ec881462e3f",
       "first_seen": "2026-08-28T19:13:32.935178+00:00",
-      "last_seen": "2026-08-28T19:16:53.194461+00:00",
+      "last_seen": "2026-08-28T19:17:59.616021+00:00",
       "patch_status": "PATCHED",
       "priority": 0,
       "zero_day_score": 76,
@@ -121403,7 +121393,19 @@
         "GHSA-W23P-WRP7-CH38"
       ],
       "candidate": false
+    },
+    "CVE-2026-55634": {
+      "fingerprint": "7842c121e4b924a5f41d",
+      "first_seen": "2026-08-28T19:17:59.616021+00:00",
+      "last_seen": "2026-08-28T19:17:59.616021+00:00",
+      "patch_status": "PATCHED",
+      "priority": 39,
+      "zero_day_score": 76,
+      "aliases": [
+        "GHSA-9X44-4GXF-8C25"
+      ],
+      "candidate": false
     }
   },
-  "updated": "2026-08-28T19:16:53.200538+00:00"
+  "updated": "2026-08-28T19:18:00.023888+00:00"
 }
