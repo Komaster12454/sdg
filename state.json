@@ -121154,16 +121154,6 @@
       "aliases": [],
       "candidate": false
     },
-    "CVE-2026-20097": {
-      "fingerprint": "41b7facab7cf500143e3",
-      "first_seen": "2026-08-28T19:10:16.296997+00:00",
-      "last_seen": "2026-08-28T19:13:32.935178+00:00",
-      "patch_status": "UNKNOWN",
-      "priority": 26,
-      "zero_day_score": 0,
-      "aliases": [],
-      "candidate": false
-    },
     "CVE-2026-50058": {
       "fingerprint": "1b5a19047ffd12c50472",
       "first_seen": "2026-08-28T19:04:41.076481+00:00",
@@ -121246,30 +121236,6 @@
       ],
       "candidate": false
     },
-    "CVE-2026-55208": {
-      "fingerprint": "ff4809a6a9436f9cbae8",
-      "first_seen": "2026-08-28T19:05:50.626555+00:00",
-      "last_seen": "2026-08-28T19:13:32.935178+00:00",
-      "patch_status": "PATCHED",
-      "priority": 30,
-      "zero_day_score": 76,
-      "aliases": [
-        "GHSA-79CW-HFCC-7MW9"
-      ],
-      "candidate": false
-    },
-    "CVE-2026-55212": {
-      "fingerprint": "121bfcfd9c6f0dedb686",
-      "first_seen": "2026-08-28T19:05:50.626555+00:00",
-      "last_seen": "2026-08-28T19:13:32.935178+00:00",
-      "patch_status": "PATCHED",
-      "priority": 28,
-      "zero_day_score": 76,
-      "aliases": [
-        "GHSA-F97C-PH8J-8VFF"
-      ],
-      "candidate": false
-    },
     "CVE-2026-55215": {
       "fingerprint": "86a0015b42a85387c378",
       "first_seen": "2026-08-28T19:04:41.076481+00:00",
@@ -121279,18 +121245,6 @@
       "zero_day_score": 76,
       "aliases": [
         "GHSA-CQHC-2H57-WPXF"
-      ],
-      "candidate": false
-    },
-    "CVE-2026-55220": {
-      "fingerprint": "c7b73d853ec881462e3f",
-      "first_seen": "2026-08-28T19:13:32.935178+00:00",
-      "last_seen": "2026-08-28T19:13:32.935178+00:00",
-      "patch_status": "PATCHED",
-      "priority": 0,
-      "zero_day_score": 76,
-      "aliases": [
-        "GHSA-W23P-WRP7-CH38"
       ],
       "candidate": false
     },
@@ -121403,7 +121357,53 @@
       "zero_day_score": 3,
       "aliases": [],
       "candidate": false
+    },
+    "CVE-2026-20097": {
+      "fingerprint": "41b7facab7cf500143e3",
+      "first_seen": "2026-08-28T19:10:16.296997+00:00",
+      "last_seen": "2026-08-28T19:14:39.852602+00:00",
+      "patch_status": "UNKNOWN",
+      "priority": 26,
+      "zero_day_score": 0,
+      "aliases": [],
+      "candidate": false
+    },
+    "CVE-2026-55208": {
+      "fingerprint": "ff4809a6a9436f9cbae8",
+      "first_seen": "2026-08-28T19:05:50.626555+00:00",
+      "last_seen": "2026-08-28T19:14:39.852602+00:00",
+      "patch_status": "PATCHED",
+      "priority": 30,
+      "zero_day_score": 76,
+      "aliases": [
+        "GHSA-79CW-HFCC-7MW9"
+      ],
+      "candidate": false
+    },
+    "CVE-2026-55212": {
+      "fingerprint": "121bfcfd9c6f0dedb686",
+      "first_seen": "2026-08-28T19:05:50.626555+00:00",
+      "last_seen": "2026-08-28T19:14:39.852602+00:00",
+      "patch_status": "PATCHED",
+      "priority": 28,
+      "zero_day_score": 76,
+      "aliases": [
+        "GHSA-F97C-PH8J-8VFF"
+      ],
+      "candidate": false
+    },
+    "CVE-2026-55220": {
+      "fingerprint": "c7b73d853ec881462e3f",
+      "first_seen": "2026-08-28T19:13:32.935178+00:00",
+      "last_seen": "2026-08-28T19:14:39.852602+00:00",
+      "patch_status": "PATCHED",
+      "priority": 0,
+      "zero_day_score": 76,
+      "aliases": [
+        "GHSA-W23P-WRP7-CH38"
+      ],
+      "candidate": false
     }
   },
-  "updated": "2026-08-28T19:13:33.216326+00:00"
+  "updated": "2026-08-28T19:14:39.869874+00:00"
 }
