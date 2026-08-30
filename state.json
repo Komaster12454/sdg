@@ -11950,16 +11950,6 @@
       "aliases": [],
       "candidate": false
     },
-    "CVE-2026-47698": {
-      "fingerprint": "4c9d84ac486aabc61ad4",
-      "first_seen": "2026-08-17T17:33:31.033662+00:00",
-      "last_seen": "2026-08-20T00:37:56.202908+00:00",
-      "patch_status": "UNKNOWN",
-      "priority": 0,
-      "zero_day_score": 0,
-      "aliases": [],
-      "candidate": false
-    },
     "CVE-2026-47720": {
       "fingerprint": "4c9d84ac486aabc61ad4",
       "first_seen": "2026-08-18T20:15:42.151976+00:00",
@@ -120985,7 +120975,19 @@
       "zero_day_score": 30,
       "aliases": [],
       "candidate": false
+    },
+    "CVE-2026-47698": {
+      "fingerprint": "72b888547edb76a02c1d",
+      "first_seen": "2026-08-17T17:33:31.033662+00:00",
+      "last_seen": "2026-08-30T15:07:15.472751+00:00",
+      "patch_status": "PATCHED",
+      "priority": 39,
+      "zero_day_score": 76,
+      "aliases": [
+        "GHSA-CFCW-XP6X-25GJ"
+      ],
+      "candidate": false
     }
   },
-  "updated": "2026-08-30T15:06:10.668725+00:00"
+  "updated": "2026-08-30T15:07:16.190520+00:00"
 }
