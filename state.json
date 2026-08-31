@@ -1,25 +1,5 @@
 {
   "records": {
-    "CVE-2026-21716": {
-      "fingerprint": "5b0398ec281dd01537c3",
-      "first_seen": "2026-08-19T13:20:43.381517+00:00",
-      "last_seen": "2026-08-19T13:27:27.383588+00:00",
-      "patch_status": "UNKNOWN",
-      "priority": 13,
-      "zero_day_score": 0,
-      "aliases": [],
-      "candidate": false
-    },
-    "CVE-2021-4034": {
-      "fingerprint": "0db836ca7f68a01cd359",
-      "first_seen": "2026-08-14T01:46:54.913499+00:00",
-      "last_seen": "2026-08-19T13:37:36.017339+00:00",
-      "patch_status": "UNKNOWN",
-      "priority": 81,
-      "zero_day_score": 35,
-      "aliases": [],
-      "candidate": false
-    },
     "CVE-2026-9816": {
       "fingerprint": "506e91cdea61b9981547",
       "first_seen": "2026-08-17T22:18:16.546620+00:00",
@@ -120950,16 +120930,38 @@
       "aliases": [],
       "candidate": false
     },
+    "CVE-2026-71310": {
+      "fingerprint": "6ae302985a873c823fdb",
+      "first_seen": "2026-08-31T14:53:53.476278+00:00",
+      "last_seen": "2026-08-31T14:53:53.476278+00:00",
+      "patch_status": "PATCHED",
+      "priority": 23,
+      "zero_day_score": 66,
+      "aliases": [
+        "GHSA-XHF4-832V-7XCR"
+      ],
+      "candidate": false
+    },
     "CVE-2026-76929": {
       "fingerprint": "20d88a3d860698391afb",
       "first_seen": "2026-08-19T23:17:19.219079+00:00",
-      "last_seen": "2026-08-31T14:52:45.347655+00:00",
+      "last_seen": "2026-08-31T14:53:53.476278+00:00",
       "patch_status": "UNKNOWN",
       "priority": 36,
       "zero_day_score": 1,
       "aliases": [],
       "candidate": false
+    },
+    "GHSA-5739-39V2-5754": {
+      "fingerprint": "7cdaa2734d775e2a28f5",
+      "first_seen": "2026-08-31T14:53:53.476278+00:00",
+      "last_seen": "2026-08-31T14:53:53.476278+00:00",
+      "patch_status": "PATCHED",
+      "priority": 19,
+      "zero_day_score": 78,
+      "aliases": [],
+      "candidate": true
     }
   },
-  "updated": "2026-08-31T14:52:45.652481+00:00"
+  "updated": "2026-08-31T14:53:54.027159+00:00"
 }
