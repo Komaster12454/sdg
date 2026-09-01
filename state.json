@@ -1,25 +1,5 @@
 {
   "records": {
-    "CVE-2026-68140": {
-      "fingerprint": "0876afc0cd3d9958bd70",
-      "first_seen": "2026-08-10T12:39:55.480712+00:00",
-      "last_seen": "2026-08-20T00:37:56.202908+00:00",
-      "patch_status": "UNKNOWN",
-      "priority": 0,
-      "zero_day_score": 0,
-      "aliases": [],
-      "candidate": false
-    },
-    "CVE-2026-68141": {
-      "fingerprint": "e0832f7578fc26cbe0ad",
-      "first_seen": "2026-08-10T12:39:55.480712+00:00",
-      "last_seen": "2026-08-20T00:37:56.202908+00:00",
-      "patch_status": "UNKNOWN",
-      "priority": 0,
-      "zero_day_score": 0,
-      "aliases": [],
-      "candidate": false
-    },
     "CVE-2026-68142": {
       "fingerprint": "ca0edd58bf7e82a129c5",
       "first_seen": "2026-08-10T12:39:55.480712+00:00",
@@ -73074,16 +73054,6 @@
       "aliases": [],
       "candidate": false
     },
-    "CVE-2025-71346": {
-      "fingerprint": "d6ce6e9908747a254ce9",
-      "first_seen": "2026-08-25T16:17:28.480867+00:00",
-      "last_seen": "2026-08-28T19:05:50.626555+00:00",
-      "patch_status": "UNKNOWN",
-      "priority": 34,
-      "zero_day_score": 3,
-      "aliases": [],
-      "candidate": false
-    },
     "CVE-2025-71407": {
       "fingerprint": "08ab11c2275fb7c34fb9",
       "first_seen": "2026-08-25T16:17:28.480867+00:00",
@@ -121196,20 +121166,54 @@
       ],
       "candidate": false
     },
-    "CVE-2025-71406": {
-      "fingerprint": "83673635b9bcc1928c09",
+    "CVE-2025-71346": {
+      "fingerprint": "d6ce6e9908747a254ce9",
       "first_seen": "2026-08-25T16:17:28.480867+00:00",
-      "last_seen": "2026-09-01T18:54:19.779253+00:00",
+      "last_seen": "2026-09-01T18:55:25.350006+00:00",
       "patch_status": "UNKNOWN",
       "priority": 34,
       "zero_day_score": 3,
       "aliases": [],
       "candidate": false
     },
+    "CVE-2025-71406": {
+      "fingerprint": "83673635b9bcc1928c09",
+      "first_seen": "2026-08-25T16:17:28.480867+00:00",
+      "last_seen": "2026-09-01T18:55:25.350006+00:00",
+      "patch_status": "UNKNOWN",
+      "priority": 34,
+      "zero_day_score": 3,
+      "aliases": [],
+      "candidate": false
+    },
+    "CVE-2026-27660": {
+      "fingerprint": "6c9d8f8754a9ce830365",
+      "first_seen": "2026-09-01T18:55:25.350006+00:00",
+      "last_seen": "2026-09-01T18:55:25.350006+00:00",
+      "patch_status": "PATCHED",
+      "priority": 30,
+      "zero_day_score": 76,
+      "aliases": [
+        "GHSA-X92V-F5GC-R34V"
+      ],
+      "candidate": false
+    },
+    "CVE-2026-58191": {
+      "fingerprint": "6bcca7897a7707b6586e",
+      "first_seen": "2026-09-01T18:55:25.350006+00:00",
+      "last_seen": "2026-09-01T18:55:25.350006+00:00",
+      "patch_status": "PATCHED",
+      "priority": 26,
+      "zero_day_score": 66,
+      "aliases": [
+        "GHSA-3WGP-X9P5-C7CC"
+      ],
+      "candidate": false
+    },
     "CVE-2026-65092": {
       "fingerprint": "7c55223b1687852b0c58",
       "first_seen": "2026-08-25T21:18:47.717355+00:00",
-      "last_seen": "2026-09-01T18:54:19.779253+00:00",
+      "last_seen": "2026-09-01T18:55:25.350006+00:00",
       "patch_status": "PATCHED",
       "priority": 34,
       "zero_day_score": 0,
@@ -121219,7 +121223,7 @@
     "CVE-2026-65093": {
       "fingerprint": "fe955266d19eb86b2721",
       "first_seen": "2026-08-25T21:18:47.717355+00:00",
-      "last_seen": "2026-09-01T18:54:19.779253+00:00",
+      "last_seen": "2026-09-01T18:55:25.350006+00:00",
       "patch_status": "PATCHED",
       "priority": 39,
       "zero_day_score": 0,
@@ -121229,7 +121233,7 @@
     "CVE-2026-65098": {
       "fingerprint": "d748c5bfe2e39b03ba05",
       "first_seen": "2026-08-25T21:18:47.717355+00:00",
-      "last_seen": "2026-09-01T18:54:19.779253+00:00",
+      "last_seen": "2026-09-01T18:55:25.350006+00:00",
       "patch_status": "PATCHED",
       "priority": 32,
       "zero_day_score": 0,
@@ -121237,5 +121241,5 @@
       "candidate": false
     }
   },
-  "updated": "2026-09-01T18:54:19.964522+00:00"
+  "updated": "2026-09-01T18:55:25.582642+00:00"
 }
