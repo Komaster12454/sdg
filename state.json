@@ -42818,16 +42818,6 @@
       "aliases": [],
       "candidate": false
     },
-    "CVE-2026-65182": {
-      "fingerprint": "808a2f97ab1edddd84eb",
-      "first_seen": "2026-08-25T22:17:31.338444+00:00",
-      "last_seen": "2026-08-27T01:56:24.613472+00:00",
-      "patch_status": "UNKNOWN",
-      "priority": 0,
-      "zero_day_score": 0,
-      "aliases": [],
-      "candidate": false
-    },
     "CVE-2026-65183": {
       "fingerprint": "45441ea8c887b39c7ca5",
       "first_seen": "2026-08-25T22:17:31.338444+00:00",
@@ -42871,16 +42861,6 @@
     "CVE-2026-65646": {
       "fingerprint": "a481798f1a429da536a4",
       "first_seen": "2026-08-26T22:17:12.086292+00:00",
-      "last_seen": "2026-08-27T01:56:24.613472+00:00",
-      "patch_status": "UNKNOWN",
-      "priority": 0,
-      "zero_day_score": 0,
-      "aliases": [],
-      "candidate": false
-    },
-    "CVE-2026-65905": {
-      "fingerprint": "4b29b9a4658541b4074d",
-      "first_seen": "2026-08-25T22:17:31.338444+00:00",
       "last_seen": "2026-08-27T01:56:24.613472+00:00",
       "patch_status": "UNKNOWN",
       "priority": 0,
@@ -121153,7 +121133,31 @@
       "zero_day_score": 0,
       "aliases": [],
       "candidate": false
+    },
+    "CVE-2026-65182": {
+      "fingerprint": "95f6ea972e9b5949f0b7",
+      "first_seen": "2026-08-25T22:17:31.338444+00:00",
+      "last_seen": "2026-09-02T22:38:44.128935+00:00",
+      "patch_status": "UNPATCHED",
+      "priority": 46,
+      "zero_day_score": 86,
+      "aliases": [
+        "GHSA-GCX9-497G-6CP6"
+      ],
+      "candidate": false
+    },
+    "CVE-2026-65905": {
+      "fingerprint": "2497f038355683177daf",
+      "first_seen": "2026-08-25T22:17:31.338444+00:00",
+      "last_seen": "2026-09-02T22:38:44.128935+00:00",
+      "patch_status": "UNPATCHED",
+      "priority": 49,
+      "zero_day_score": 86,
+      "aliases": [
+        "GHSA-9XV2-5V5Q-P794"
+      ],
+      "candidate": false
     }
   },
-  "updated": "2026-09-02T22:37:37.819843+00:00"
+  "updated": "2026-09-02T22:38:44.964841+00:00"
 }
