@@ -119834,16 +119834,6 @@
       "aliases": [],
       "candidate": false
     },
-    "CVE-2026-84366": {
-      "fingerprint": "45441ea8c887b39c7ca5",
-      "first_seen": "2026-09-01T21:19:39.334556+00:00",
-      "last_seen": "2026-09-02T22:35:24.813494+00:00",
-      "patch_status": "UNKNOWN",
-      "priority": 0,
-      "zero_day_score": 0,
-      "aliases": [],
-      "candidate": false
-    },
     "CVE-2026-84368": {
       "fingerprint": "627b37e23c9b1c67abdd",
       "first_seen": "2026-09-01T21:20:57.529451+00:00",
@@ -121155,7 +121145,7 @@
     "CVE-2026-68921": {
       "fingerprint": "54303bb26559ce677134",
       "first_seen": "2026-08-20T21:18:04.082004+00:00",
-      "last_seen": "2026-09-02T22:49:50.799177+00:00",
+      "last_seen": "2026-09-02T22:50:57.584766+00:00",
       "patch_status": "PATCHED",
       "priority": 18,
       "zero_day_score": 66,
@@ -121163,7 +121153,19 @@
         "GHSA-GCR2-9V8M-GQ45"
       ],
       "candidate": false
+    },
+    "CVE-2026-84366": {
+      "fingerprint": "38bc449d01aa5ac6e595",
+      "first_seen": "2026-09-01T21:19:39.334556+00:00",
+      "last_seen": "2026-09-02T22:50:57.584766+00:00",
+      "patch_status": "PATCHED",
+      "priority": 29,
+      "zero_day_score": 76,
+      "aliases": [
+        "GHSA-76G3-C3X4-CRVX"
+      ],
+      "candidate": false
     }
   },
-  "updated": "2026-09-02T22:49:50.806623+00:00"
+  "updated": "2026-09-02T22:50:57.885620+00:00"
 }
