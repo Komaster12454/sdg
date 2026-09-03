@@ -27898,16 +27898,6 @@
       "aliases": [],
       "candidate": false
     },
-    "CVE-2026-72808": {
-      "fingerprint": "69017cb3a2f7ffcfaa1d",
-      "first_seen": "2026-08-12T19:42:18.547858+00:00",
-      "last_seen": "2026-08-26T17:06:33.307033+00:00",
-      "patch_status": "UNKNOWN",
-      "priority": 27,
-      "zero_day_score": 0,
-      "aliases": [],
-      "candidate": false
-    },
     "CVE-2026-73326": {
       "fingerprint": "b1d61aa66a7229225e54",
       "first_seen": "2026-08-12T19:44:48.658064+00:00",
@@ -121427,7 +121417,19 @@
         "GHSA-3MP7-4RH5-JRV9"
       ],
       "candidate": false
+    },
+    "CVE-2026-72808": {
+      "fingerprint": "b468f25824e646aa1f26",
+      "first_seen": "2026-08-12T19:42:18.547858+00:00",
+      "last_seen": "2026-09-03T22:48:43.022760+00:00",
+      "patch_status": "PATCHED",
+      "priority": 23,
+      "zero_day_score": 66,
+      "aliases": [
+        "GHSA-V7PH-R5R6-4JCJ"
+      ],
+      "candidate": false
     }
   },
-  "updated": "2026-09-03T22:47:35.827537+00:00"
+  "updated": "2026-09-03T22:48:43.283211+00:00"
 }
