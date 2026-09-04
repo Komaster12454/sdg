@@ -19142,26 +19142,6 @@
       "aliases": [],
       "candidate": false
     },
-    "CVE-2026-72796": {
-      "fingerprint": "4206baf3ed02dae73bbb",
-      "first_seen": "2026-08-12T19:42:18.547858+00:00",
-      "last_seen": "2026-08-26T17:06:33.307033+00:00",
-      "patch_status": "UNKNOWN",
-      "priority": 27,
-      "zero_day_score": 0,
-      "aliases": [],
-      "candidate": false
-    },
-    "CVE-2026-72797": {
-      "fingerprint": "40c3cffc84798916e34f",
-      "first_seen": "2026-08-12T19:42:18.547858+00:00",
-      "last_seen": "2026-08-26T17:06:33.307033+00:00",
-      "patch_status": "UNKNOWN",
-      "priority": 27,
-      "zero_day_score": 0,
-      "aliases": [],
-      "candidate": false
-    },
     "CVE-2026-73326": {
       "fingerprint": "b1d61aa66a7229225e54",
       "first_seen": "2026-08-12T19:44:48.658064+00:00",
@@ -121490,10 +121470,34 @@
       ],
       "candidate": false
     },
+    "CVE-2026-72796": {
+      "fingerprint": "9efa234788f96d1035f9",
+      "first_seen": "2026-08-12T19:42:18.547858+00:00",
+      "last_seen": "2026-09-04T21:02:48.661811+00:00",
+      "patch_status": "PATCHED",
+      "priority": 23,
+      "zero_day_score": 66,
+      "aliases": [
+        "GHSA-FGMR-7W36-9QFQ"
+      ],
+      "candidate": false
+    },
+    "CVE-2026-72797": {
+      "fingerprint": "5fe44fe21cc7f7ad30ba",
+      "first_seen": "2026-08-12T19:42:18.547858+00:00",
+      "last_seen": "2026-09-04T21:02:48.661811+00:00",
+      "patch_status": "PATCHED",
+      "priority": 23,
+      "zero_day_score": 66,
+      "aliases": [
+        "GHSA-F2RW-W22V-54VH"
+      ],
+      "candidate": false
+    },
     "CVE-2026-72798": {
       "fingerprint": "dd9811dd050379aef4dc",
       "first_seen": "2026-08-12T19:42:18.547858+00:00",
-      "last_seen": "2026-09-04T21:01:41.682323+00:00",
+      "last_seen": "2026-09-04T21:02:48.661811+00:00",
       "patch_status": "PATCHED",
       "priority": 34,
       "zero_day_score": 76,
@@ -121505,7 +121509,7 @@
     "CVE-2026-72799": {
       "fingerprint": "bb5f8e9643b75fee54ab",
       "first_seen": "2026-08-12T19:42:18.547858+00:00",
-      "last_seen": "2026-09-04T21:01:41.682323+00:00",
+      "last_seen": "2026-09-04T21:02:48.661811+00:00",
       "patch_status": "PATCHED",
       "priority": 23,
       "zero_day_score": 66,
@@ -121515,5 +121519,5 @@
       "candidate": false
     }
   },
-  "updated": "2026-09-04T21:01:41.691632+00:00"
+  "updated": "2026-09-04T21:02:49.018900+00:00"
 }
