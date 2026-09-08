@@ -63050,16 +63050,6 @@
       "aliases": [],
       "candidate": false
     },
-    "GHSA-CVHV-G4RQ-3HMW": {
-      "fingerprint": "776997a50725b87261ab",
-      "first_seen": "2026-09-02T14:28:36.245087+00:00",
-      "last_seen": "2026-09-02T14:37:00.036526+00:00",
-      "patch_status": "PATCHED",
-      "priority": 32,
-      "zero_day_score": 78,
-      "aliases": [],
-      "candidate": true
-    },
     "GHSA-P498-V437-472G": {
       "fingerprint": "7cdaa2734d775e2a28f5",
       "first_seen": "2026-09-02T14:28:36.245087+00:00",
@@ -121704,18 +121694,6 @@
       "aliases": [],
       "candidate": false
     },
-    "CVE-2018-1000164": {
-      "fingerprint": "4f7fd6c6a0b93f4767c0",
-      "first_seen": "2026-09-08T15:38:37.062112+00:00",
-      "last_seen": "2026-09-08T15:44:31.711731+00:00",
-      "patch_status": "PATCHED",
-      "priority": 30,
-      "zero_day_score": 76,
-      "aliases": [
-        "GHSA-32PC-XPHX-Q4F6"
-      ],
-      "candidate": false
-    },
     "CVE-2026-67322": {
       "fingerprint": "45a61efdc1d144f369d9",
       "first_seen": "2026-08-31T20:26:09.581375+00:00",
@@ -121727,7 +121705,29 @@
         "GHSA-RWJ8-PGH3-R573"
       ],
       "candidate": false
+    },
+    "CVE-2018-1000164": {
+      "fingerprint": "4f7fd6c6a0b93f4767c0",
+      "first_seen": "2026-09-08T15:38:37.062112+00:00",
+      "last_seen": "2026-09-08T15:45:39.433064+00:00",
+      "patch_status": "PATCHED",
+      "priority": 30,
+      "zero_day_score": 76,
+      "aliases": [
+        "GHSA-32PC-XPHX-Q4F6"
+      ],
+      "candidate": false
+    },
+    "GHSA-CVHV-G4RQ-3HMW": {
+      "fingerprint": "776997a50725b87261ab",
+      "first_seen": "2026-09-02T14:28:36.245087+00:00",
+      "last_seen": "2026-09-08T15:45:39.433064+00:00",
+      "patch_status": "PATCHED",
+      "priority": 32,
+      "zero_day_score": 78,
+      "aliases": [],
+      "candidate": true
     }
   },
-  "updated": "2026-09-08T15:44:31.717663+00:00"
+  "updated": "2026-09-08T15:45:39.439462+00:00"
 }
