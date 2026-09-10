@@ -119814,16 +119814,6 @@
       "aliases": [],
       "candidate": false
     },
-    "CVE-2026-88013": {
-      "fingerprint": "a481798f1a429da536a4",
-      "first_seen": "2026-09-10T16:20:51.273791+00:00",
-      "last_seen": "2026-09-10T22:34:26.011868+00:00",
-      "patch_status": "UNKNOWN",
-      "priority": 0,
-      "zero_day_score": 0,
-      "aliases": [],
-      "candidate": false
-    },
     "CVE-2026-88014": {
       "fingerprint": "a481798f1a429da536a4",
       "first_seen": "2026-09-10T16:19:32.223161+00:00",
@@ -121425,7 +121415,19 @@
         "GHSA-F8G7-2XJC-7MFH"
       ],
       "candidate": false
+    },
+    "CVE-2026-88013": {
+      "fingerprint": "ab58c05f08a02529ed94",
+      "first_seen": "2026-09-10T16:20:51.273791+00:00",
+      "last_seen": "2026-09-10T23:03:13.198388+00:00",
+      "patch_status": "PATCHED",
+      "priority": 14,
+      "zero_day_score": 66,
+      "aliases": [
+        "GHSA-486V-Q2WF-FP2R"
+      ],
+      "candidate": false
     }
   },
-  "updated": "2026-09-10T23:02:07.519473+00:00"
+  "updated": "2026-09-10T23:03:13.444835+00:00"
 }
