@@ -1,15 +1,5 @@
 {
   "records": {
-    "CVE-2026-70703": {
-      "fingerprint": "456f2e7b9dcb5458549f",
-      "first_seen": "2026-08-18T21:23:53.962416+00:00",
-      "last_seen": "2026-09-04T13:28:30.473033+00:00",
-      "patch_status": "UNKNOWN",
-      "priority": 32,
-      "zero_day_score": 3,
-      "aliases": [],
-      "candidate": false
-    },
     "CVE-2026-70709": {
       "fingerprint": "52ff8b275603870adf26",
       "first_seen": "2026-08-18T22:28:15.164203+00:00",
@@ -120745,13 +120735,25 @@
     "CVE-2026-43499": {
       "fingerprint": "30518cd1ce639ab5e771",
       "first_seen": "2026-07-22T03:35:12.970215+00:00",
-      "last_seen": "2026-09-15T20:46:21.401599+00:00",
+      "last_seen": "2026-09-15T20:47:27.556671+00:00",
       "patch_status": "UNKNOWN",
       "priority": 5,
       "zero_day_score": 30,
       "aliases": [],
       "candidate": false
+    },
+    "CVE-2026-61554": {
+      "fingerprint": "b21f28bc1dbe17f8b784",
+      "first_seen": "2026-09-15T20:47:27.556671+00:00",
+      "last_seen": "2026-09-15T20:47:27.556671+00:00",
+      "patch_status": "PATCHED",
+      "priority": 30,
+      "zero_day_score": 76,
+      "aliases": [
+        "GHSA-4595-RVPX-4Q34"
+      ],
+      "candidate": false
     }
   },
-  "updated": "2026-09-15T20:46:21.408580+00:00"
+  "updated": "2026-09-15T20:47:27.880696+00:00"
 }
