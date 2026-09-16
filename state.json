@@ -1,15 +1,5 @@
 {
   "records": {
-    "CVE-2026-85592": {
-      "fingerprint": "c245aa8e0e608cdba9e3",
-      "first_seen": "2026-09-04T12:18:18.296399+00:00",
-      "last_seen": "2026-09-08T20:15:23.250355+00:00",
-      "patch_status": "UNKNOWN",
-      "priority": 25,
-      "zero_day_score": 0,
-      "aliases": [],
-      "candidate": false
-    },
     "CVE-2026-85599": {
       "fingerprint": "aed3604a4c06911a2069",
       "first_seen": "2026-09-04T12:18:18.296399+00:00",
@@ -120971,7 +120961,7 @@
     "CVE-2026-61588": {
       "fingerprint": "f2f3ebc0e7f546a4e380",
       "first_seen": "2026-09-16T22:03:08.042722+00:00",
-      "last_seen": "2026-09-16T22:08:38.201057+00:00",
+      "last_seen": "2026-09-16T22:09:44.164566+00:00",
       "patch_status": "PATCHED",
       "priority": 26,
       "zero_day_score": 66,
@@ -120983,7 +120973,7 @@
     "CVE-2026-61589": {
       "fingerprint": "3683fa21389320cc190c",
       "first_seen": "2026-09-16T22:08:38.201057+00:00",
-      "last_seen": "2026-09-16T22:08:38.201057+00:00",
+      "last_seen": "2026-09-16T22:09:44.164566+00:00",
       "patch_status": "PATCHED",
       "priority": 25,
       "zero_day_score": 66,
@@ -120995,7 +120985,7 @@
     "CVE-2026-61596": {
       "fingerprint": "e850e95fbfe0ce159349",
       "first_seen": "2026-09-16T22:06:25.834702+00:00",
-      "last_seen": "2026-09-16T22:08:38.201057+00:00",
+      "last_seen": "2026-09-16T22:09:44.164566+00:00",
       "patch_status": "PATCHED",
       "priority": 28,
       "zero_day_score": 76,
@@ -121003,7 +120993,19 @@
         "GHSA-C7C5-5J6R-Q957"
       ],
       "candidate": false
+    },
+    "CVE-2026-61599": {
+      "fingerprint": "a54a6d9c3b95c60fd122",
+      "first_seen": "2026-09-16T22:09:44.164566+00:00",
+      "last_seen": "2026-09-16T22:09:44.164566+00:00",
+      "patch_status": "PATCHED",
+      "priority": 0,
+      "zero_day_score": 76,
+      "aliases": [
+        "GHSA-7PRP-2623-8G45"
+      ],
+      "candidate": false
     }
   },
-  "updated": "2026-09-16T22:08:38.582069+00:00"
+  "updated": "2026-09-16T22:09:44.451918+00:00"
 }
