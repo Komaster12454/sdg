@@ -1,15 +1,5 @@
 {
   "records": {
-    "CVE-2026-55533": {
-      "fingerprint": "a44b3599fa532160bffe",
-      "first_seen": "2026-09-09T21:08:13.733242+00:00",
-      "last_seen": "2026-09-09T21:16:32.717324+00:00",
-      "patch_status": "UNKNOWN",
-      "priority": 32,
-      "zero_day_score": 3,
-      "aliases": [],
-      "candidate": false
-    },
     "CVE-2026-55534": {
       "fingerprint": "9ec47d97b29f6cfadb50",
       "first_seen": "2026-09-09T21:08:13.733242+00:00",
@@ -120452,10 +120442,22 @@
       "aliases": [],
       "candidate": false
     },
+    "CVE-2026-56326": {
+      "fingerprint": "db4899ba09d4ac95bf16",
+      "first_seen": "2026-09-18T20:43:25.745239+00:00",
+      "last_seen": "2026-09-18T20:43:25.745239+00:00",
+      "patch_status": "PATCHED",
+      "priority": 24,
+      "zero_day_score": 66,
+      "aliases": [
+        "GHSA-C9CV-MQ2M-PPP3"
+      ],
+      "candidate": false
+    },
     "ZD-CAND-6DC682D406EE": {
       "fingerprint": "0d5ea8d28c187cc8a4a5",
       "first_seen": "2026-09-18T20:34:44.344767+00:00",
-      "last_seen": "2026-09-18T20:42:20.665841+00:00",
+      "last_seen": "2026-09-18T20:43:25.745239+00:00",
       "patch_status": "UNKNOWN",
       "priority": 16,
       "zero_day_score": 45,
@@ -120463,5 +120465,5 @@
       "candidate": true
     }
   },
-  "updated": "2026-09-18T20:42:20.671589+00:00"
+  "updated": "2026-09-18T20:43:25.950829+00:00"
 }
