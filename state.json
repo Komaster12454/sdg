@@ -95338,16 +95338,6 @@
       "aliases": [],
       "candidate": false
     },
-    "CVE-2025-66455": {
-      "fingerprint": "a481798f1a429da536a4",
-      "first_seen": "2026-09-18T17:04:41.538001+00:00",
-      "last_seen": "2026-09-18T23:31:25.318531+00:00",
-      "patch_status": "UNKNOWN",
-      "priority": 0,
-      "zero_day_score": 0,
-      "aliases": [],
-      "candidate": false
-    },
     "CVE-2025-69223": {
       "fingerprint": "92189a69effe91164e5b",
       "first_seen": "2026-07-22T01:33:12.312578+00:00",
@@ -120579,7 +120569,19 @@
       "zero_day_score": 0,
       "aliases": [],
       "candidate": false
+    },
+    "CVE-2025-66455": {
+      "fingerprint": "6bc1c6148d79e6be92a3",
+      "first_seen": "2026-09-18T17:04:41.538001+00:00",
+      "last_seen": "2026-09-21T04:51:13.838367+00:00",
+      "patch_status": "PATCHED",
+      "priority": 39,
+      "zero_day_score": 76,
+      "aliases": [
+        "GHSA-2VH9-42VM-XMV2"
+      ],
+      "candidate": false
     }
   },
-  "updated": "2026-09-21T04:50:07.787482+00:00"
+  "updated": "2026-09-21T04:51:14.134762+00:00"
 }
