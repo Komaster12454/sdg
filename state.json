@@ -100882,16 +100882,6 @@
       "aliases": [],
       "candidate": false
     },
-    "CVE-2026-57576": {
-      "fingerprint": "96d1df9fdabd9909ac1d",
-      "first_seen": "2026-09-22T23:17:56.024243+00:00",
-      "last_seen": "2026-09-23T18:21:36.862949+00:00",
-      "patch_status": "UNKNOWN",
-      "priority": 26,
-      "zero_day_score": 0,
-      "aliases": [],
-      "candidate": false
-    },
     "CVE-2026-59991": {
       "fingerprint": "83701cd671dada5989ca",
       "first_seen": "2026-09-22T19:46:35.015003+00:00",
@@ -120809,7 +120799,19 @@
         "GHSA-VXXW-P436-QH27"
       ],
       "candidate": false
+    },
+    "CVE-2026-57576": {
+      "fingerprint": "84595c0c4ab82e3a1907",
+      "first_seen": "2026-09-22T23:17:56.024243+00:00",
+      "last_seen": "2026-09-23T21:48:47.005708+00:00",
+      "patch_status": "PATCHED",
+      "priority": 26,
+      "zero_day_score": 66,
+      "aliases": [
+        "GHSA-5426-92W4-WVHV"
+      ],
+      "candidate": false
     }
   },
-  "updated": "2026-09-23T21:47:40.563525+00:00"
+  "updated": "2026-09-23T21:48:47.425986+00:00"
 }
