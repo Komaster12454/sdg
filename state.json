@@ -1,15 +1,5 @@
 {
   "records": {
-    "CVE-2026-87247": {
-      "fingerprint": "0876afc0cd3d9958bd70",
-      "first_seen": "2026-09-15T20:28:56.480114+00:00",
-      "last_seen": "2026-09-18T00:49:50.006857+00:00",
-      "patch_status": "UNKNOWN",
-      "priority": 0,
-      "zero_day_score": 0,
-      "aliases": [],
-      "candidate": false
-    },
     "CVE-2026-87259": {
       "fingerprint": "773cb71c2ce575b9aa77",
       "first_seen": "2026-09-15T20:24:08.197564+00:00",
@@ -120765,7 +120755,19 @@
         "GHSA-PW89-P422-JR5J"
       ],
       "candidate": false
+    },
+    "CVE-2024-38819": {
+      "fingerprint": "3ab1863093813fb86af2",
+      "first_seen": "2026-09-28T15:51:38.376997+00:00",
+      "last_seen": "2026-09-28T15:51:38.376997+00:00",
+      "patch_status": "UNPATCHED",
+      "priority": 54,
+      "zero_day_score": 86,
+      "aliases": [
+        "GHSA-G5VR-RGQM-VF78"
+      ],
+      "candidate": false
     }
   },
-  "updated": "2026-09-28T15:50:29.616902+00:00"
+  "updated": "2026-09-28T15:51:38.656189+00:00"
 }
