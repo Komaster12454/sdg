@@ -88310,16 +88310,6 @@
       "aliases": [],
       "candidate": false
     },
-    "CVE-2026-101917": {
-      "fingerprint": "a481798f1a429da536a4",
-      "first_seen": "2026-09-28T21:17:45.367360+00:00",
-      "last_seen": "2026-09-28T23:36:28.571607+00:00",
-      "patch_status": "UNKNOWN",
-      "priority": 0,
-      "zero_day_score": 0,
-      "aliases": [],
-      "candidate": false
-    },
     "CVE-2026-102265": {
       "fingerprint": "a481798f1a429da536a4",
       "first_seen": "2026-09-28T21:17:45.367360+00:00",
@@ -120654,10 +120644,22 @@
       "aliases": [],
       "candidate": false
     },
+    "CVE-2026-101917": {
+      "fingerprint": "3b8193e79084a074a78e",
+      "first_seen": "2026-09-28T21:17:45.367360+00:00",
+      "last_seen": "2026-09-29T23:12:22.371154+00:00",
+      "patch_status": "PATCHED",
+      "priority": 21,
+      "zero_day_score": 66,
+      "aliases": [
+        "GHSA-2GX3-RCP4-G85Q"
+      ],
+      "candidate": false
+    },
     "CVE-2026-102342": {
       "fingerprint": "b57ca02e78ef7060ef92",
       "first_seen": "2026-09-29T23:10:09.812738+00:00",
-      "last_seen": "2026-09-29T23:11:16.890639+00:00",
+      "last_seen": "2026-09-29T23:12:22.371154+00:00",
       "patch_status": "PATCHED",
       "priority": 21,
       "zero_day_score": 66,
@@ -120669,7 +120671,7 @@
     "GHSA-8238-W5PM-2374": {
       "fingerprint": "27b3a34264553d69b258",
       "first_seen": "2026-09-29T23:11:16.890639+00:00",
-      "last_seen": "2026-09-29T23:11:16.890639+00:00",
+      "last_seen": "2026-09-29T23:12:22.371154+00:00",
       "patch_status": "PATCHED",
       "priority": 52,
       "zero_day_score": 88,
@@ -120679,7 +120681,7 @@
     "GHSA-C6FG-446Q-CG94": {
       "fingerprint": "6255338c65107140590f",
       "first_seen": "2026-09-29T23:11:16.890639+00:00",
-      "last_seen": "2026-09-29T23:11:16.890639+00:00",
+      "last_seen": "2026-09-29T23:12:22.371154+00:00",
       "patch_status": "PATCHED",
       "priority": 40,
       "zero_day_score": 78,
@@ -120689,7 +120691,7 @@
     "GHSA-P634-W6R4-RJP2": {
       "fingerprint": "4e987215c9bdda2f29ae",
       "first_seen": "2026-09-29T23:11:16.890639+00:00",
-      "last_seen": "2026-09-29T23:11:16.890639+00:00",
+      "last_seen": "2026-09-29T23:12:22.371154+00:00",
       "patch_status": "PATCHED",
       "priority": 42,
       "zero_day_score": 78,
@@ -120697,5 +120699,5 @@
       "candidate": true
     }
   },
-  "updated": "2026-09-29T23:11:17.106076+00:00"
+  "updated": "2026-09-29T23:12:22.573927+00:00"
 }
