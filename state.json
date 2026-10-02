@@ -1,15 +1,5 @@
 {
   "records": {
-    "CVE-2026-61720": {
-      "fingerprint": "5e1de65ec523022523d1",
-      "first_seen": "2026-09-18T20:20:25.854313+00:00",
-      "last_seen": "2026-09-24T21:35:17.333294+00:00",
-      "patch_status": "UNKNOWN",
-      "priority": 24,
-      "zero_day_score": 0,
-      "aliases": [],
-      "candidate": false
-    },
     "CVE-2026-61723": {
       "fingerprint": "bd053897d111b332a8ea",
       "first_seen": "2026-09-18T20:19:12.306711+00:00",
@@ -85678,16 +85668,6 @@
       "aliases": [],
       "candidate": false
     },
-    "CVE-2026-85532": {
-      "fingerprint": "a481798f1a429da536a4",
-      "first_seen": "2026-09-30T12:18:20.263035+00:00",
-      "last_seen": "2026-09-30T23:37:29.605558+00:00",
-      "patch_status": "UNKNOWN",
-      "priority": 0,
-      "zero_day_score": 0,
-      "aliases": [],
-      "candidate": false
-    },
     "CVE-2026-85573": {
       "fingerprint": "a481798f1a429da536a4",
       "first_seen": "2026-09-30T06:17:25.225959+00:00",
@@ -120470,10 +120450,32 @@
       "aliases": [],
       "candidate": false
     },
+    "CVE-2023-46589": {
+      "fingerprint": "65b30dceb11cb111756a",
+      "first_seen": "2026-10-02T20:15:02.256540+00:00",
+      "last_seen": "2026-10-02T20:15:02.256540+00:00",
+      "patch_status": "PATCHED",
+      "priority": 30,
+      "zero_day_score": 76,
+      "aliases": [
+        "GHSA-FCCV-JMMP-QG76"
+      ],
+      "candidate": false
+    },
+    "CVE-2026-85532": {
+      "fingerprint": "d6f597b9367f18adbf36",
+      "first_seen": "2026-09-30T12:18:20.263035+00:00",
+      "last_seen": "2026-10-02T20:15:02.256540+00:00",
+      "patch_status": "UNKNOWN",
+      "priority": 30,
+      "zero_day_score": 3,
+      "aliases": [],
+      "candidate": false
+    },
     "CVE-2026-95275": {
       "fingerprint": "a583b7ae95e85fc5b1ed",
       "first_seen": "2026-09-29T18:19:27.981028+00:00",
-      "last_seen": "2026-10-02T20:13:56.052917+00:00",
+      "last_seen": "2026-10-02T20:15:02.256540+00:00",
       "patch_status": "UNKNOWN",
       "priority": 44,
       "zero_day_score": 1,
@@ -120483,7 +120485,7 @@
     "GHSA-5R2P-PJR8-7FH7": {
       "fingerprint": "62a75e27175f43df3d63",
       "first_seen": "2026-10-02T20:12:48.711914+00:00",
-      "last_seen": "2026-10-02T20:13:56.052917+00:00",
+      "last_seen": "2026-10-02T20:15:02.256540+00:00",
       "patch_status": "PATCHED",
       "priority": 22,
       "zero_day_score": 88,
@@ -120491,5 +120493,5 @@
       "candidate": true
     }
   },
-  "updated": "2026-10-02T20:13:56.058576+00:00"
+  "updated": "2026-10-02T20:15:02.836077+00:00"
 }
