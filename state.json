@@ -105162,16 +105162,6 @@
       "aliases": [],
       "candidate": true
     },
-    "CVE-2026-106445": {
-      "fingerprint": "ccd8a20f64417031c12c",
-      "first_seen": "2026-10-06T20:17:59.369840+00:00",
-      "last_seen": "2026-10-10T08:33:39.554143+00:00",
-      "patch_status": "UNKNOWN",
-      "priority": 23,
-      "zero_day_score": 38,
-      "aliases": [],
-      "candidate": false
-    },
     "GHSA-P8WG-VRV2-V86F": {
       "fingerprint": "e84bf26fc14f5a37122d",
       "first_seen": "2026-10-10T08:24:43.081088+00:00",
@@ -120633,7 +120623,19 @@
       "zero_day_score": 3,
       "aliases": [],
       "candidate": false
+    },
+    "CVE-2026-106445": {
+      "fingerprint": "0672d1d6b5b387424f8c",
+      "first_seen": "2026-10-06T20:17:59.369840+00:00",
+      "last_seen": "2026-10-12T14:34:10.450831+00:00",
+      "patch_status": "PATCHED",
+      "priority": 0,
+      "zero_day_score": 76,
+      "aliases": [
+        "GHSA-P8WG-VRV2-V86F"
+      ],
+      "candidate": false
     }
   },
-  "updated": "2026-10-12T14:33:02.592658+00:00"
+  "updated": "2026-10-12T14:34:10.783483+00:00"
 }
