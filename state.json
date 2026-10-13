@@ -31410,16 +31410,6 @@
       "aliases": [],
       "candidate": false
     },
-    "CVE-2026-96594": {
-      "fingerprint": "246945918bbb9986ed79",
-      "first_seen": "2026-10-06T22:17:26.574127+00:00",
-      "last_seen": "2026-10-07T23:41:48.391318+00:00",
-      "patch_status": "UNKNOWN",
-      "priority": 0,
-      "zero_day_score": 0,
-      "aliases": [],
-      "candidate": false
-    },
     "CVE-2026-96658": {
       "fingerprint": "d0b6dc1999d5122116ba",
       "first_seen": "2026-10-01T17:18:00.421134+00:00",
@@ -120642,26 +120632,6 @@
       "aliases": [],
       "candidate": false
     },
-    "CVE-2026-106583": {
-      "fingerprint": "b47620ed0bab4997d66b",
-      "first_seen": "2026-10-13T17:52:57.269614+00:00",
-      "last_seen": "2026-10-13T17:58:43.287270+00:00",
-      "patch_status": "UNKNOWN",
-      "priority": 10,
-      "zero_day_score": 0,
-      "aliases": [],
-      "candidate": false
-    },
-    "CVE-2026-97208": {
-      "fingerprint": "9fe8febaa2f7d3fb4fa5",
-      "first_seen": "2026-10-06T22:17:26.574127+00:00",
-      "last_seen": "2026-10-13T17:58:43.287270+00:00",
-      "patch_status": "PATCHED",
-      "priority": 19,
-      "zero_day_score": 0,
-      "aliases": [],
-      "candidate": false
-    },
     "ZD-CAND-A34B3CB35265": {
       "fingerprint": "0d5ea8d28c187cc8a4a5",
       "first_seen": "2026-10-13T17:49:38.565402+00:00",
@@ -120671,7 +120641,37 @@
       "zero_day_score": 45,
       "aliases": [],
       "candidate": true
+    },
+    "CVE-2026-106583": {
+      "fingerprint": "b47620ed0bab4997d66b",
+      "first_seen": "2026-10-13T17:52:57.269614+00:00",
+      "last_seen": "2026-10-13T17:59:49.644938+00:00",
+      "patch_status": "UNKNOWN",
+      "priority": 10,
+      "zero_day_score": 0,
+      "aliases": [],
+      "candidate": false
+    },
+    "CVE-2026-96594": {
+      "fingerprint": "4341a23f0d622783d43f",
+      "first_seen": "2026-10-06T22:17:26.574127+00:00",
+      "last_seen": "2026-10-13T17:59:49.644938+00:00",
+      "patch_status": "PATCHED",
+      "priority": 24,
+      "zero_day_score": 0,
+      "aliases": [],
+      "candidate": false
+    },
+    "CVE-2026-97208": {
+      "fingerprint": "9fe8febaa2f7d3fb4fa5",
+      "first_seen": "2026-10-06T22:17:26.574127+00:00",
+      "last_seen": "2026-10-13T17:59:49.644938+00:00",
+      "patch_status": "PATCHED",
+      "priority": 19,
+      "zero_day_score": 0,
+      "aliases": [],
+      "candidate": false
     }
   },
-  "updated": "2026-10-13T17:58:43.292683+00:00"
+  "updated": "2026-10-13T17:59:49.844142+00:00"
 }
