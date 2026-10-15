@@ -1,15 +1,5 @@
 {
   "records": {
-    "CVE-2019-16942": {
-      "fingerprint": "990cce1cc2a1a226b216",
-      "first_seen": "2026-10-08T21:19:37.809463+00:00",
-      "last_seen": "2026-10-09T00:53:50.543751+00:00",
-      "patch_status": "UNKNOWN",
-      "priority": 1,
-      "zero_day_score": 0,
-      "aliases": [],
-      "candidate": false
-    },
     "CVE-2019-17531": {
       "fingerprint": "d5d9b2fafc4efc94a716",
       "first_seen": "2026-10-08T21:19:37.809463+00:00",
@@ -120889,13 +120879,25 @@
     "CVE-2026-44825": {
       "fingerprint": "cf8acce3311d3a0485e3",
       "first_seen": "2026-10-13T04:17:37.332811+00:00",
-      "last_seen": "2026-10-15T01:06:55.122529+00:00",
+      "last_seen": "2026-10-15T01:08:01.946356+00:00",
       "patch_status": "UNKNOWN",
       "priority": 5,
       "zero_day_score": 30,
       "aliases": [],
       "candidate": false
+    },
+    "CVE-2026-53710": {
+      "fingerprint": "c621e9cb2534a61097fc",
+      "first_seen": "2026-10-15T01:08:01.946356+00:00",
+      "last_seen": "2026-10-15T01:08:01.946356+00:00",
+      "patch_status": "PATCHED",
+      "priority": 40,
+      "zero_day_score": 76,
+      "aliases": [
+        "GHSA-XM98-3VCF-FPH7"
+      ],
+      "candidate": false
     }
   },
-  "updated": "2026-10-15T01:06:55.127877+00:00"
+  "updated": "2026-10-15T01:08:02.303257+00:00"
 }
