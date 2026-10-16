@@ -1,15 +1,5 @@
 {
   "records": {
-    "CVE-2023-39615": {
-      "fingerprint": "e558ff41a9c0bffd04c2",
-      "first_seen": "2026-10-15T00:17:21.298432+00:00",
-      "last_seen": "2026-10-15T00:50:47.142613+00:00",
-      "patch_status": "UNKNOWN",
-      "priority": 0,
-      "zero_day_score": 0,
-      "aliases": [],
-      "candidate": false
-    },
     "CVE-2023-4004": {
       "fingerprint": "25b0694584c594601dcb",
       "first_seen": "2026-10-14T22:18:33.527929+00:00",
@@ -23099,16 +23089,6 @@
     "CVE-2026-86856": {
       "fingerprint": "7833dd8ebe8b77fb828c",
       "first_seen": "2026-10-14T18:20:14.916808+00:00",
-      "last_seen": "2026-10-15T21:37:38.438892+00:00",
-      "patch_status": "UNKNOWN",
-      "priority": 0,
-      "zero_day_score": 0,
-      "aliases": [],
-      "candidate": false
-    },
-    "CVE-2026-87093": {
-      "fingerprint": "ca0edd58bf7e82a129c5",
-      "first_seen": "2026-10-14T16:18:46.334859+00:00",
       "last_seen": "2026-10-15T21:37:38.438892+00:00",
       "patch_status": "UNKNOWN",
       "priority": 0,
@@ -120285,13 +120265,35 @@
     "CVE-2024-10924": {
       "fingerprint": "83176402e31bc4e95fb9",
       "first_seen": "2026-10-16T21:08:23.152260+00:00",
-      "last_seen": "2026-10-16T21:11:43.003190+00:00",
+      "last_seen": "2026-10-16T21:12:51.220363+00:00",
       "patch_status": "UNKNOWN",
       "priority": 25,
       "zero_day_score": 30,
       "aliases": [],
       "candidate": false
+    },
+    "CVE-2026-87093": {
+      "fingerprint": "bc455c0a4957b5c9da0a",
+      "first_seen": "2026-10-14T16:18:46.334859+00:00",
+      "last_seen": "2026-10-16T21:12:51.220363+00:00",
+      "patch_status": "UNKNOWN",
+      "priority": 35,
+      "zero_day_score": 3,
+      "aliases": [],
+      "candidate": false
+    },
+    "CVE-2026-96628": {
+      "fingerprint": "a09c26683137d9524847",
+      "first_seen": "2026-10-16T21:12:51.220363+00:00",
+      "last_seen": "2026-10-16T21:12:51.220363+00:00",
+      "patch_status": "PATCHED",
+      "priority": 17,
+      "zero_day_score": 66,
+      "aliases": [
+        "GHSA-MP22-58FF-6FHR"
+      ],
+      "candidate": false
     }
   },
-  "updated": "2026-10-16T21:11:43.008515+00:00"
+  "updated": "2026-10-16T21:12:51.549544+00:00"
 }
