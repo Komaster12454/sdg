@@ -101232,16 +101232,6 @@
       "aliases": [],
       "candidate": false
     },
-    "CVE-2026-112403": {
-      "fingerprint": "3d7ef0fabb636b5398f1",
-      "first_seen": "2026-10-19T22:17:51.268731+00:00",
-      "last_seen": "2026-10-20T19:57:54.796429+00:00",
-      "patch_status": "UNKNOWN",
-      "priority": 36,
-      "zero_day_score": 3,
-      "aliases": [],
-      "candidate": false
-    },
     "CVE-2026-112404": {
       "fingerprint": "22cb7483352608e09146",
       "first_seen": "2026-10-19T22:17:51.268731+00:00",
@@ -120591,7 +120581,7 @@
     "CVE-2026-109680": {
       "fingerprint": "7d892585f76844e0b467",
       "first_seen": "2026-10-20T20:37:16.009616+00:00",
-      "last_seen": "2026-10-20T20:39:39.699419+00:00",
+      "last_seen": "2026-10-20T20:40:47.405285+00:00",
       "patch_status": "UNKNOWN",
       "priority": 42,
       "zero_day_score": 1,
@@ -120601,7 +120591,7 @@
     "CVE-2026-111753": {
       "fingerprint": "0935841e429fb20353b9",
       "first_seen": "2026-10-20T20:38:32.067062+00:00",
-      "last_seen": "2026-10-20T20:39:39.699419+00:00",
+      "last_seen": "2026-10-20T20:40:47.405285+00:00",
       "patch_status": "UNPATCHED",
       "priority": 10,
       "zero_day_score": 76,
@@ -120609,7 +120599,19 @@
         "GHSA-JFGX-762W-99VR"
       ],
       "candidate": false
+    },
+    "CVE-2026-112403": {
+      "fingerprint": "fa6fcc77469d856b9ef5",
+      "first_seen": "2026-10-19T22:17:51.268731+00:00",
+      "last_seen": "2026-10-20T20:40:47.405285+00:00",
+      "patch_status": "PATCHED",
+      "priority": 0,
+      "zero_day_score": 76,
+      "aliases": [
+        "GHSA-8G5G-8VMR-9782"
+      ],
+      "candidate": false
     }
   },
-  "updated": "2026-10-20T20:39:39.705083+00:00"
+  "updated": "2026-10-20T20:40:47.727042+00:00"
 }
