@@ -1,15 +1,5 @@
 {
   "records": {
-    "CVE-2025-49393": {
-      "fingerprint": "040a71706894fb5758ed",
-      "first_seen": "2026-10-18T21:15:13.579104+00:00",
-      "last_seen": "2026-10-18T21:18:57.198444+00:00",
-      "patch_status": "UNKNOWN",
-      "priority": 39,
-      "zero_day_score": 3,
-      "aliases": [],
-      "candidate": false
-    },
     "CVE-2025-49402": {
       "fingerprint": "e4e9038e3b4ab15184e4",
       "first_seen": "2026-10-18T21:18:57.198444+00:00",
@@ -121339,7 +121329,19 @@
       "zero_day_score": 30,
       "aliases": [],
       "candidate": false
+    },
+    "CVE-2026-9675": {
+      "fingerprint": "46f6faceaf58ea731553",
+      "first_seen": "2026-10-22T05:08:02.511722+00:00",
+      "last_seen": "2026-10-22T05:08:02.511722+00:00",
+      "patch_status": "PATCHED",
+      "priority": 30,
+      "zero_day_score": 76,
+      "aliases": [
+        "GHSA-38RV-X7PX-6HHQ"
+      ],
+      "candidate": false
     }
   },
-  "updated": "2026-10-22T05:07:11.919811+00:00"
+  "updated": "2026-10-22T05:08:03.276482+00:00"
 }
