@@ -1,15 +1,5 @@
 {
   "records": {
-    "CVE-2026-112271": {
-      "fingerprint": "a481798f1a429da536a4",
-      "first_seen": "2026-10-19T14:17:25.827448+00:00",
-      "last_seen": "2026-10-19T23:34:06.830693+00:00",
-      "patch_status": "UNKNOWN",
-      "priority": 0,
-      "zero_day_score": 0,
-      "aliases": [],
-      "candidate": false
-    },
     "CVE-2026-112272": {
       "fingerprint": "a481798f1a429da536a4",
       "first_seen": "2026-10-19T14:17:25.827448+00:00",
@@ -120986,10 +120976,20 @@
       ],
       "candidate": false
     },
+    "GHSA-XMJ3-9GF7-H52W": {
+      "fingerprint": "11e6e1fd693e179d0758",
+      "first_seen": "2026-10-23T21:45:13.687587+00:00",
+      "last_seen": "2026-10-23T21:54:08.991212+00:00",
+      "patch_status": "PATCHED",
+      "priority": 19,
+      "zero_day_score": 78,
+      "aliases": [],
+      "candidate": true
+    },
     "CVE-2026-114501": {
       "fingerprint": "961bd5b95a1ee7b77efc",
       "first_seen": "2026-10-21T22:16:58.023314+00:00",
-      "last_seen": "2026-10-23T21:54:08.991212+00:00",
+      "last_seen": "2026-10-23T21:55:16.053033+00:00",
       "patch_status": "PATCHED",
       "priority": 0,
       "zero_day_score": 66,
@@ -121001,7 +121001,7 @@
     "CVE-2026-114508": {
       "fingerprint": "16b0cac6df62f574d70d",
       "first_seen": "2026-10-21T22:16:58.023314+00:00",
-      "last_seen": "2026-10-23T21:54:08.991212+00:00",
+      "last_seen": "2026-10-23T21:55:16.053033+00:00",
       "patch_status": "PATCHED",
       "priority": 26,
       "zero_day_score": 66,
@@ -121013,7 +121013,7 @@
     "CVE-2026-114509": {
       "fingerprint": "758f97308a6d7dd2f3cc",
       "first_seen": "2026-10-21T22:16:58.023314+00:00",
-      "last_seen": "2026-10-23T21:54:08.991212+00:00",
+      "last_seen": "2026-10-23T21:55:16.053033+00:00",
       "patch_status": "PATCHED",
       "priority": 0,
       "zero_day_score": 76,
@@ -121025,7 +121025,7 @@
     "CVE-2026-69097": {
       "fingerprint": "8148f8e8118395b9fca2",
       "first_seen": "2026-10-23T21:11:17.636904+00:00",
-      "last_seen": "2026-10-23T21:54:08.991212+00:00",
+      "last_seen": "2026-10-23T21:55:16.053033+00:00",
       "patch_status": "PATCHED",
       "priority": 28,
       "zero_day_score": 76,
@@ -121037,7 +121037,7 @@
     "GHSA-85X2-Q946-CP5H": {
       "fingerprint": "19b357b2db1c7d5260a4",
       "first_seen": "2026-10-23T21:51:54.539605+00:00",
-      "last_seen": "2026-10-23T21:54:08.991212+00:00",
+      "last_seen": "2026-10-23T21:55:16.053033+00:00",
       "patch_status": "PATCHED",
       "priority": 45,
       "zero_day_score": 78,
@@ -121047,33 +121047,33 @@
     "GHSA-8C8M-P3M8-CJG8": {
       "fingerprint": "19b357b2db1c7d5260a4",
       "first_seen": "2026-10-23T21:54:08.991212+00:00",
-      "last_seen": "2026-10-23T21:54:08.991212+00:00",
+      "last_seen": "2026-10-23T21:55:16.053033+00:00",
       "patch_status": "PATCHED",
       "priority": 45,
       "zero_day_score": 78,
+      "aliases": [],
+      "candidate": true
+    },
+    "GHSA-F2HQ-32VH-53CC": {
+      "fingerprint": "27b3a34264553d69b258",
+      "first_seen": "2026-10-23T21:55:16.053033+00:00",
+      "last_seen": "2026-10-23T21:55:16.053033+00:00",
+      "patch_status": "PATCHED",
+      "priority": 52,
+      "zero_day_score": 88,
       "aliases": [],
       "candidate": true
     },
     "GHSA-M943-M63M-W62W": {
       "fingerprint": "19b357b2db1c7d5260a4",
       "first_seen": "2026-10-23T21:53:01.391088+00:00",
-      "last_seen": "2026-10-23T21:54:08.991212+00:00",
+      "last_seen": "2026-10-23T21:55:16.053033+00:00",
       "patch_status": "PATCHED",
       "priority": 45,
       "zero_day_score": 78,
       "aliases": [],
       "candidate": true
-    },
-    "GHSA-XMJ3-9GF7-H52W": {
-      "fingerprint": "11e6e1fd693e179d0758",
-      "first_seen": "2026-10-23T21:45:13.687587+00:00",
-      "last_seen": "2026-10-23T21:54:08.991212+00:00",
-      "patch_status": "PATCHED",
-      "priority": 19,
-      "zero_day_score": 78,
-      "aliases": [],
-      "candidate": true
     }
   },
-  "updated": "2026-10-23T21:54:09.553448+00:00"
+  "updated": "2026-10-23T21:55:16.270804+00:00"
 }
