@@ -26478,16 +26478,6 @@
       "aliases": [],
       "candidate": false
     },
-    "CVE-2026-53995": {
-      "fingerprint": "056e7a0154786f2e57fb",
-      "first_seen": "2026-10-17T22:20:17.986098+00:00",
-      "last_seen": "2026-10-20T23:33:54.533551+00:00",
-      "patch_status": "UNKNOWN",
-      "priority": 0,
-      "zero_day_score": 0,
-      "aliases": [],
-      "candidate": false
-    },
     "CVE-2026-54554": {
       "fingerprint": "e8ce1bfe36d5be58fc17",
       "first_seen": "2026-10-20T02:17:27.893691+00:00",
@@ -120885,17 +120875,29 @@
     "CVE-2026-115560": {
       "fingerprint": "bb1af289c9709489cd3e",
       "first_seen": "2026-10-23T16:41:06.720524+00:00",
-      "last_seen": "2026-10-23T21:33:07.505983+00:00",
+      "last_seen": "2026-10-23T21:34:14.725839+00:00",
       "patch_status": "UNKNOWN",
       "priority": 5,
       "zero_day_score": 30,
       "aliases": [],
       "candidate": false
     },
+    "CVE-2026-53995": {
+      "fingerprint": "98c529ff06cd91cfcc76",
+      "first_seen": "2026-10-17T22:20:17.986098+00:00",
+      "last_seen": "2026-10-23T21:34:14.725839+00:00",
+      "patch_status": "PATCHED",
+      "priority": 32,
+      "zero_day_score": 76,
+      "aliases": [
+        "GHSA-WQMH-QCCW-PQWF"
+      ],
+      "candidate": false
+    },
     "GHSA-7XGJ-8392-5Q4R": {
       "fingerprint": "c9959ea6ac59a927c627",
       "first_seen": "2026-10-23T21:33:07.505983+00:00",
-      "last_seen": "2026-10-23T21:33:07.505983+00:00",
+      "last_seen": "2026-10-23T21:34:14.725839+00:00",
       "patch_status": "PATCHED",
       "priority": 46,
       "zero_day_score": 78,
@@ -120905,7 +120907,7 @@
     "GHSA-VQQP-X5QM-5QP4": {
       "fingerprint": "4e987215c9bdda2f29ae",
       "first_seen": "2026-10-23T21:31:59.947531+00:00",
-      "last_seen": "2026-10-23T21:33:07.505983+00:00",
+      "last_seen": "2026-10-23T21:34:14.725839+00:00",
       "patch_status": "PATCHED",
       "priority": 42,
       "zero_day_score": 78,
@@ -120913,5 +120915,5 @@
       "candidate": true
     }
   },
-  "updated": "2026-10-23T21:33:07.802241+00:00"
+  "updated": "2026-10-23T21:34:14.996268+00:00"
 }
