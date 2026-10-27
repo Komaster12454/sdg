@@ -1,35 +1,5 @@
 {
   "records": {
-    "CVE-2026-16419": {
-      "fingerprint": "915773aeca22ec7c4c66",
-      "first_seen": "2026-10-24T17:11:09.693674+00:00",
-      "last_seen": "2026-10-24T17:19:35.771345+00:00",
-      "patch_status": "UNKNOWN",
-      "priority": 38,
-      "zero_day_score": 3,
-      "aliases": [],
-      "candidate": false
-    },
-    "CVE-2026-16420": {
-      "fingerprint": "b7608ffa452de4e5603f",
-      "first_seen": "2026-10-24T17:11:09.693674+00:00",
-      "last_seen": "2026-10-24T17:19:35.771345+00:00",
-      "patch_status": "UNKNOWN",
-      "priority": 35,
-      "zero_day_score": 3,
-      "aliases": [],
-      "candidate": false
-    },
-    "CVE-2026-16421": {
-      "fingerprint": "27c4e4cc6742982a7ccc",
-      "first_seen": "2026-10-24T17:11:09.693674+00:00",
-      "last_seen": "2026-10-24T17:19:35.771345+00:00",
-      "patch_status": "UNKNOWN",
-      "priority": 35,
-      "zero_day_score": 3,
-      "aliases": [],
-      "candidate": false
-    },
     "CVE-2026-16422": {
       "fingerprint": "2e779a1a3a3a18a3389b",
       "first_seen": "2026-10-24T17:12:26.323130+00:00",
@@ -120171,7 +120141,43 @@
       "zero_day_score": 43,
       "aliases": [],
       "candidate": false
+    },
+    "CVE-2026-12259": {
+      "fingerprint": "e8fca9e65f1c53800b02",
+      "first_seen": "2026-10-27T07:58:48.770942+00:00",
+      "last_seen": "2026-10-27T07:58:48.770942+00:00",
+      "patch_status": "PATCHED",
+      "priority": 21,
+      "zero_day_score": 66,
+      "aliases": [
+        "GHSA-5WP5-5229-5G6Q"
+      ],
+      "candidate": false
+    },
+    "CVE-2026-62388": {
+      "fingerprint": "e4ef3d801abf1e4cdcda",
+      "first_seen": "2026-10-27T07:58:48.770942+00:00",
+      "last_seen": "2026-10-27T07:58:48.770942+00:00",
+      "patch_status": "PATCHED",
+      "priority": 0,
+      "zero_day_score": 76,
+      "aliases": [
+        "GHSA-P3M8-78J2-G5P3"
+      ],
+      "candidate": false
+    },
+    "CVE-2026-63311": {
+      "fingerprint": "0322b96b1080b6c6349e",
+      "first_seen": "2026-10-27T07:58:48.770942+00:00",
+      "last_seen": "2026-10-27T07:58:48.770942+00:00",
+      "patch_status": "PATCHED",
+      "priority": 0,
+      "zero_day_score": 66,
+      "aliases": [
+        "GHSA-3GQM-FCW5-W839"
+      ],
+      "candidate": false
     }
   },
-  "updated": "2026-10-27T07:57:43.404822+00:00"
+  "updated": "2026-10-27T07:58:49.062407+00:00"
 }
