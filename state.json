@@ -1,25 +1,5 @@
 {
   "records": {
-    "CVE-2026-48315": {
-      "fingerprint": "4ebc9dee3c339688d8c9",
-      "first_seen": "2026-10-25T21:12:02.157065+00:00",
-      "last_seen": "2026-10-25T21:19:35.038778+00:00",
-      "patch_status": "UNKNOWN",
-      "priority": 37,
-      "zero_day_score": 3,
-      "aliases": [],
-      "candidate": false
-    },
-    "CVE-2026-49049": {
-      "fingerprint": "d570fc4c8f7e3ae93a18",
-      "first_seen": "2026-10-25T21:15:46.904945+00:00",
-      "last_seen": "2026-10-25T21:19:35.038778+00:00",
-      "patch_status": "UNKNOWN",
-      "priority": 30,
-      "zero_day_score": 3,
-      "aliases": [],
-      "candidate": false
-    },
     "CVE-2026-49451": {
       "fingerprint": "d4fa0f980aafcc169135",
       "first_seen": "2026-10-25T21:15:46.904945+00:00",
@@ -120623,7 +120603,31 @@
       "zero_day_score": 30,
       "aliases": [],
       "candidate": false
+    },
+    "CVE-2025-59341": {
+      "fingerprint": "e2a52ba428930ffe42c9",
+      "first_seen": "2026-10-29T02:10:51.430860+00:00",
+      "last_seen": "2026-10-29T02:10:51.430860+00:00",
+      "patch_status": "UNPATCHED",
+      "priority": 10,
+      "zero_day_score": 86,
+      "aliases": [
+        "GHSA-49PV-GWXP-532R"
+      ],
+      "candidate": false
+    },
+    "CVE-2025-59342": {
+      "fingerprint": "e2eabaa86089ec96252a",
+      "first_seen": "2026-10-29T02:10:51.430860+00:00",
+      "last_seen": "2026-10-29T02:10:51.430860+00:00",
+      "patch_status": "PATCHED",
+      "priority": 0,
+      "zero_day_score": 66,
+      "aliases": [
+        "GHSA-G2H5-CVVR-7GMW"
+      ],
+      "candidate": false
     }
   },
-  "updated": "2026-10-29T02:09:45.489168+00:00"
+  "updated": "2026-10-29T02:10:51.775575+00:00"
 }
