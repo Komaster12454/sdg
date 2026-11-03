@@ -1,15 +1,5 @@
 {
   "records": {
-    "CVE-2026-117910": {
-      "fingerprint": "a481798f1a429da536a4",
-      "first_seen": "2026-10-27T14:19:29.044267+00:00",
-      "last_seen": "2026-10-28T00:47:28.980660+00:00",
-      "patch_status": "UNKNOWN",
-      "priority": 0,
-      "zero_day_score": 0,
-      "aliases": [],
-      "candidate": false
-    },
     "CVE-2026-117911": {
       "fingerprint": "a481798f1a429da536a4",
       "first_seen": "2026-10-27T14:19:29.044267+00:00",
@@ -122020,18 +122010,6 @@
       "aliases": [],
       "candidate": false
     },
-    "CVE-2026-13426": {
-      "fingerprint": "4118bf5deb177e347aed",
-      "first_seen": "2026-11-03T22:05:42.608690+00:00",
-      "last_seen": "2026-11-03T22:10:11.446605+00:00",
-      "patch_status": "PATCHED",
-      "priority": 21,
-      "zero_day_score": 66,
-      "aliases": [
-        "GHSA-72V2-V53V-4QMM"
-      ],
-      "candidate": false
-    },
     "CVE-2026-57915": {
       "fingerprint": "9ea5e975c2e9fbb7e7b4",
       "first_seen": "2026-11-03T22:02:21.453305+00:00",
@@ -122044,10 +122022,34 @@
       ],
       "candidate": false
     },
+    "CVE-2026-111769": {
+      "fingerprint": "40f6d51085b09f0371f9",
+      "first_seen": "2026-11-03T22:11:18.666123+00:00",
+      "last_seen": "2026-11-03T22:11:18.666123+00:00",
+      "patch_status": "PATCHED",
+      "priority": 26,
+      "zero_day_score": 66,
+      "aliases": [
+        "GHSA-6PRH-2H8M-C8CW"
+      ],
+      "candidate": false
+    },
+    "CVE-2026-13426": {
+      "fingerprint": "4118bf5deb177e347aed",
+      "first_seen": "2026-11-03T22:05:42.608690+00:00",
+      "last_seen": "2026-11-03T22:11:18.666123+00:00",
+      "patch_status": "PATCHED",
+      "priority": 21,
+      "zero_day_score": 66,
+      "aliases": [
+        "GHSA-72V2-V53V-4QMM"
+      ],
+      "candidate": false
+    },
     "CVE-2026-98432": {
       "fingerprint": "ab09ac115048f8a7ed67",
       "first_seen": "2026-10-29T14:19:39.259369+00:00",
-      "last_seen": "2026-11-03T22:10:11.446605+00:00",
+      "last_seen": "2026-11-03T22:11:18.666123+00:00",
       "patch_status": "UNKNOWN",
       "priority": 5,
       "zero_day_score": 30,
@@ -122055,5 +122057,5 @@
       "candidate": false
     }
   },
-  "updated": "2026-11-03T22:10:11.450799+00:00"
+  "updated": "2026-11-03T22:11:18.932102+00:00"
 }
