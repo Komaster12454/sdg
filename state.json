@@ -1,15 +1,5 @@
 {
   "records": {
-    "CVE-2026-103330": {
-      "fingerprint": "a481798f1a429da536a4",
-      "first_seen": "2026-10-28T11:17:47.554777+00:00",
-      "last_seen": "2026-10-29T00:47:59.351464+00:00",
-      "patch_status": "UNKNOWN",
-      "priority": 0,
-      "zero_day_score": 0,
-      "aliases": [],
-      "candidate": false
-    },
     "CVE-2026-103331": {
       "fingerprint": "773cb71c2ce575b9aa77",
       "first_seen": "2026-10-28T06:16:53.686647+00:00",
@@ -121711,7 +121701,7 @@
     "CVE-2025-13465": {
       "fingerprint": "e2309e7757dcd34ad1e3",
       "first_seen": "2026-11-04T03:09:41.610348+00:00",
-      "last_seen": "2026-11-04T03:11:53.312774+00:00",
+      "last_seen": "2026-11-04T03:12:58.912181+00:00",
       "patch_status": "PATCHED",
       "priority": 26,
       "zero_day_score": 66,
@@ -121720,10 +121710,22 @@
       ],
       "candidate": false
     },
+    "CVE-2026-24734": {
+      "fingerprint": "731a5403a5d275b2178f",
+      "first_seen": "2026-11-04T03:12:58.912181+00:00",
+      "last_seen": "2026-11-04T03:12:58.912181+00:00",
+      "patch_status": "PATCHED",
+      "priority": 30,
+      "zero_day_score": 76,
+      "aliases": [
+        "GHSA-MGP5-RV84-W37Q"
+      ],
+      "candidate": false
+    },
     "CVE-2026-24747": {
       "fingerprint": "1bfa8f921cdab90f2e2c",
       "first_seen": "2026-11-04T03:07:30.575407+00:00",
-      "last_seen": "2026-11-04T03:11:53.312774+00:00",
+      "last_seen": "2026-11-04T03:12:58.912181+00:00",
       "patch_status": "PATCHED",
       "priority": 35,
       "zero_day_score": 76,
@@ -121733,5 +121735,5 @@
       "candidate": false
     }
   },
-  "updated": "2026-11-04T03:11:53.316392+00:00"
+  "updated": "2026-11-04T03:12:59.547904+00:00"
 }
