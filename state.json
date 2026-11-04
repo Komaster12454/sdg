@@ -78904,16 +78904,6 @@
       "aliases": [],
       "candidate": false
     },
-    "CVE-2026-57108": {
-      "fingerprint": "5be591d61db14e3e01ce",
-      "first_seen": "2026-10-28T20:18:55.260784+00:00",
-      "last_seen": "2026-11-02T00:41:40.687379+00:00",
-      "patch_status": "UNKNOWN",
-      "priority": 0,
-      "zero_day_score": 0,
-      "aliases": [],
-      "candidate": false
-    },
     "CVE-2026-57968": {
       "fingerprint": "4634d8b2a61fa51d571e",
       "first_seen": "2026-10-28T22:34:24.221512+00:00",
@@ -121821,7 +121811,19 @@
       "zero_day_score": 38,
       "aliases": [],
       "candidate": false
+    },
+    "CVE-2026-57108": {
+      "fingerprint": "dedc1c4be9c8469a7c28",
+      "first_seen": "2026-10-28T20:18:55.260784+00:00",
+      "last_seen": "2026-11-04T04:08:21.308464+00:00",
+      "patch_status": "PATCHED",
+      "priority": 30,
+      "zero_day_score": 76,
+      "aliases": [
+        "GHSA-RP2P-6CMP-JXJ9"
+      ],
+      "candidate": false
     }
   },
-  "updated": "2026-11-04T04:07:16.011983+00:00"
+  "updated": "2026-11-04T04:08:21.735693+00:00"
 }
