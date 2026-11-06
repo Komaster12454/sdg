@@ -19792,16 +19792,6 @@
       "aliases": [],
       "candidate": false
     },
-    "CVE-2026-62284": {
-      "fingerprint": "0ed54fdd4ae7541b30e9",
-      "first_seen": "2026-10-30T20:17:45.944173+00:00",
-      "last_seen": "2026-11-02T19:45:16.141380+00:00",
-      "patch_status": "UNKNOWN",
-      "priority": 34,
-      "zero_day_score": 3,
-      "aliases": [],
-      "candidate": false
-    },
     "CVE-2026-62301": {
       "fingerprint": "5eef56d8a70ca9ed0d5a",
       "first_seen": "2026-10-30T20:19:03.962537+00:00",
@@ -120809,7 +120799,7 @@
     "CVE-2026-123158": {
       "fingerprint": "9a5725c52cc0f2fa07c5",
       "first_seen": "2026-11-05T17:19:43.037546+00:00",
-      "last_seen": "2026-11-06T18:11:54.867214+00:00",
+      "last_seen": "2026-11-06T18:13:02.609571+00:00",
       "patch_status": "UNKNOWN",
       "priority": 5,
       "zero_day_score": 30,
@@ -120819,7 +120809,7 @@
     "CVE-2026-16454": {
       "fingerprint": "7ca9a991170a77712227",
       "first_seen": "2026-11-06T18:10:46.396616+00:00",
-      "last_seen": "2026-11-06T18:11:54.867214+00:00",
+      "last_seen": "2026-11-06T18:13:02.609571+00:00",
       "patch_status": "PATCHED",
       "priority": 17,
       "zero_day_score": 66,
@@ -120831,7 +120821,7 @@
     "CVE-2026-18747": {
       "fingerprint": "5f0146c3a147cd7c7dc7",
       "first_seen": "2026-11-04T05:22:17.478861+00:00",
-      "last_seen": "2026-11-06T18:11:54.867214+00:00",
+      "last_seen": "2026-11-06T18:13:02.609571+00:00",
       "patch_status": "PATCHED",
       "priority": 45,
       "zero_day_score": 0,
@@ -120841,7 +120831,7 @@
     "CVE-2026-56378": {
       "fingerprint": "cc1370512cceda16cbed",
       "first_seen": "2026-11-06T18:07:22.915646+00:00",
-      "last_seen": "2026-11-06T18:11:54.867214+00:00",
+      "last_seen": "2026-11-06T18:13:02.609571+00:00",
       "patch_status": "PATCHED",
       "priority": 14,
       "zero_day_score": 66,
@@ -120849,7 +120839,19 @@
         "GHSA-WGXP-Q8XQ-WPP9"
       ],
       "candidate": false
+    },
+    "CVE-2026-62284": {
+      "fingerprint": "3c329451c0d82cfcb4a6",
+      "first_seen": "2026-10-30T20:17:45.944173+00:00",
+      "last_seen": "2026-11-06T18:13:02.609571+00:00",
+      "patch_status": "PATCHED",
+      "priority": 0,
+      "zero_day_score": 76,
+      "aliases": [
+        "GHSA-5W5G-J6HW-6P8F"
+      ],
+      "candidate": false
     }
   },
-  "updated": "2026-11-06T18:11:54.872289+00:00"
+  "updated": "2026-11-06T18:13:02.976418+00:00"
 }
