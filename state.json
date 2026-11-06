@@ -1,15 +1,5 @@
 {
   "records": {
-    "CVE-2026-83764": {
-      "fingerprint": "54fd22b4a0dc7f549e34",
-      "first_seen": "2026-10-15T00:49:33.536550+00:00",
-      "last_seen": "2026-11-01T00:49:45.866020+00:00",
-      "patch_status": "UNKNOWN",
-      "priority": 0,
-      "zero_day_score": 0,
-      "aliases": [],
-      "candidate": false
-    },
     "CVE-2026-83765": {
       "fingerprint": "e30c6fff8811265d2913",
       "first_seen": "2026-10-15T00:49:33.536550+00:00",
@@ -121293,7 +121283,7 @@
     "CVE-2026-60586": {
       "fingerprint": "0d766a4db067390e35d2",
       "first_seen": "2026-11-06T18:47:16.304521+00:00",
-      "last_seen": "2026-11-06T18:53:08.862351+00:00",
+      "last_seen": "2026-11-06T18:54:16.297645+00:00",
       "patch_status": "UNKNOWN",
       "priority": 5,
       "zero_day_score": 30,
@@ -121303,7 +121293,17 @@
     "GHSA-9J25-MM2H-2F76": {
       "fingerprint": "931e1b84861205d6d530",
       "first_seen": "2026-11-06T18:45:59.908225+00:00",
-      "last_seen": "2026-11-06T18:53:08.862351+00:00",
+      "last_seen": "2026-11-06T18:54:16.297645+00:00",
+      "patch_status": "PATCHED",
+      "priority": 61,
+      "zero_day_score": 88,
+      "aliases": [],
+      "candidate": true
+    },
+    "GHSA-JPF8-86F3-WP38": {
+      "fingerprint": "931e1b84861205d6d530",
+      "first_seen": "2026-11-06T18:54:16.297645+00:00",
+      "last_seen": "2026-11-06T18:54:16.297645+00:00",
       "patch_status": "PATCHED",
       "priority": 61,
       "zero_day_score": 88,
@@ -121313,7 +121313,7 @@
     "ZD-CAND-F0941F350B2F": {
       "fingerprint": "0d5ea8d28c187cc8a4a5",
       "first_seen": "2026-11-06T18:52:01.487100+00:00",
-      "last_seen": "2026-11-06T18:53:08.862351+00:00",
+      "last_seen": "2026-11-06T18:54:16.297645+00:00",
       "patch_status": "UNKNOWN",
       "priority": 16,
       "zero_day_score": 45,
@@ -121321,5 +121321,5 @@
       "candidate": true
     }
   },
-  "updated": "2026-11-06T18:53:08.868166+00:00"
+  "updated": "2026-11-06T18:54:16.712433+00:00"
 }
