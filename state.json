@@ -99168,16 +99168,6 @@
       "aliases": [],
       "candidate": false
     },
-    "CVE-2026-43637": {
-      "fingerprint": "96e17c3421d0da12d29b",
-      "first_seen": "2026-11-08T15:24:31.598013+00:00",
-      "last_seen": "2026-11-09T00:51:07.856061+00:00",
-      "patch_status": "UNKNOWN",
-      "priority": 0,
-      "zero_day_score": 0,
-      "aliases": [],
-      "candidate": false
-    },
     "CVE-2026-43638": {
       "fingerprint": "5a067f14d4015e2636b4",
       "first_seen": "2026-11-08T15:24:31.598013+00:00",
@@ -120639,7 +120629,19 @@
       "zero_day_score": 3,
       "aliases": [],
       "candidate": false
+    },
+    "CVE-2026-43637": {
+      "fingerprint": "51b957bb59445b28762f",
+      "first_seen": "2026-11-08T15:24:31.598013+00:00",
+      "last_seen": "2026-11-09T21:47:44.840544+00:00",
+      "patch_status": "PATCHED",
+      "priority": 36,
+      "zero_day_score": 76,
+      "aliases": [
+        "GHSA-RRH3-CWWJ-G5MG"
+      ],
+      "candidate": false
     }
   },
-  "updated": "2026-11-09T21:46:37.649006+00:00"
+  "updated": "2026-11-09T21:47:45.180753+00:00"
 }
