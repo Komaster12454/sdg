@@ -1,15 +1,5 @@
 {
   "records": {
-    "CVE-2025-63210": {
-      "fingerprint": "229d232c7b0d3ea14abd",
-      "first_seen": "2026-11-05T13:11:09.437118+00:00",
-      "last_seen": "2026-11-05T13:19:08.163192+00:00",
-      "patch_status": "UNKNOWN",
-      "priority": 57,
-      "zero_day_score": 11,
-      "aliases": [],
-      "candidate": false
-    },
     "CVE-2025-63211": {
       "fingerprint": "d8637a4490b3107cb70b",
       "first_seen": "2026-11-05T13:11:09.437118+00:00",
@@ -120625,13 +120615,25 @@
     "CVE-2026-102234": {
       "fingerprint": "a0aa4aabf933f3ffb597",
       "first_seen": "2026-11-10T21:05:00.205850+00:00",
-      "last_seen": "2026-11-10T21:09:27.505895+00:00",
+      "last_seen": "2026-11-10T21:10:35.008146+00:00",
       "patch_status": "UNKNOWN",
       "priority": 29,
       "zero_day_score": 3,
       "aliases": [],
       "candidate": false
+    },
+    "CVE-2026-126066": {
+      "fingerprint": "966caf19155feb6fabe5",
+      "first_seen": "2026-11-10T21:10:35.008146+00:00",
+      "last_seen": "2026-11-10T21:10:35.008146+00:00",
+      "patch_status": "PATCHED",
+      "priority": 14,
+      "zero_day_score": 66,
+      "aliases": [
+        "GHSA-474X-HRWR-FGX4"
+      ],
+      "candidate": false
     }
   },
-  "updated": "2026-11-10T21:09:27.509573+00:00"
+  "updated": "2026-11-10T21:10:35.481707+00:00"
 }
