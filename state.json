@@ -1,15 +1,5 @@
 {
   "records": {
-    "CVE-2026-119682": {
-      "fingerprint": "54fd22b4a0dc7f549e34",
-      "first_seen": "2026-11-06T17:18:02.338677+00:00",
-      "last_seen": "2026-11-07T00:43:56.343007+00:00",
-      "patch_status": "UNKNOWN",
-      "priority": 0,
-      "zero_day_score": 0,
-      "aliases": [],
-      "candidate": false
-    },
     "CVE-2026-119716": {
       "fingerprint": "4a1308458b25e98796f5",
       "first_seen": "2026-10-30T16:18:29.069832+00:00",
@@ -120531,7 +120521,19 @@
         "GHSA-9CRM-G4MF-WC5J"
       ],
       "candidate": false
+    },
+    "CVE-2026-126366": {
+      "fingerprint": "e1a456975eebb87a3c48",
+      "first_seen": "2026-11-12T22:55:27.555562+00:00",
+      "last_seen": "2026-11-12T22:55:27.555562+00:00",
+      "patch_status": "PATCHED",
+      "priority": 30,
+      "zero_day_score": 76,
+      "aliases": [
+        "GHSA-73V3-WF97-VPGJ"
+      ],
+      "candidate": false
     }
   },
-  "updated": "2026-11-12T22:54:21.503793+00:00"
+  "updated": "2026-11-12T22:55:27.837228+00:00"
 }
