@@ -97492,16 +97492,6 @@
       "aliases": [],
       "candidate": false
     },
-    "CVE-2026-126081": {
-      "fingerprint": "a98754fbf5a76be6aea9",
-      "first_seen": "2026-11-10T21:24:43.114657+00:00",
-      "last_seen": "2026-11-12T22:28:35.096085+00:00",
-      "patch_status": "UNKNOWN",
-      "priority": 30,
-      "zero_day_score": 3,
-      "aliases": [],
-      "candidate": false
-    },
     "CVE-2026-126083": {
       "fingerprint": "efafb0a87e467e7ecefb",
       "first_seen": "2026-11-10T21:24:43.114657+00:00",
@@ -120362,10 +120352,22 @@
       ],
       "candidate": false
     },
+    "CVE-2026-126081": {
+      "fingerprint": "4fb50a50a0415edc30be",
+      "first_seen": "2026-11-10T21:24:43.114657+00:00",
+      "last_seen": "2026-11-12T23:37:15.766272+00:00",
+      "patch_status": "PATCHED",
+      "priority": 30,
+      "zero_day_score": 76,
+      "aliases": [
+        "GHSA-WM3X-V3QW-4JH3"
+      ],
+      "candidate": false
+    },
     "CVE-2026-126355": {
       "fingerprint": "90b31b0609edf53f0235",
       "first_seen": "2026-11-12T23:21:54.321900+00:00",
-      "last_seen": "2026-11-12T23:36:09.670393+00:00",
+      "last_seen": "2026-11-12T23:37:15.766272+00:00",
       "patch_status": "PATCHED",
       "priority": 21,
       "zero_day_score": 66,
@@ -120377,7 +120379,7 @@
     "CVE-2026-126356": {
       "fingerprint": "0c34f4618151c5ccda07",
       "first_seen": "2026-11-12T23:21:54.321900+00:00",
-      "last_seen": "2026-11-12T23:36:09.670393+00:00",
+      "last_seen": "2026-11-12T23:37:15.766272+00:00",
       "patch_status": "PATCHED",
       "priority": 21,
       "zero_day_score": 66,
@@ -120389,7 +120391,7 @@
     "CVE-2026-128066": {
       "fingerprint": "801f29f5f099830210fc",
       "first_seen": "2026-11-12T23:21:54.321900+00:00",
-      "last_seen": "2026-11-12T23:36:09.670393+00:00",
+      "last_seen": "2026-11-12T23:37:15.766272+00:00",
       "patch_status": "PATCHED",
       "priority": 0,
       "zero_day_score": 66,
@@ -120401,7 +120403,7 @@
     "CVE-2026-128067": {
       "fingerprint": "e49e3bffcc6f7876d57f",
       "first_seen": "2026-11-12T23:21:54.321900+00:00",
-      "last_seen": "2026-11-12T23:36:09.670393+00:00",
+      "last_seen": "2026-11-12T23:37:15.766272+00:00",
       "patch_status": "PATCHED",
       "priority": 0,
       "zero_day_score": 76,
@@ -120411,5 +120413,5 @@
       "candidate": false
     }
   },
-  "updated": "2026-11-12T23:36:10.058736+00:00"
+  "updated": "2026-11-12T23:37:15.904119+00:00"
 }
