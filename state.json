@@ -1,15 +1,5 @@
 {
   "records": {
-    "CVE-2026-12547": {
-      "fingerprint": "808a2f97ab1edddd84eb",
-      "first_seen": "2026-11-06T18:21:23.244690+00:00",
-      "last_seen": "2026-11-07T00:43:56.343007+00:00",
-      "patch_status": "UNKNOWN",
-      "priority": 0,
-      "zero_day_score": 0,
-      "aliases": [],
-      "candidate": false
-    },
     "CVE-2026-12967": {
       "fingerprint": "7833dd8ebe8b77fb828c",
       "first_seen": "2026-11-06T06:17:45.594278+00:00",
@@ -76136,16 +76126,6 @@
       "aliases": [],
       "candidate": false
     },
-    "CVE-2026-41651": {
-      "fingerprint": "6544254b5ad82de75f99",
-      "first_seen": "2026-11-11T23:10:46.174421+00:00",
-      "last_seen": "2026-11-11T23:19:30.811815+00:00",
-      "patch_status": "PATCHED",
-      "priority": 53,
-      "zero_day_score": 6,
-      "aliases": [],
-      "candidate": false
-    },
     "CVE-2026-41676": {
       "fingerprint": "997b545270290bf04c3c",
       "first_seen": "2026-11-11T23:18:16.004884+00:00",
@@ -120412,10 +120392,30 @@
       "aliases": [],
       "candidate": false
     },
+    "CVE-2026-39987": {
+      "fingerprint": "eada10beaa2488616509",
+      "first_seen": "2026-11-13T07:46:03.303217+00:00",
+      "last_seen": "2026-11-13T07:46:03.303217+00:00",
+      "patch_status": "UNKNOWN",
+      "priority": 67,
+      "zero_day_score": 35,
+      "aliases": [],
+      "candidate": false
+    },
+    "CVE-2026-41651": {
+      "fingerprint": "47cc2da8091a3c00bd5f",
+      "first_seen": "2026-11-11T23:10:46.174421+00:00",
+      "last_seen": "2026-11-13T07:46:03.303217+00:00",
+      "patch_status": "UNKNOWN",
+      "priority": 5,
+      "zero_day_score": 30,
+      "aliases": [],
+      "candidate": false
+    },
     "CVE-2026-6460": {
       "fingerprint": "bb1af289c9709489cd3e",
       "first_seen": "2026-11-12T15:18:35.525117+00:00",
-      "last_seen": "2026-11-13T07:44:56.648313+00:00",
+      "last_seen": "2026-11-13T07:46:03.303217+00:00",
       "patch_status": "UNKNOWN",
       "priority": 5,
       "zero_day_score": 30,
@@ -120423,5 +120423,5 @@
       "candidate": false
     }
   },
-  "updated": "2026-11-13T07:44:56.655663+00:00"
+  "updated": "2026-11-13T07:46:03.621242+00:00"
 }
