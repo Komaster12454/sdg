@@ -1,15 +1,5 @@
 {
   "records": {
-    "CVE-2026-68365": {
-      "fingerprint": "f30537b20596019558a9",
-      "first_seen": "2026-11-06T22:35:05.685687+00:00",
-      "last_seen": "2026-11-07T00:43:56.343007+00:00",
-      "patch_status": "UNKNOWN",
-      "priority": 0,
-      "zero_day_score": 0,
-      "aliases": [],
-      "candidate": false
-    },
     "CVE-2026-68367": {
       "fingerprint": "f30537b20596019558a9",
       "first_seen": "2026-11-06T22:35:05.685687+00:00",
@@ -120419,7 +120409,7 @@
     "CVE-2026-126300": {
       "fingerprint": "5d2e88e7756b36d7851d",
       "first_seen": "2026-11-13T10:24:12.783592+00:00",
-      "last_seen": "2026-11-13T21:16:05.112368+00:00",
+      "last_seen": "2026-11-13T21:17:26.453900+00:00",
       "patch_status": "PATCHED",
       "priority": 21,
       "zero_day_score": 66,
@@ -120427,7 +120417,17 @@
         "GHSA-FFR9-MGRR-WCVR"
       ],
       "candidate": false
+    },
+    "GHSA-GPWC-27CW-RH9R": {
+      "fingerprint": "6255338c65107140590f",
+      "first_seen": "2026-11-13T21:17:26.453900+00:00",
+      "last_seen": "2026-11-13T21:17:26.453900+00:00",
+      "patch_status": "PATCHED",
+      "priority": 40,
+      "zero_day_score": 78,
+      "aliases": [],
+      "candidate": true
     }
   },
-  "updated": "2026-11-13T21:16:05.117569+00:00"
+  "updated": "2026-11-13T21:17:28.029415+00:00"
 }
