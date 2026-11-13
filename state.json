@@ -119338,16 +119338,6 @@
       ],
       "candidate": false
     },
-    "CVE-2026-113551": {
-      "fingerprint": "2485f8b278181af380c4",
-      "first_seen": "2026-11-10T21:22:13.585038+00:00",
-      "last_seen": "2026-11-13T18:42:38.738069+00:00",
-      "patch_status": "UNKNOWN",
-      "priority": 34,
-      "zero_day_score": 3,
-      "aliases": [],
-      "candidate": false
-    },
     "CVE-2026-113553": {
       "fingerprint": "dd9a2e75c22e4123246d",
       "first_seen": "2026-11-10T21:23:29.005541+00:00",
@@ -119499,30 +119489,6 @@
       "zero_day_score": 61,
       "aliases": [
         "GHSA-C9G3-JX5Q-F946"
-      ],
-      "candidate": false
-    },
-    "CVE-2026-126361": {
-      "fingerprint": "c615c50ea3425cb960fd",
-      "first_seen": "2026-11-12T23:21:54.321900+00:00",
-      "last_seen": "2026-11-13T18:42:38.738069+00:00",
-      "patch_status": "PATCHED",
-      "priority": 0,
-      "zero_day_score": 66,
-      "aliases": [
-        "GHSA-MH32-JXCR-MH9F"
-      ],
-      "candidate": false
-    },
-    "CVE-2026-126364": {
-      "fingerprint": "69263571080386da33ce",
-      "first_seen": "2026-11-12T23:21:54.321900+00:00",
-      "last_seen": "2026-11-13T18:42:38.738069+00:00",
-      "patch_status": "UNPATCHED",
-      "priority": 10,
-      "zero_day_score": 76,
-      "aliases": [
-        "GHSA-R3H5-4585-7X3W"
       ],
       "candidate": false
     },
@@ -120833,7 +120799,41 @@
         "GHSA-JF5X-956P-QGG8"
       ],
       "candidate": false
+    },
+    "CVE-2026-113551": {
+      "fingerprint": "2485f8b278181af380c4",
+      "first_seen": "2026-11-10T21:22:13.585038+00:00",
+      "last_seen": "2026-11-13T18:43:57.600908+00:00",
+      "patch_status": "UNKNOWN",
+      "priority": 34,
+      "zero_day_score": 3,
+      "aliases": [],
+      "candidate": false
+    },
+    "CVE-2026-126361": {
+      "fingerprint": "c615c50ea3425cb960fd",
+      "first_seen": "2026-11-12T23:21:54.321900+00:00",
+      "last_seen": "2026-11-13T18:43:57.600908+00:00",
+      "patch_status": "PATCHED",
+      "priority": 0,
+      "zero_day_score": 66,
+      "aliases": [
+        "GHSA-MH32-JXCR-MH9F"
+      ],
+      "candidate": false
+    },
+    "CVE-2026-126364": {
+      "fingerprint": "69263571080386da33ce",
+      "first_seen": "2026-11-12T23:21:54.321900+00:00",
+      "last_seen": "2026-11-13T18:43:57.600908+00:00",
+      "patch_status": "UNPATCHED",
+      "priority": 10,
+      "zero_day_score": 76,
+      "aliases": [
+        "GHSA-R3H5-4585-7X3W"
+      ],
+      "candidate": false
     }
   },
-  "updated": "2026-11-13T18:42:46.571720+00:00"
+  "updated": "2026-11-13T18:43:57.605619+00:00"
 }
