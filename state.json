@@ -112776,16 +112776,6 @@
       "aliases": [],
       "candidate": false
     },
-    "CVE-2026-128123": {
-      "fingerprint": "a481798f1a429da536a4",
-      "first_seen": "2026-11-13T20:21:13.363668+00:00",
-      "last_seen": "2026-11-13T20:35:15.820905+00:00",
-      "patch_status": "UNKNOWN",
-      "priority": 0,
-      "zero_day_score": 0,
-      "aliases": [],
-      "candidate": false
-    },
     "CVE-2026-128237": {
       "fingerprint": "e8ce1bfe36d5be58fc17",
       "first_seen": "2026-11-13T10:24:12.783592+00:00",
@@ -120389,7 +120379,7 @@
     "CVE-2026-101570": {
       "fingerprint": "f7aa0b1f7ec04551f52b",
       "first_seen": "2026-11-13T20:33:33.405385+00:00",
-      "last_seen": "2026-11-13T20:37:44.289482+00:00",
+      "last_seen": "2026-11-13T20:38:56.900830+00:00",
       "patch_status": "UNKNOWN",
       "priority": 14,
       "zero_day_score": 0,
@@ -120399,7 +120389,7 @@
     "CVE-2026-126347": {
       "fingerprint": "deb0f87506ea5374c675",
       "first_seen": "2026-11-12T22:26:03.527895+00:00",
-      "last_seen": "2026-11-13T20:37:44.289482+00:00",
+      "last_seen": "2026-11-13T20:38:56.900830+00:00",
       "patch_status": "PATCHED",
       "priority": 12,
       "zero_day_score": 66,
@@ -120408,10 +120398,22 @@
       ],
       "candidate": false
     },
+    "CVE-2026-128123": {
+      "fingerprint": "477bca467187db05fbe7",
+      "first_seen": "2026-11-13T20:21:13.363668+00:00",
+      "last_seen": "2026-11-13T20:38:56.900830+00:00",
+      "patch_status": "PATCHED",
+      "priority": 23,
+      "zero_day_score": 66,
+      "aliases": [
+        "GHSA-RQW3-X7HX-MM3P"
+      ],
+      "candidate": false
+    },
     "CVE-2026-53787": {
       "fingerprint": "e5158c96776424d9783d",
       "first_seen": "2026-11-13T20:32:11.591932+00:00",
-      "last_seen": "2026-11-13T20:37:44.289482+00:00",
+      "last_seen": "2026-11-13T20:38:56.900830+00:00",
       "patch_status": "UNKNOWN",
       "priority": 6,
       "zero_day_score": 30,
@@ -120419,5 +120421,5 @@
       "candidate": false
     }
   },
-  "updated": "2026-11-13T20:37:44.293976+00:00"
+  "updated": "2026-11-13T20:38:57.191183+00:00"
 }
