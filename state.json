@@ -1,15 +1,5 @@
 {
   "records": {
-    "CVE-2022-44629": {
-      "fingerprint": "09035ef47c36a241ba14",
-      "first_seen": "2026-11-10T12:14:51.001716+00:00",
-      "last_seen": "2026-11-10T12:19:47.067365+00:00",
-      "patch_status": "UNKNOWN",
-      "priority": 19,
-      "zero_day_score": 0,
-      "aliases": [],
-      "candidate": false
-    },
     "CVE-2022-44729": {
       "fingerprint": "febf5515962e98024e82",
       "first_seen": "2026-11-10T12:13:37.198860+00:00",
@@ -120725,7 +120715,17 @@
     "GHSA-CG2G-XH64-V4Q7": {
       "fingerprint": "11e6e1fd693e179d0758",
       "first_seen": "2026-11-19T00:03:37.907678+00:00",
-      "last_seen": "2026-11-19T00:06:58.306569+00:00",
+      "last_seen": "2026-11-19T00:08:04.561416+00:00",
+      "patch_status": "PATCHED",
+      "priority": 19,
+      "zero_day_score": 78,
+      "aliases": [],
+      "candidate": true
+    },
+    "GHSA-MRV2-3PQR-J5JR": {
+      "fingerprint": "11e6e1fd693e179d0758",
+      "first_seen": "2026-11-19T00:08:04.561416+00:00",
+      "last_seen": "2026-11-19T00:08:04.561416+00:00",
       "patch_status": "PATCHED",
       "priority": 19,
       "zero_day_score": 78,
@@ -120733,5 +120733,5 @@
       "candidate": true
     }
   },
-  "updated": "2026-11-19T00:06:58.311216+00:00"
+  "updated": "2026-11-19T00:08:04.835621+00:00"
 }
