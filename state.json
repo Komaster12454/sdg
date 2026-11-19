@@ -106966,16 +106966,6 @@
       "aliases": [],
       "candidate": false
     },
-    "CVE-2026-129234": {
-      "fingerprint": "a481798f1a429da536a4",
-      "first_seen": "2026-11-19T17:19:06.850459+00:00",
-      "last_seen": "2026-11-19T23:37:27.118921+00:00",
-      "patch_status": "UNKNOWN",
-      "priority": 0,
-      "zero_day_score": 0,
-      "aliases": [],
-      "candidate": false
-    },
     "CVE-2026-129289": {
       "fingerprint": "a481798f1a429da536a4",
       "first_seen": "2026-11-19T15:18:27.479124+00:00",
@@ -120515,7 +120505,19 @@
       "zero_day_score": 0,
       "aliases": [],
       "candidate": false
+    },
+    "CVE-2026-129234": {
+      "fingerprint": "f26d87f9a8dd5a6de005",
+      "first_seen": "2026-11-19T17:19:06.850459+00:00",
+      "last_seen": "2026-11-19T23:48:11.116683+00:00",
+      "patch_status": "PATCHED",
+      "priority": 29,
+      "zero_day_score": 76,
+      "aliases": [
+        "GHSA-CC5R-64RF-75HG"
+      ],
+      "candidate": false
     }
   },
-  "updated": "2026-11-19T23:46:37.597126+00:00"
+  "updated": "2026-11-19T23:48:11.383142+00:00"
 }
