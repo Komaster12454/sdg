@@ -1,55 +1,5 @@
 {
   "records": {
-    "CVE-2026-43577": {
-      "fingerprint": "b1e9c8e0356fe068ffc1",
-      "first_seen": "2026-11-11T23:18:16.004884+00:00",
-      "last_seen": "2026-11-11T23:19:30.811815+00:00",
-      "patch_status": "PATCHED",
-      "priority": 28,
-      "zero_day_score": 0,
-      "aliases": [],
-      "candidate": false
-    },
-    "CVE-2026-43578": {
-      "fingerprint": "4f386092c65d0a397252",
-      "first_seen": "2026-11-11T23:13:10.812314+00:00",
-      "last_seen": "2026-11-11T23:19:30.811815+00:00",
-      "patch_status": "PATCHED",
-      "priority": 36,
-      "zero_day_score": 0,
-      "aliases": [],
-      "candidate": false
-    },
-    "CVE-2026-43579": {
-      "fingerprint": "6ef9848f48ee796e74a3",
-      "first_seen": "2026-11-11T23:19:30.811815+00:00",
-      "last_seen": "2026-11-11T23:19:30.811815+00:00",
-      "patch_status": "PATCHED",
-      "priority": 24,
-      "zero_day_score": 0,
-      "aliases": [],
-      "candidate": false
-    },
-    "CVE-2026-43581": {
-      "fingerprint": "6c85832515e2532763df",
-      "first_seen": "2026-11-11T23:13:10.812314+00:00",
-      "last_seen": "2026-11-11T23:19:30.811815+00:00",
-      "patch_status": "PATCHED",
-      "priority": 36,
-      "zero_day_score": 0,
-      "aliases": [],
-      "candidate": false
-    },
-    "CVE-2026-43583": {
-      "fingerprint": "d2d42e246d40f3df6746",
-      "first_seen": "2026-11-11T23:19:30.811815+00:00",
-      "last_seen": "2026-11-11T23:19:30.811815+00:00",
-      "patch_status": "PATCHED",
-      "priority": 24,
-      "zero_day_score": 0,
-      "aliases": [],
-      "candidate": false
-    },
     "CVE-2026-43584": {
       "fingerprint": "ece78d0b01e60fb94a60",
       "first_seen": "2026-11-11T23:14:25.548726+00:00",
@@ -120601,13 +120551,73 @@
     "CVE-2025-48617": {
       "fingerprint": "cc7bcac82fe776ae28bd",
       "first_seen": "2026-11-21T05:10:00.597175+00:00",
-      "last_seen": "2026-11-21T05:15:27.442961+00:00",
+      "last_seen": "2026-11-21T05:16:32.893565+00:00",
       "patch_status": "UNKNOWN",
       "priority": 5,
       "zero_day_score": 30,
       "aliases": [],
       "candidate": false
+    },
+    "CVE-2026-117933": {
+      "fingerprint": "3c4bb7c7c1b9fdf1ccac",
+      "first_seen": "2026-11-21T05:16:32.893565+00:00",
+      "last_seen": "2026-11-21T05:16:32.893565+00:00",
+      "patch_status": "UNKNOWN",
+      "priority": 21,
+      "zero_day_score": 51,
+      "aliases": [
+        "GHSA-M7C3-XFG3-RFQP"
+      ],
+      "candidate": false
+    },
+    "CVE-2026-117958": {
+      "fingerprint": "0d676218c594fdcb8fe9",
+      "first_seen": "2026-11-21T05:16:32.893565+00:00",
+      "last_seen": "2026-11-21T05:16:32.893565+00:00",
+      "patch_status": "UNKNOWN",
+      "priority": 32,
+      "zero_day_score": 61,
+      "aliases": [
+        "GHSA-VV84-X87P-GHRX"
+      ],
+      "candidate": false
+    },
+    "CVE-2026-33203": {
+      "fingerprint": "e85d96453cfdfe64c726",
+      "first_seen": "2026-11-21T05:16:32.893565+00:00",
+      "last_seen": "2026-11-21T05:16:32.893565+00:00",
+      "patch_status": "PATCHED",
+      "priority": 30,
+      "zero_day_score": 76,
+      "aliases": [
+        "GHSA-3G9H-9HP4-654V"
+      ],
+      "candidate": false
+    },
+    "CVE-2026-45325": {
+      "fingerprint": "4758686be55cd378b053",
+      "first_seen": "2026-11-21T05:16:32.893565+00:00",
+      "last_seen": "2026-11-21T05:16:32.893565+00:00",
+      "patch_status": "PATCHED",
+      "priority": 32,
+      "zero_day_score": 76,
+      "aliases": [
+        "GHSA-CMXG-94MG-JQ94"
+      ],
+      "candidate": false
+    },
+    "CVE-2026-55621": {
+      "fingerprint": "f732a3ddae6733f2a667",
+      "first_seen": "2026-11-21T05:16:32.893565+00:00",
+      "last_seen": "2026-11-21T05:16:32.893565+00:00",
+      "patch_status": "UNPATCHED",
+      "priority": 40,
+      "zero_day_score": 86,
+      "aliases": [
+        "GHSA-64F3-V33M-W89F"
+      ],
+      "candidate": false
     }
   },
-  "updated": "2026-11-21T05:15:27.451459+00:00"
+  "updated": "2026-11-21T05:16:33.153015+00:00"
 }
