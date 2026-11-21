@@ -72644,18 +72644,6 @@
       ],
       "candidate": false
     },
-    "CVE-2026-63344": {
-      "fingerprint": "64be7450fb35c2089eb0",
-      "first_seen": "2026-11-20T00:07:19.381481+00:00",
-      "last_seen": "2026-11-20T00:16:09.255724+00:00",
-      "patch_status": "PATCHED",
-      "priority": 0,
-      "zero_day_score": 76,
-      "aliases": [
-        "GHSA-P32V-8V8J-J534"
-      ],
-      "candidate": false
-    },
     "CVE-2026-63345": {
       "fingerprint": "9b69ddd5923267b74e13",
       "first_seen": "2026-11-20T00:06:12.404015+00:00",
@@ -120675,9 +120663,19 @@
     "CVE-2026-34472": {
       "fingerprint": "791a0b19c9c62f6601a5",
       "first_seen": "2026-11-21T07:08:12.696751+00:00",
-      "last_seen": "2026-11-21T07:13:38.940594+00:00",
+      "last_seen": "2026-11-21T07:14:45.947892+00:00",
       "patch_status": "UNKNOWN",
       "priority": 7,
+      "zero_day_score": 30,
+      "aliases": [],
+      "candidate": false
+    },
+    "CVE-2026-63344": {
+      "fingerprint": "0d766a4db067390e35d2",
+      "first_seen": "2026-11-20T00:07:19.381481+00:00",
+      "last_seen": "2026-11-21T07:14:45.947892+00:00",
+      "patch_status": "UNKNOWN",
+      "priority": 5,
       "zero_day_score": 30,
       "aliases": [],
       "candidate": false
@@ -120685,7 +120683,7 @@
     "ZD-CAND-F797B5089CD8": {
       "fingerprint": "0d5ea8d28c187cc8a4a5",
       "first_seen": "2026-11-21T07:12:33.079713+00:00",
-      "last_seen": "2026-11-21T07:13:38.940594+00:00",
+      "last_seen": "2026-11-21T07:14:45.947892+00:00",
       "patch_status": "UNKNOWN",
       "priority": 16,
       "zero_day_score": 45,
@@ -120693,5 +120691,5 @@
       "candidate": true
     }
   },
-  "updated": "2026-11-21T07:13:38.945920+00:00"
+  "updated": "2026-11-21T07:14:46.131804+00:00"
 }
